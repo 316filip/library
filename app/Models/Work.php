@@ -14,4 +14,10 @@ class Work extends Model
     {
         return $this->belongsTo(Author::class, 'author_id');
     }
+
+    // Relationship to books
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'work_id');
+    }
 }
