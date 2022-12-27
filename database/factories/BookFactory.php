@@ -18,6 +18,7 @@ class BookFactory extends Factory
     {
         return [
             'work_id' => fake()->numberBetween(1,10),
+            'title' => fake()->text(50),
             'length' => fake()->numberBetween(50,300),
             'language' => fake()->randomElement(['čeština', 'angličtina', 'němčina', 'francouzština']),
             'translator' => fake()->name(),
