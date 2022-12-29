@@ -20,6 +20,7 @@ return new class extends Migration
             $table->year('year');
             $table->longText('description');
             $table->string('subtitle');
+            $table->string('language');
             $table->string('class');
             $table->string('genre');
             $table->integer('number');

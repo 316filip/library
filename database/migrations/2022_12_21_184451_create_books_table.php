@@ -17,12 +17,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('work_id')->constrained()->onDelete('cascade');
             $table->string('title');
+            $table->string('subtitle');
             $table->integer('length');
             $table->string('language');
             $table->string('translator');
-            $table->year('year');
+            $table->string('illustrator');
             $table->longText('description');
-            $table->integer('publication');
+            $table->string('house');
+            $table->year('year');
+            $table->integer('publication')->nullable();
             $table->string('place');
             $table->string('image')->nullable();
             $table->string('ISBN');
