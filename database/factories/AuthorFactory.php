@@ -17,11 +17,10 @@ class AuthorFactory extends Factory
     public function definition()
     {
         return [
-            'name_prefix' => fake()->title(),
-            'first_name' => fake()->firstName(),
-            'middle_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'name_suffix' => fake()->title()
+            'name' => fake()->name(),
+            'birth_date' => fake()->dateTime(),
+            'death_date' => fake()->dateTime(),
+            'description' => fake()->text(1000)
         ];
     }
 }
