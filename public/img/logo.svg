@@ -25,14 +25,14 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="4.051698"
-     inkscape:cx="78.362207"
-     inkscape:cy="51.953526"
+     inkscape:cx="72.06855"
+     inkscape:cy="51.953527"
      inkscape:window-width="1920"
      inkscape:window-height="991"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="text186" />
   <defs
      id="defs2" />
   <g
@@ -47,16 +47,42 @@
        height="12.537953"
        x="86.584885"
        y="142.23102" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="88.251724"
-       y="152.54367"
-       id="text186"><tspan
-         sodipodi:role="line"
-         x="88.251724"
-         y="152.54367"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Agency FB';-inkscape-font-specification:'Agency FB';stroke-width:0.264583"
-         id="tspan188">KNIHOVNA</tspan></text>
+    <g
+       aria-label="KNIHOVNA"
+       id="text186"
+       style="font-size:10.5833px;line-height:1.25;stroke-width:0.264583">
+      <path
+         d="m 92.272138,152.54367 h -0.790647 l -1.865513,-3.88605 v 3.88605 h -0.7183 v -8.08734 h 0.7183 v 3.63285 l 1.694981,-3.63285 h 0.780312 v 0.0465 l -1.82934,3.84989 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path392" />
+      <path
+         d="m 96.302887,152.54367 h -0.496093 l -2.160068,-5.94794 v 5.94794 h -0.676959 v -8.08734 H 93.5072 l 2.118727,5.84459 v -5.84459 h 0.67696 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path394" />
+      <path
+         d="m 98.354434,152.54367 h -0.7183 v -8.08734 h 0.7183 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path396" />
+      <path
+         d="m 103.08798,152.54367 h -0.7183 v -3.88605 h -1.94819 v 3.88605 h -0.718305 v -8.08734 h 0.718305 v 3.55533 h 1.94819 v -3.55533 h 0.7183 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path398" />
+      <path
+         d="m 107.79569,151.97006 q 0,0.25322 -0.16537,0.41341 -0.16019,0.1602 -0.41341,0.1602 h -2.26342 q -0.25321,0 -0.41341,-0.1602 -0.16019,-0.16019 -0.16019,-0.41341 v -6.94012 q 0,-0.25321 0.16019,-0.41341 0.1602,-0.1602 0.41341,-0.1602 h 2.26342 q 0.25322,0 0.41341,0.1602 0.16537,0.1602 0.16537,0.41341 z m -0.7183,-0.062 v -6.8161 h -1.9792 v 6.8161 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path400" />
+      <path
+         d="m 112.24501,144.45633 -1.40042,8.10801 h -0.67696 l -1.40043,-8.10801 h 0.71313 l 1.00252,6.43887 q 0,0 0.031,0.5271 0.005,-0.18087 0.0362,-0.5271 l 1.00252,-6.43887 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path402" />
+      <path
+         d="m 116.54965,152.54367 h -0.49609 l -2.16007,-5.94794 v 5.94794 h -0.67696 v -8.08734 h 0.53743 l 2.11873,5.84459 v -5.84459 h 0.67696 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path404" />
+      <path
+         d="m 121.10233,152.54367 h -0.71314 l -0.28422,-1.79833 h -1.60713 l -0.28422,1.79833 h -0.69246 v -0.0207 l 1.44177,-8.08734 h 0.70796 z m -1.09037,-2.43395 -0.70797,-4.38215 -0.71313,4.38215 z"
+         style="font-family:'Agency FB';-inkscape-font-specification:'Agency FB'"
+         id="path406" />
+    </g>
   </g>
 </svg>
