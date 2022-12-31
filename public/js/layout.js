@@ -54,7 +54,7 @@ function hideResults() {
 
 function showSearchBar() {
     /**
-     * Shows search results 
+     * Shows search results
      */
     $("#search-frame").addClass("-top-2");
     $("#search-input").focus();
@@ -162,16 +162,26 @@ function search() {
 function go(e) {
     /**
      * Go to dedicated search page
-     * 
+     *
      * @param {Event} e Event to be cancelled
      */
     e.preventDefault();
     // TODO: Submit the search form
 }
 
-$(document).ready(function () {
-    navbar();
-});
+$(document)
+    .ready(function () {
+        navbar();
+
+        $("#search-input").bind("keydown", "esc", function () {
+            $("#search-input").blur();
+            return false;
+        });
+    })
+    .bind("keydown", "ctrl+k", function () {
+        showSearchBar();
+        return false;
+    });
 
 $(window).scroll(function () {
     navbar();
