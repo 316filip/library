@@ -22,31 +22,59 @@
                 <a href="/" class="hover:scale-125 hover:-rotate-6 transition">
                     <img class="h-10" src="{{ asset('/img/logo.svg') }}" alt="">
                 </a>
+
                 {{-- Search bar --}}
                 <div class="absolute -top-20 xl:-top-2 left-1/2 -translate-x-1/2 h-fit w-full md:w-3/4 lg:w-1/2 transition-all rounded-lg p-2"
                     id="search-frame">
                     <form action="/hledat" method="GET" onsubmit="go(event)">
-                        <input type="text" name="query" class="h-10 w-full border border-slate-200 rounded-lg mb-2 pl-2 pr-10"
+                        <input type="text" name="query"
+                            class="h-10 w-full border border-slate-200 shadow-sm rounded-lg mb-2 pl-2 pr-10"
                             id="search-input" onfocus="showResults()" onblur="hideResults()" onkeyup="search()"
                             autocomplete="off" placeholder="Vyhledat...">
-                        <button class="absolute right-5 top-4" onclick="go(event)"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button class="absolute right-5 top-4" onclick="go(event)"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <div class="h-80 rounded-lg overflow-auto" id="search-results" style="display: none">
                         <div class="grid place-content-center h-full w-full"><span>Pro vyhledávání začněte psát</span>
                         </div>
                     </div>
                 </div>
+
                 {{-- Menu items --}}
                 <div class="flex my-auto space-x-6">
-                    <button class="block xl:hidden bg-yellow-400 p-2 rounded-md" onclick="showSearchBar()"
-                        id="show-search-bar">Hledat <i class="fa-solid fa-magnifying-glass"></i></button>
                     {{-- Show search bar button --}}
+                    <button
+                        class="block xl:hidden rounded-md border border-slate-200 bg-yellow-400 px-4 py-2 shadow-sm hover:bg-amber-400 transition"
+                        onclick="showSearchBar()" id="show-search-bar">Hledat <i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+
+                    {{-- Links --}}
                     <span class="hidden md:flex my-auto space-x-6">
-                        <a class="hover:text-yellow-400 transition" href="/knihovna">Knihovna</a>
-                        <a class="hover:text-yellow-400 transition" href="/autor">Autoři</a>
-                        <a class="hover:text-yellow-400 transition" href="#">O nás</a>
-                        <a class="hover:text-yellow-400 transition" href="#">Účet</a>
+                        <p class="my-auto"><a class="hover:text-yellow-400 transition" href="/knihovna">Procházet</a>
+                        </p>
+                        <p class="my-auto"><a class="hover:text-yellow-400 transition" href="#">Kontakt</a></p>
+
+                        {{-- Account dropdown button --}}
+                        <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true"
+                            onclick="$('#dropdown-menu').fadeToggle('fast');"
+                            onblur="$('#dropdown-menu').fadeOut('fast');">
+                            Účet <i class="fa-solid fa-caret-down"></i>
+                        </button>
                     </span>
+                </div>
+                {{-- TODO: Menu links on smaller screens --}}
+
+                {{-- Dropdown menu --}}
+                <div id="dropdown-menu"
+                    class="absolute right-0 z-10 mt-12 w-44 origin-top-right rounded-md bg-white shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
+                    style="display: none">
+                    <div class="py-1" role="none">
+                        <a href="#" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
+                            tabindex="-1" id="menu-item-0">Přihlásit se</a>
+                        <a href="#" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
+                            tabindex="-1" id="menu-item-1">Vytvořit účet</a>
+                    </div>
                 </div>
             </div>
         </div>
