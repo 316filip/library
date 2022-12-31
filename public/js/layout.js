@@ -7,12 +7,12 @@ function navbar() {
         $("#navbar-backdrop")
             .addClass("bg-sky-100")
             .removeClass("bg-sky-100/80")
-            .removeClass("drop-shadow-lg");
+            .removeClass("shadow-lg");
     } else {
         $("#navbar-backdrop")
             .addClass("bg-sky-100/80")
             .removeClass("bg-sky-100")
-            .addClass("drop-shadow-lg");
+            .addClass("shadow-lg");
     }
 }
 
@@ -36,7 +36,7 @@ function showResults() {
     /**
      * Shows live search results frame
      */
-    $("#search-frame").addClass("drop-shadow-lg").addClass("backdrop-blur-xl");
+    $("#search-frame").addClass("shadow-lg").addClass("backdrop-blur-xl");
     $("#search-results").stop().slideDown("fast");
 }
 
@@ -46,7 +46,7 @@ function hideResults() {
      */
     $("#search-results").slideUp("fast", function () {
         $("#search-frame")
-            .removeClass("drop-shadow-lg")
+            .removeClass("shadow-lg")
             .removeClass("backdrop-blur-xl")
             .removeClass("-top-2");
     });
