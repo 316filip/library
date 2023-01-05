@@ -92,7 +92,19 @@ function search() {
                         '<a href="/autor/' +
                             field["id"] +
                             '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
-                            field["name"] +
+                            (field["name_prefix"] == ""
+                                ? ""
+                                : field["name_prefix"] + " ") +
+                            (field["first_name"] == ""
+                                ? ""
+                                : field["first_name"] + " ") +
+                            (field["middle_name"] == ""
+                                ? ""
+                                : field["middle_name"] + " ") +
+                            (field["last_name"] == ""
+                                ? ""
+                                : field["last_name"] + " ") +
+                            field["name_suffix"] +
                             "</p></a>"
                     );
                 });
