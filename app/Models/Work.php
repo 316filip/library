@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
 
 class Work extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     // Relationship to author
     public function author()
@@ -20,14 +19,5 @@ class Work extends Model
     public function books()
     {
         return $this->hasMany(Book::class, 'work_id');
-    }
-
-    // Define searchable fields
-    public function toSearchableArray()
-    {
-        return [
-            'title' => $this->title,
-            'subtitle' => $this->subtitle
-        ];
     }
 }

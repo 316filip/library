@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Author extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     // Relationship to works
     public function works()
@@ -16,11 +16,10 @@ class Author extends Model
         return $this->hasMany(Work::class, 'author_id');
     }
 
-    // Define searchable fields
-    public function toSearchableArray()
+    protected function name(): Attribute
     {
-        return [
-            'name' => $this->name
-        ];
+        return Attribute::make(
+            fn () => $this->name_prefix . " " . $this->first_name . " " . $this->middle_name . " " . $this->last_name . " " . $this->name_suffix,
+        );
     }
 }
