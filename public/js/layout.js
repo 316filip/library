@@ -77,7 +77,7 @@ function search() {
 
     // Get quick results as JSON from API
     $.getJSON(
-        "/api/search?query=" + $("#search-input").val(),
+        "/api/search?query=" + $("#search-input").val() + "&in=all",
         function (result) {
             // Refresh results displayed below search field
             $("#search-results").empty();
@@ -110,7 +110,7 @@ function search() {
                 });
 
                 $("#search-results").append(
-                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(event)">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
+                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(\'author\')">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
                 );
             }
 
@@ -131,7 +131,7 @@ function search() {
                 });
 
                 $("#search-results").append(
-                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(event)">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
+                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(\'work\')">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
                 );
             }
 
@@ -152,7 +152,7 @@ function search() {
                 });
 
                 $("#search-results").append(
-                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(event)">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
+                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(\'book\')">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
                 );
             }
 
@@ -171,13 +171,14 @@ function search() {
     );
 }
 
-function go(e) {
+function go(what = "all") {
     /**
      * Go to dedicated search page
      *
-     * @param {Event} e Event to be cancelled
+     * @param {String} what Where to search for results
      */
-    e.preventDefault();
+    $("#search-area").val(what);
+    $("#search-form").submit();
     // TODO: Submit the search form
 }
 
@@ -185,10 +186,15 @@ $(document)
     .ready(function () {
         navbar();
 
-        $("#search-input").bind("keydown", "esc", function () {
-            $("#search-input").blur();
-            return false;
-        });
+        $("#search-input")
+            .bind("keydown", "esc", function () {
+                $("#search-input").blur();
+                return false;
+            })
+            .bind("keydown", "enter", function () {
+                go();
+                return false;
+            });
     })
     .bind("keydown", "ctrl+k", function () {
         showSearchBar();
