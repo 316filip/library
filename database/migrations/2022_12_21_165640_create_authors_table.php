@@ -23,6 +23,7 @@ return new class extends Migration
             $table->dateTime('birth_date');
             $table->dateTime('death_date');
             $table->longText('description');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
