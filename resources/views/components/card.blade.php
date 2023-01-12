@@ -1,11 +1,11 @@
 <div class="relative border border-slate-200 shadow-sm rounded-lg p-4{{ $classes }}">
-    <h3 class="text-lg">
+    <h3 class="text-lg line-clamp-3">
         {{ $title }}
     </h3>
-    <p>
+    <p class="line-clamp-4">
         {{ $subtitle }}
     </p>
-    <a href="{{ $link }}" class="absolute inset-0 pointer-events-auto"></a>
+    <a href="{{ $link }}" class="absolute inset-0 pointer-events-auto" title="{{ $title }}"></a>
     <div class="{{ $overlay }}">
         <div class="absolute inset-0 rounded-lg flex">
             <div class="flex-auto w-32 rounded-l-lg bg-gradient-to-r from-transparent to-slate-100"></div>
