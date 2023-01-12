@@ -13,7 +13,7 @@ class SearchHelper
     {
         $request = "%" . str_replace(" ", "%", request("query")) . "%";
 
-        if (request('in') == 'all' || request('in') == 'author') {
+        if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'author') {
             $author_query = Author::query();
             $author_query->where(DB::raw('concat(name_prefix, " ", first_name, " ", middle_name, " ", last_name, " ", name_suffix)'), 'like', $request);
             $author = $author_query->get();
@@ -23,7 +23,7 @@ class SearchHelper
             }
         }
 
-        if (request('in') == 'all' || request('in') == 'work') {
+        if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'work') {
             $work_query = Work::query();
             $work_query->where(DB::raw('concat(title, " ", subtitle, " ", description)'), 'like', $request);
             $work = $work_query->get();
@@ -33,7 +33,7 @@ class SearchHelper
             }
         }
 
-        if (request('in') == 'all' || request('in') == 'book') {
+        if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'book') {
             $book_query = Book::query();
             $book_query->where(DB::raw('concat(title, " ", subtitle, " ", description)'), 'like', $request);
             $book = $book_query->get();
@@ -43,11 +43,18 @@ class SearchHelper
             }
         }
 
+        if (request('in') == 'quick') {
+            return [
+                'author' => $author->sortByDesc('similarity')->values()->take(5),
+                'work' => $work->sortByDesc('similarity')->values()->take(5),
+                'book' => $book->sortByDesc('similarity')->values()->take(5)
+            ];
+        }
         if (request('in') == 'all') {
             return [
-                'author' => $author->sortByDesc('similarity')->values()->take(7),
-                'work' => $work->sortByDesc('similarity')->values()->take(7),
-                'book' => $book->sortByDesc('similarity')->values()->take(7)
+                'author' => $author->sortByDesc('similarity')->values()->take(8),
+                'work' => $work->sortByDesc('similarity')->values()->take(8),
+                'book' => $book->sortByDesc('similarity')->values()->take(8)
             ];
         }
         if (request('in') == 'author') {
