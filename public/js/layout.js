@@ -77,7 +77,7 @@ function search() {
 
     // Get quick results as JSON from API
     $.getJSON(
-        "/api/search?query=" + $("#search-input").val() + "&in=all",
+        "/api/search?query=" + $("#search-input").val() + "&in=quick",
         function (result) {
             // Refresh results displayed below search field
             $("#search-results").empty();
