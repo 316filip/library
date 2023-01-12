@@ -29,12 +29,13 @@
                 {{-- Search bar --}}
                 <div class="absolute -top-20 xl:-top-2 left-1/2 -translate-x-1/2 h-fit w-full md:w-3/4 lg:w-1/2 transition-all rounded-lg p-2"
                     id="search-frame">
-                    <form action="/hledat" method="GET" onsubmit="go(event)">
+                    <form action="/hledat" method="GET" id="search-form">
                         <input type="text" name="query"
                             class="h-10 w-full border border-slate-200 shadow-sm rounded-lg mb-2 pl-2 pr-10"
                             id="search-input" onfocus="showResults()" onblur="hideResults()" onkeyup="search()"
                             autocomplete="off" placeholder="Vyhledat...">
-                        <button class="absolute right-5 top-4" onclick="go(event)"><i
+                        <input type="hidden" name="in" value="all" id="search-area">
+                        <button class="absolute right-5 top-4" onclick="go()"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <div class="h-80 rounded-lg overflow-auto" id="search-results" style="display: none">
