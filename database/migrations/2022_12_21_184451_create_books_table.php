@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('place');
             $table->string('image')->nullable();
             $table->string('ISBN');
+            $table->integer('amount');
             $table->timestamps();
         });
     }
