@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string("middle_name");
             $table->string("last_name");
             $table->string("name_suffix");
-            $table->dateTime('birth_date');
-            $table->dateTime('death_date');
+            $table->dateTime('birth_date')->nullable();
+            $table->dateTime('death_date')->nullable();
             $table->longText('description');
             $table->string('image')->nullable();
             $table->timestamps();

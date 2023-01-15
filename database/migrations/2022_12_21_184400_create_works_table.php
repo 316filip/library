@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('works', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')->constrained()->onDelete('cascade');
+            $table->foreignId('author_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->year('year');
-            $table->longText('description');
-            $table->string('subtitle');
+            $table->year('year')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('subtitle')->nullable();
             $table->string('language');
             $table->string('class');
-            $table->string('genre');
-            $table->integer('number');
+            $table->string('genre')->nullable();
+            $table->integer('number')->nullable();
             $table->timestamps();
         });
     }
