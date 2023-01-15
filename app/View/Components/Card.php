@@ -22,7 +22,7 @@ class Card extends Component
         } elseif ($type == 'work') {
             $this->title = $data['title'];
             $this->subtitle = $data['subtitle'];
-            $this->link = '/knihovna/' . $data['id'];
+            $this->link = '/titul/' . $data['id'];
             $this->filter_text = "děl";
         } elseif ($type == 'book') {
             $this->title = $data['title'];
