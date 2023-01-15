@@ -14,8 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.hotkeys/0.2.0/jquery.hotkeys.min.js"
         integrity="sha512-njd096AjZyGuWOttOsHolCOFjq9Xg9txZTl6Pd7FOpwf1nyBDsOXpS1cd184l/EWy5ekDJZldDMQPs9bLCSAtQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Development version -->
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="/js/layout.js"></script>
 </head>
 
@@ -48,12 +47,18 @@
                 </div>
 
                 {{-- Menu items --}}
-                <div class="flex my-auto space-x-6">
-                    {{-- Show search bar button --}}
+                <div class="flex my-auto space-x-3 md:space-x-6">
+                    {{-- Show search button --}}
                     <button
                         class="block xl:hidden rounded-md border border-slate-200 bg-yellow-400 px-4 py-2 shadow-sm hover:bg-amber-400 transition"
                         onclick="showSearchBar()" id="show-search-bar">Hledat <i
                             class="fa-solid fa-magnifying-glass"></i></button>
+
+                    {{-- Show fullscreen menu --}}
+                    <button onclick="openMenu()"
+                        class="block md:hidden rounded-md border border-slate-200 bg-yellow-400 px-4 py-2 shadow-sm hover:bg-amber-400 transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
 
                     {{-- Links --}}
                     <span class="hidden md:flex my-auto space-x-6">
@@ -69,7 +74,6 @@
                         </button>
                     </span>
                 </div>
-                {{-- TODO: Menu links on smaller screens --}}
 
                 {{-- Dropdown menu --}}
                 <div id="dropdown-menu"
@@ -89,6 +93,29 @@
     <div id="navbar-backdrop" class="fixed top-0 w-full p-6 backdrop-blur transition bg-sky-100 z-20">
         <div class="h-10"></div>
     </div>
+
+    {{-- Fullscreen menu --}}
+    <div id="fullscreen-menu" style="display: none"
+        class="absolute top-0 w-full h-full backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center">
+        <div class="grid grid-cols-1 mx-8 py-8 rounded-md place-content-center place-items-center gap-3 bg-slate-50">
+            <p><a href="/knihovna">Procházet</a></p>
+            <p><a href="#">Kontakt</a></p>
+            <div class="w-full">
+                <div
+                    class="grid grid-cols-1 mx-8 py-8 rounded-md place-content-center place-items-center gap-3 bg-slate-100 shadow-inner">
+                    <p class="font-bold">Účet:</p>
+                    <p><a href="#">Přihlásit se</a></p>
+                    <p><a href="#">Vytvořit účet</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="absolute top-7 right-9 text-3xl cursor-pointer" onclick="closeMenu()">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </div>
+
+    {{-- Flash message --}}
+    <x-Flash />
 
     {{-- Page content --}}
     <div class="container mx-auto p-6">

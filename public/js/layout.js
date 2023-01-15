@@ -182,6 +182,14 @@ function go(what = "all") {
     $("#search-form").submit();
 }
 
+function openMenu() {
+    $("#fullscreen-menu").fadeIn("fast");
+}
+
+function closeMenu() {
+    $("#fullscreen-menu").fadeOut("fast");
+}
+
 $(document)
     .ready(function () {
         navbar();
