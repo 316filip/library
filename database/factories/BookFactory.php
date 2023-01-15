@@ -17,10 +17,10 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            'work_id' => fake()->numberBetween(1,10),
+            'work_id' => fake()->numberBetween(1, 10),
             'title' => fake()->text(50),
             'subtitle' => fake()->text(80),
-            'length' => fake()->numberBetween(50,300),
+            'length' => fake()->numberBetween(50, 300),
             'language' => fake()->randomElement(['čeština', 'angličtina', 'němčina', 'francouzština']),
             'translator' => fake()->name(),
             'illustrator' => fake()->name(),
@@ -29,7 +29,8 @@ class BookFactory extends Factory
             'year' => fake()->year(),
             'publication' => fake()->numberBetween(1, 6),
             'place' => fake()->city(),
-            'ISBN' => fake()->isbn10()
+            'ISBN' => fake()->isbn10(),
+            'amount' => fake()->numberBetween(1, 5)
         ];
     }
 }
