@@ -6,19 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Knihovna</title>
-    <script src="https://cdn.tailwindcss.com?plugins=line-clamp"></script>
+    <link rel="shortcut icon" href="{{ asset('/img/icon.svg') }}" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,line-clamp"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/51eae37035.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.hotkeys/0.2.0/jquery.hotkeys.min.js"
         integrity="sha512-njd096AjZyGuWOttOsHolCOFjq9Xg9txZTl6Pd7FOpwf1nyBDsOXpS1cd184l/EWy5ekDJZldDMQPs9bLCSAtQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Development version -->
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
     <script src="/js/layout.js"></script>
 </head>
 
 <body>
     {{-- Navbar --}}
-    <nav class="sticky top-0 z-50">
+    <nav class="sticky top-0 z-30">
         <div class="container mx-auto p-6">
             <div class="relative flex h-10 content-center justify-between">
                 {{-- Logo --}}
@@ -27,7 +30,7 @@
                 </a>
 
                 {{-- Search bar --}}
-                <div class="absolute -top-20 xl:-top-2 left-1/2 -translate-x-1/2 h-fit w-full md:w-3/4 lg:w-1/2 transition-all rounded-lg p-2"
+                <div class="absolute -top-20 xl:-top-2 left-1/2 -translate-x-1/2 h-fit w-full md:max-w-3xl lg:max-w-lg xl:max-w-2xl 2xl:max-w-3xl transition-all rounded-lg p-2"
                     id="search-frame">
                     <form action="/hledat" method="GET" id="search-form">
                         <input type="text" name="query"
@@ -83,7 +86,7 @@
             </div>
         </div>
     </nav>
-    <div id="navbar-backdrop" class="fixed top-0 w-full p-6 backdrop-blur transition bg-sky-100 z-40">
+    <div id="navbar-backdrop" class="fixed top-0 w-full p-6 backdrop-blur transition bg-sky-100 z-20">
         <div class="h-10"></div>
     </div>
 
