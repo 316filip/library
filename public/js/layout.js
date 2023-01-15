@@ -1,7 +1,7 @@
+/**
+ * Changes navbar classes according to scroll position
+ */
 function navbar() {
-    /**
-     * Changes navbar classes according to scroll position
-     */
     var scroll = $(window).scrollTop();
     if (scroll === 0) {
         $("#navbar-backdrop")
@@ -16,55 +16,56 @@ function navbar() {
     }
 }
 
+/**
+ * Toggles work details table
+ */
 function workDetails() {
-    /**
-     * Toggles work details table
-     */
     $("#work-details-table").slideToggle();
     $("#work-details-toggle").toggleClass("rotate-90");
 }
 
+/**
+ * Toggles book details table
+ */
 function bookDetails() {
-    /**
-     * Toggles book details table
-     */
     $("#book-details-table").slideToggle();
     $("#book-details-toggle").toggleClass("rotate-90");
 }
 
+/**
+ * Shows live search results frame
+ */
 function showResults() {
-    /**
-     * Shows live search results frame
-     */
     $("#search-frame").addClass("shadow-lg").addClass("backdrop-blur-xl");
     $("#search-results").stop().slideDown("fast");
 }
 
+/**
+ * Hides live search results frame, hides search bar on smaller screens
+ */
 function hideResults() {
-    /**
-     * Hides live search results frame, hides search bar on smaller screens
-     */
-    $("#search-results").slideUp("fast", function () {
-        $("#search-frame")
-            .removeClass("shadow-lg")
-            .removeClass("backdrop-blur-xl")
-            .removeClass("-top-2");
-    });
+    setTimeout(() => {
+        $("#search-results").slideUp("fast", function () {
+            $("#search-frame")
+                .removeClass("shadow-lg")
+                .removeClass("backdrop-blur-xl")
+                .removeClass("-top-2");
+        });
+    }, 100);
 }
 
+/**
+ * Shows search results
+ */
 function showSearchBar() {
-    /**
-     * Shows search results
-     */
     $("#search-frame").addClass("-top-2");
     $("#search-input").focus();
 }
 
+/**
+ * Fetches quick search results and displays them below search field
+ */
 function search() {
-    /**
-     * Fetches quick search results and displays them below search field
-     */
-
     // Check that the search query is longer than 3 chars
     if ($("#search-input").val().trim().length < 3) {
         $("#search-results")
@@ -122,7 +123,7 @@ function search() {
 
                 $.each(result["work"], function (i, field) {
                     $("#search-results").append(
-                        '<a href="/knihovna/' +
+                        '<a href="/titul/' +
                             field["id"] +
                             '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
                             field["title"] +
@@ -171,15 +172,14 @@ function search() {
     );
 }
 
+/**
+ * Go to dedicated search page
+ *
+ * @param {String} what Where to search for results
+ */
 function go(what = "all") {
-    /**
-     * Go to dedicated search page
-     *
-     * @param {String} what Where to search for results
-     */
     $("#search-area").val(what);
     $("#search-form").submit();
-    // TODO: Submit the search form
 }
 
 $(document)
