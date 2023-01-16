@@ -96,8 +96,8 @@
 
     {{-- Fullscreen menu --}}
     <div id="fullscreen-menu" style="display: none"
-        class="absolute top-0 w-full h-full backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center">
-        <div class="grid grid-cols-1 mx-8 py-8 rounded-md place-content-center place-items-center gap-3 bg-slate-50">
+        class="fixed top-0 w-full h-full backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center">
+        <div class="grid grid-cols-1 mx-8 py-8 rounded-md shadow-md place-content-center place-items-center gap-3 bg-slate-50">
             <p><a href="/knihovna">Procházet</a></p>
             <p><a href="#">Kontakt</a></p>
             <div class="w-full">
