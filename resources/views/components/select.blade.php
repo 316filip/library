@@ -1,9 +1,13 @@
 <div>
-    <label for="form-select" class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Autor</label>
+    <label for="form-select"
+        class="block mb-1 capitalize after:content-['*'] after:ml-0.5 after:text-red-500">{{ $label }}</label>
     <div class="relative">
-        <input type="hidden" name="{{ $name }}" id="form-select-output" value="{{ old($name) }}" autocomplete="off">
-        <input type="text" name="{{$type}}" class="p-2 w-full border border-slate-200 rounded-lg cursor-default" id="form-select"
-            placeholder="Neznámý" onfocus="selectOpen()" readonly  value="{{ old($type) }}" autocomplete="off">
+        <input type="hidden" name="{{ $type }}_id" id="form-select-output" value="{{ old($type) }}"
+            autocomplete="off">
+        <input type="text" name="{{ $type }}"
+            class="p-2 w-full border border-slate-200 rounded-lg cursor-default" id="form-select"
+            placeholder="{{ $placeholder }}" onfocus="selectOpen()" readonly value="{{ old($type) }}"
+            autocomplete="off">
         <span class="absolute right-3 top-2 text-slate-500 pointer-events-none"><i
                 class="fa-solid fa-angle-down"></i></span>
     </div>
@@ -12,18 +16,24 @@
         <div class="h-full w-full rounded-md shadow-lg backdrop-blur-xl p-3" id="form-select-content"
             style="display: none">
             <input type="text" class="p-2 mb-3 w-full border border-slate-200 rounded-lg" id="form-select-filter"
-                placeholder="Prohledat autory..." onkeyup="selectFilter()" onblur="selectClose()" autocomplete="off">
+                placeholder="Prohledat {{ $search }}..." onkeyup="selectFilter()" onblur="selectClose()"
+                autocomplete="off">
             <div class="h-60 overflow-auto">
                 <div id="form-select-options">
-                    <input type="button" class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
-                        value="Neznámý" onclick="selectSet(1, 'Neznámý')">
+                    @if ($type == 'author')
+                        <input type="button"
+                            class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
+                            value="Neznámý" onclick="selectSet(1, 'Neznámý')">
+                    @endif
                     @foreach ($values as $value)
-                        <input type="button" class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
-                            value="{{ $value->name }}" onclick="selectSet({{ $value->id }}, '{{ $value->name }}')">
+                        <input type="button"
+                            class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
+                            value="{{ $value->name == '' ? $value->title : $value->name }}"
+                            onclick="selectSet({{ $value->id }}, '{{ $value->name == '' ? $value->title : $value->name }}')">
                     @endforeach
                 </div>
                 <div class="grid place-content-center h-full w-full hidden" id="form-select-options-empty">
-                    <span>Hledaný autor nebyl nalezen</span>
+                    <span>Hledaný {{ $label }} nebyl nalezen</span>
                 </div>
             </div>
         </div>

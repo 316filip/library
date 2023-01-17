@@ -12,15 +12,20 @@ class Select extends Component
      *
      * @return void
      */
-    public $type, $name, $values, $label;
+    public $type, $values, $label, $placeholder, $search;
     public function __construct($type, $values)
     {
         $this->type = $type;
         $this->values = $values;
 
         if ($type == "author") {
-            $this->name = "author_id";
-            $this->label = "Autor";
+            $this->label = "autor";
+            $this->placeholder = "Neznámý";
+            $this->search = "autory";
+        } elseif ($type == "work") {
+            $this->label = "titul";
+            $this->placeholder = "Bible";
+            $this->search = "díla";
         }
     }
 
