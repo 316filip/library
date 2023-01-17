@@ -1,10 +1,26 @@
-<div class="relative border border-slate-200 shadow-sm rounded-lg p-4{{ $classes }}">
-    <h3 class="text-lg line-clamp-3">
-        {{ $title }}
-    </h3>
-    <p class="line-clamp-4">
-        {{ $subtitle }}
-    </p>
+<div class="relative {{ $classes }}">
+    <div class="h-full border border-slate-200 shadow-sm rounded-lg p-4 grid place-content-between">
+        <div>
+            <h3 class="text-lg line-clamp-3">
+                {{ $type == 'author' ? $values->name : $values->title }}
+            </h3>
+            <p class="line-clamp-4">
+                {{ $type == 'author' ? '' : $values->subtitle }}
+            </p>
+        </div>
+        @if ($type == 'book')
+            <div>
+                <p>{{ count($values->bookings) }} rezervace</p>
+                @if (count($values->bookings) !== 0 && substr($values->bookings->last()->to, 0, 10) > date('Y-m-d'))
+                    <p class="text-red-600">Dostupné od
+                        {{ date('d. m. Y', strtotime($values->bookings->last()->to)) }}
+                    </p>
+                @else
+                    <p class="text-lime-600">Dostupné právě teď</p>
+                @endif
+            </div>
+        @endif
+    </div>
     <a href="{{ $link }}" class="absolute inset-0 pointer-events-auto" title="{{ $title }}"></a>
     <div class="{{ $overlay }}">
         <div class="absolute inset-0 rounded-lg flex">
