@@ -9,7 +9,7 @@ class Work extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['author_id', 'title', 'year', 'description', 'subtitle', 'language', 'class', 'genre', 'number'];
+    protected $fillable = ['author_id', 'title', 'original_title', 'year', 'description', 'subtitle', 'language', 'class', 'genre', 'number'];
 
     // Relationship to author
     public function author()

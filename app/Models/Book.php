@@ -9,6 +9,8 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['work_id', 'title', 'subtitle', 'length', 'language', 'translator', 'illustrator', 'description', 'house', 'year', 'publication', 'place', 'image', 'ISBN', 'amount'];
+
     // Relationship to work
     public function work()
     {
