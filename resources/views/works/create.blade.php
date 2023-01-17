@@ -21,8 +21,18 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="create-work-original_title"
+                    class="block mb-1">Originální název</label>
+                <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="original_title"
+                    id="create-work-original_title" placeholder="τὰ βιβλíα" value="{{ old('original_title') }}"
+                    autocomplete="off">
+                @error('original_title')
+                    <p class="text-red-500 text-sm">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <x-Select type="author" :values=$authors></x-Select>
-                @error('author')
+                @error('author_id')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
