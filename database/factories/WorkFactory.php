@@ -19,6 +19,7 @@ class WorkFactory extends Factory
         return [
             'author_id' => fake()->numberBetween(1,10),
             'title' => fake()->text(50),
+            'original_title' => fake()->text(50),
             'year' => fake()->year(),
             'description' => fake()->text(1000),
             'subtitle' => fake()->text(100),
