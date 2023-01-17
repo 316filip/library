@@ -8,6 +8,12 @@
                 @endunless
             </td>
         </tr>
+        @unless($work->original_title == NULL)
+            <tr>
+                <td class="align-top">Původní název:</td>
+                <td class="align-bottom text-justify">{{ $work->original_title }}</td>
+            </tr>
+        @endunless
         <tr>
             <td class="align-top">Autor:</td>
             <td class="align-bottom">
