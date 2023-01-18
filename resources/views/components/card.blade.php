@@ -10,13 +10,13 @@
         </div>
         @if ($type == 'book')
             <div>
-                <p>{{ count($values->bookings) }} rezervace</p>
+                <p class="text-slate-500 text-sm">{{ count($values->bookings) }} rezervace</p>
                 @if (count($values->bookings) !== 0 && substr($values->bookings->last()->to, 0, 10) > date('Y-m-d'))
-                    <p class="text-red-600">Dostupné od
+                    <p class="text-red-600 text-sm">Dostupné od
                         {{ date('d. m. Y', strtotime($values->bookings->last()->to)) }}
                     </p>
                 @else
-                    <p class="text-lime-600">Dostupné právě teď</p>
+                    <p class="text-lime-600 text-sm">Dostupné právě teď</p>
                 @endif
             </div>
         @endif
