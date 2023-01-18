@@ -25,7 +25,7 @@ class SearchHelper
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'work') {
             $work_query = Work::query();
-            $work_query->where(DB::raw('concat(title, " ", subtitle, " ", description)'), 'like', $request);
+            $work_query->where(DB::raw('concat(title, " ", original_title, " ", subtitle, " ", description)'), 'like', $request);
             $work = $work_query->get();
             foreach ($work as $i => $item) {
                 similar_text(strtolower($work[$i]['title']), strtolower(request('query')), $percent);
