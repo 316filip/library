@@ -20,10 +20,11 @@ class BookingFactory extends Factory
         $reservationDate = fake()->dateTimeThisMonth();
         return [
             'code' => fake()->randomNumber(6),
-            'book_id' => fake()->numberBetween(1,10),
-            'user_id' => fake()->numberBetween(1,10),
+            'book_id' => fake()->numberBetween(1, 10),
+            'user_id' => fake()->numberBetween(1, 10),
             'from' => $reservationDate,
-            'to' => Date('Y-m-d h:i:s', strtotime('+1 month', $reservationDate->getTimestamp()))
+            'to' => Date('Y-m-d h:i:s', strtotime('+1 month', $reservationDate->getTimestamp())),
+            'returned' => fake()->boolean()
         ];
     }
 }

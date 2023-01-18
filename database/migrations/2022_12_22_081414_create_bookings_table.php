@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->dateTime('from');
             $table->dateTime('to');
+            $table->boolean('returned');
             $table->timestamps();
         });
     }
