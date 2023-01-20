@@ -1,7 +1,7 @@
 <x-layout>
     <h1 class="text-4xl text-center font-bold mb-5">Přidat knihu</h1>
     <div class="flex justify-center">
-        <form method="POST" action="/kniha" class="w-full px-2 max-w-2xl 2xl:max-w-3xl">
+        <form method="POST" action="/kniha" enctype="multipart/form-data" class="w-full px-2 max-w-2xl 2xl:max-w-3xl">
             @csrf
             <div class="mb-3">
                 <label for="create-book-title"
@@ -40,8 +40,8 @@
                     <label for="create-work-language"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Jazyk</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="language"
-                        id="create-work-language" placeholder="Čeština (Český ekumenický překlad)" value="{{ old('language') }}"
-                        autocomplete="off">
+                        id="create-work-language" placeholder="Čeština (Český ekumenický překlad)"
+                        value="{{ old('language') }}" autocomplete="off">
                     @error('language')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -77,7 +77,8 @@
                     <label for="create-book-house"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Nakladatelství</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="house"
-                        id="create-book-house" placeholder="Česká biblická společnost" value="{{ old('house') }}" autocomplete="off">
+                        id="create-book-house" placeholder="Česká biblická společnost" value="{{ old('house') }}"
+                        autocomplete="off">
                     @error('house')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -102,8 +103,8 @@
                 <div class="mb-3">
                     <label for="create-book-publication" class="block mb-1">Číslo publikace</label>
                     <input type="number" class="p-2 w-full border border-slate-200 rounded-lg" name="publication"
-                        id="create-book-publication" placeholder="22" min="1" value="{{ old('publication') }}"
-                        autocomplete="off">
+                        id="create-book-publication" placeholder="22" min="1"
+                        value="{{ old('publication') }}" autocomplete="off">
                     @error('publication')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -111,7 +112,8 @@
                 <div class="mb-3">
                     <label for="create-book-ISBN" class="block mb-1">ISBN</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="ISBN"
-                        id="create-book-ISBN" placeholder="978-80-7545-028-9" value="{{ old('ISBN') }}" autocomplete="off">
+                        id="create-book-ISBN" placeholder="978-80-7545-028-9" value="{{ old('ISBN') }}"
+                        autocomplete="off">
                     @error('ISBN')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -126,6 +128,15 @@
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
+            </div>
+            <div class="mb-3">
+                <label for="create-book-image" class="block mb-1">Obrázek přebalu</label>
+                <input type="file"
+                    class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
+                    name="image" id="create-book-image" autocomplete="off">
+                @error('image')
+                    <p class="text-red-500 text-sm">{{ $message }}</p>
+                @enderror
             </div>
             <div class="flex justify-center">
                 <div class="mb-3">
