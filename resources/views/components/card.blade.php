@@ -1,22 +1,35 @@
 <div class="relative {{ $classes }}">
-    <div class="h-full border border-slate-200 shadow-sm rounded-lg p-4 grid place-content-between">
+    <div class="h-full border border-slate-200 shadow-sm rounded-lg p-4 grid">
         <div>
-            <h3 class="text-lg line-clamp-3">
-                {{ $type == 'author' ? $values->name : $values->title }}
-            </h3>
-            <p class="line-clamp-4">
-                {{ $type == 'author' ? '' : $values->subtitle }}
-            </p>
+            <div class="flex justify-center mb-1">
+                @if ($type == 'book')
+                    @if ($values->image !== null)
+                        <img src="{{ asset('/img/' . $values->image) }}" alt="Obrázek přebalu" class="max-h-28">
+                    @else
+                        <img src="{{ asset('/img/book_cover.png') }}" alt="Ukázkový obrázek přebalu" class="max-h-28">
+                    @endif
+                @endif
+            </div>
+            <div>
+                <h3 class="text-lg line-clamp-3">
+                    {{ $type == 'author' ? $values->name : $values->title }}
+                </h3>
+                <p class="line-clamp-4">
+                    {{ $type == 'author' ? '' : $values->subtitle }}
+                </p>
+            </div>
         </div>
         @if ($type == 'book')
-            <div>
+            <div class="w-full pt-3 place-self-end">
                 <p class="text-slate-500 text-sm">{{ count($values->bookings) }} rezervace</p>
-                @if (count($values->bookings) !== 0 && substr($values->bookings->last()->to, 0, 10) > date('Y-m-d'))
-                    <p class="text-red-600 text-sm">Dostupné od
-                        {{ date('d. m. Y', strtotime($values->bookings->last()->to)) }}
-                    </p>
-                @else
+                @if ($values->date === true)
                     <p class="text-lime-600 text-sm">Dostupné právě teď</p>
+                @elseif ($values->date === false)
+                    <p class="text-red-600 text-sm">Momentálně nedostupné</p>
+                @else
+                    <p class="text-amber-500 text-sm">Dostupné od
+                        {{ date('d. m. Y', strtotime($values->date)) }}
+                    </p>
                 @endif
             </div>
         @endif
