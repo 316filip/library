@@ -1,16 +1,44 @@
 <div class="relative {{ $classes }}">
     <div class="h-full border border-slate-200 shadow-sm rounded-lg p-4 grid">
         <div>
-            <div class="flex justify-center mb-1">
+            <div class="flex justify-center mb-1 mx-4{{ $type == 'work' ? ' h-28' : '' }} relative">
                 @if ($type == 'book')
+                    {{-- When showing a book, display cover image --}}
                     @if ($values->image !== null)
                         <img src="{{ asset('/img/' . $values->image) }}" alt="Obrázek přebalu" class="max-h-28">
                     @else
                         <img src="{{ asset('/img/book_cover.png') }}" alt="Ukázkový obrázek přebalu" class="max-h-28">
                     @endif
+                @elseif ($type == 'work')
+                    {{-- When showing a work, display three cover images --}}
+                    @for ($i = 0; $i < 3; $i++)
+                        @php
+                            // Different classes for first, second and third image
+                            $position = $i == 0 ? 'bottom-0 ml-8' : '';
+                            $position = $i == 1 ? '-z-10 bottom-4' : $position;
+                            $position = $i == 2 ? '-z-20 bottom-8 mr-8' : $position;
+                        @endphp
+
+                        @if (isset($values->books[$i]))
+                            {{-- If there is a book with this index --}}
+                            @if ($values->books[$i]->image !== null)
+                                {{-- If the book has a cover picture --}}
+                                <img src="{{ asset('/img/' . $values->books[$i]->image) }}" alt="Obrázek přebalu"
+                                    class="max-h-20 {{ $position }} shadow absolute">
+                            @else
+                                {{-- If there is no cover picture --}}
+                                <img src="{{ asset('/img/book_cover.png') }}" alt="Ukázkový obrázek přebalu"
+                                    class="max-h-20 {{ $position }} shadow absolute">
+                            @endif
+                        @else
+                            {{-- If there is no book with this index --}}
+                            <div class="h-20 w-12 bg-slate-200 {{ $position }} shadow absolute"></div>
+                        @endif
+                    @endfor
                 @endif
             </div>
             <div>
+                {{-- Name / title + subtitle --}}
                 <h3 class="text-lg line-clamp-3">
                     {{ $type == 'author' ? $values->name : $values->title }}
                 </h3>
@@ -20,6 +48,7 @@
             </div>
         </div>
         @if ($type == 'book')
+            {{-- When showing a book, display availibility info --}}
             <div class="w-full pt-3 place-self-end">
                 <p class="text-slate-500 text-sm">{{ count($values->bookings) }} rezervace</p>
                 @if ($values->date === true)
@@ -34,7 +63,11 @@
             </div>
         @endif
     </div>
+
+    {{-- Link to the result --}}
     <a href="{{ $link }}" class="absolute inset-0 pointer-events-auto" title="{{ $title }}"></a>
+
+    {{-- For last search result in a row, display 'show more' link --}}
     <div class="{{ $overlay }}">
         <div class="absolute inset-0 rounded-lg flex">
             <div class="flex-auto w-32 rounded-l-lg bg-gradient-to-r from-transparent to-slate-100"></div>
