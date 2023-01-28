@@ -10,12 +10,15 @@ class Author extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name_prefix', 'first_name', 'middle_name', 'last_name', 'name_suffix', 'birth_date', 'death_date', 'description', 'image'];
+
     // Relationship to works
     public function works()
     {
         return $this->hasMany(Work::class, 'author_id');
     }
 
+    // Attribute containing full name
     protected function name(): Attribute
     {
         return Attribute::make(
