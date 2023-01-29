@@ -3,12 +3,12 @@
         class="table-auto w-full border border-slate-200 rounded-md border-separate border-spacing-x-4 border-spacing-y-3">
         <tr>
             <td colspan="2"><span class="font-bold">{{ $work->title }}</span>
-                @unless($work->subtitle == NULL)
+                @unless($work->subtitle == null)
                     ({{ $work->subtitle }})
                 @endunless
             </td>
         </tr>
-        @unless($work->original_title == NULL)
+        @unless($work->original_title == null)
             <tr>
                 <td class="align-top">Původní název:</td>
                 <td class="align-bottom text-justify">{{ $work->original_title }}</td>
@@ -26,13 +26,13 @@
                 @endunless
             </td>
         </tr>
-        @unless($work->description == NULL)
+        @unless($work->description == null)
             <tr>
                 <td class="align-top">Popis:</td>
                 <td class="align-bottom text-justify">{{ $work->description }}</td>
             </tr>
         @endunless
-        @unless($work->year == NULL)
+        @unless($work->year == null)
             <tr>
                 <td class="align-top">Rok:</td>
                 <td class="align-bottom">{{ $work->year }}</td>
@@ -46,13 +46,13 @@
             <td class="align-top">Literární druh:</td>
             <td class="align-bottom capitalize">{{ $work->class }}</td>
         </tr>
-        @unless($work->genre == NULL)
+        @unless($work->genre == null)
             <tr>
                 <td class="align-top">Literární žánr:</td>
                 <td class="align-bottom capitalize">{{ $work->genre }}</td>
             </tr>
         @endunless
-        @unless($work->number == NULL)
+        @unless($work->number == null)
             <tr>
                 <td class="align-top">Délka:</td>
                 <td class="align-bottom">{{ $work->number }} @if ($work->class === 'lyrika')
@@ -67,3 +67,13 @@
         @endunless
     </table>
 </div>
+
+<script>
+    /**
+     * Toggles work details table
+     */
+    function workDetails() {
+        $("#work-details-table").slideToggle();
+        $("#work-details-toggle").toggleClass("rotate-90");
+    }
+</script>
