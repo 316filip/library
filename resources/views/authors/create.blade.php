@@ -82,14 +82,25 @@
             </div>
             <div class="mb-3">
                 <label for="create-author-image" class="block mb-1">Obrázek / Fotografie</label>
-                <input type="file"
-                    class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
-                    name="image" id="create-author-image" autocomplete="off"
-                    aria-describedby="create-author-image-hint">
-                <p id="create-author-image-hint" class="text-slate-500">Vyberte takový obrázek, aby hlava byla umístěna uprostřed.</p>
+                <div class="flex gap-4">
+                    <input type="file" accept="image/*"
+                        class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
+                        name="image" id="create-author-image" autocomplete="off"
+                        aria-describedby="create-author-image-hint" onchange="preview(this)">
+                    <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow" onclick="empty(event)"
+                        title="Vyprázdnit výběr obrázku">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+                <p id="create-author-image-hint" class="text-slate-500 text-sm">Vyberte takový obrázek, aby hlava byla
+                    umístěna uprostřed.</p>
                 @error('image')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
+            </div>
+            <div class="flex justify-center mb-3">
+                <div id="create-author-image-preview" class="bg-sky-100 h-20 w-20 bg-cover bg-center rounded-full shadow"
+                    style="background-image: url({{ asset('/img/author_profile.svg') }})" title="Náhled obrázku"></div>
             </div>
             <div class="flex justify-center">
                 <div class="mb-3">
@@ -100,4 +111,21 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function preview(file) {
+            if (file.files === undefined) {
+                $('#create-author-image-preview').css('background-image', 'url(/img/author_profile.svg)');
+                return;
+            }
+            let src = URL.createObjectURL(file.files[0]);
+            $('#create-author-image-preview').css('background-image', 'url(' + src + ')');
+        }
+
+        function empty(e) {
+            e.preventDefault();
+            $('#create-author-image').val('');
+            preview($('#create-author-image'));
+        }
+    </script>
 </x-layout>
