@@ -22,14 +22,16 @@
                 <div id="form-select-options">
                     @if ($type == 'author')
                         <input type="button"
-                            class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
+                            class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition italic"
                             value="Neznámý" onclick="selectSet(1, 'Neznámý')">
                     @endif
                     @foreach ($values as $value)
-                        <input type="button"
-                            class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
-                            value="{{ $value->name == '' ? $value->title : $value->name }}"
-                            onclick="selectSet({{ $value->id }}, '{{ $value->name == '' ? $value->title : $value->name }}')">
+                        @unless($type == 'author' && $value->id == 1)
+                            <input type="button"
+                                class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
+                                value="{{ $value->name == '' ? $value->title : $value->name }}"
+                                onclick="selectSet({{ $value->id }}, '{{ $value->name == '' ? $value->title : $value->name }}')">
+                        @endunless
                     @endforeach
                 </div>
                 <div class="grid place-content-center h-full w-full hidden" id="form-select-options-empty">
