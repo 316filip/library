@@ -1,13 +1,14 @@
 <div class="relative {{ $classes }}">
     <div class="h-full border border-slate-200 shadow-sm rounded-lg p-4 grid">
         <div>
-            <div class="flex justify-center mb-1 mx-4{{ $type == 'work' ? ' h-28' : '' }} relative">
+            <div class="flex justify-center mb-1 mx-4{{ $type != 'book' ? ' h-28' : '' }} relative">
                 @if ($type == 'book')
                     {{-- When showing a book, display cover image --}}
                     @if ($values->image !== null)
-                        <img src="{{ asset('/img/' . $values->image) }}" alt="Obrázek přebalu" class="max-h-28">
+                        <img src="{{ asset('/img/' . $values->image) }}" alt="Obrázek přebalu" class="max-h-28 shadow">
                     @else
-                        <img src="{{ asset('/img/book_cover.png') }}" alt="Ukázkový obrázek přebalu" class="max-h-28">
+                        <img src="{{ asset('/img/book_cover.png') }}" alt="Ukázkový obrázek přebalu"
+                            class="max-h-28 shadow">
                     @endif
                 @elseif ($type == 'work')
                     {{-- When showing a work, display three cover images --}}
@@ -35,6 +36,15 @@
                             <div class="h-20 w-12 bg-slate-200 {{ $position }} shadow absolute"></div>
                         @endif
                     @endfor
+                @elseif ($type = 'author')
+                    {{-- When showing an author, display a profile picture --}}
+                    @if ($values->image === null)
+                        <div class="absolute bg-sky-100 h-28 w-28 bg-cover bg-center rounded-full shadow"
+                            style="background-image: url({{ asset('/img/author_profile.svg') }})"></div>
+                    @else
+                        <div class="absolute bg-sky-100 h-28 w-28 bg-cover bg-center rounded-full shadow"
+                            style="background-image: url({{ asset('/img/' . $values->image) }})"></div>
+                    @endif
                 @endif
             </div>
             <div>
