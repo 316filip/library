@@ -15,7 +15,7 @@ class SearchHelper
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'author') {
             $author_query = Author::query();
-            $author_query->where(DB::raw('concat(name_prefix, " ", first_name, " ", middle_name, " ", last_name, " ", name_suffix)'), 'like', $request);
+            $author_query->where(DB::raw('concat(coalesce(name_prefix, ""), " ", first_name, " ", coalesce(middle_name, ""), " ", last_name, " ", coalesce(name_suffix, ""))'), 'like', $request);
             $author = $author_query->get();
             foreach ($author as $i => $item) {
                 similar_text(strtolower($author[$i]['name']), strtolower(request('query')), $percent);
@@ -25,7 +25,7 @@ class SearchHelper
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'work') {
             $work_query = Work::query();
-            $work_query->where(DB::raw('concat(title, " ", original_title, " ", subtitle, " ", description)'), 'like', $request);
+            $work_query->where(DB::raw('concat(title, " ", coalesce(original_title, ""), " ", coalesce(subtitle, ""), " ", coalesce(description, ""))'), 'like', $request);
             $work = $work_query->get();
             foreach ($work as $i => $item) {
                 similar_text(strtolower($work[$i]['title']), strtolower(request('query')), $percent);
@@ -35,7 +35,7 @@ class SearchHelper
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'book') {
             $book_query = Book::query();
-            $book_query->where(DB::raw('concat(title, " ", subtitle, " ", description)'), 'like', $request);
+            $book_query->where(DB::raw('concat(title, " ", coalesce(subtitle, ""), " ", coalesce(description, ""))'), 'like', $request);
             $book = $book_query->get();
             foreach ($book as $i => $item) {
                 similar_text(strtolower($book[$i]['title']), strtolower(request('query')), $percent);
