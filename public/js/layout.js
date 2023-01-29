@@ -17,22 +17,6 @@ function navbar() {
 }
 
 /**
- * Toggles work details table
- */
-function workDetails() {
-    $("#work-details-table").slideToggle();
-    $("#work-details-toggle").toggleClass("rotate-90");
-}
-
-/**
- * Toggles book details table
- */
-function bookDetails() {
-    $("#book-details-table").slideToggle();
-    $("#book-details-toggle").toggleClass("rotate-90");
-}
-
-/**
  * Shows live search results frame
  */
 function showResults() {
@@ -93,19 +77,17 @@ function search() {
                         '<a href="/autor/' +
                             field["id"] +
                             '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
-                            (field["name_prefix"] == ""
+                            (field["name_prefix"] == null
                                 ? ""
                                 : field["name_prefix"] + " ") +
-                            (field["first_name"] == ""
-                                ? ""
-                                : field["first_name"] + " ") +
-                            (field["middle_name"] == ""
+                            (field["first_name"] + " ") +
+                            (field["middle_name"] == null
                                 ? ""
                                 : field["middle_name"] + " ") +
-                            (field["last_name"] == ""
+                            field["last_name"] +
+                            (field["name_suffix"] == null
                                 ? ""
-                                : field["last_name"] + " ") +
-                            field["name_suffix"] +
+                                : " " + field["name_suffix"]) +
                             "</p></a>"
                     );
                 });
