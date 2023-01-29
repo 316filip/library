@@ -7,8 +7,8 @@
                     @if ($values->image !== null)
                         <img src="{{ asset('/img/' . $values->image) }}" alt="Obrázek přebalu" class="max-h-28 shadow">
                     @else
-                        <img src="{{ asset('/img/book_cover.png') }}" alt="Ukázkový obrázek přebalu"
-                            class="max-h-28 shadow">
+                        <img src="{{ asset('/img/book_cover.svg') }}" alt="Ukázkový obrázek přebalu"
+                            class="max-h-28 drop-shadow">
                     @endif
                 @elseif ($type == 'work')
                     {{-- When showing a work, display three cover images --}}
@@ -28,12 +28,12 @@
                                     class="max-h-20 {{ $position }} shadow absolute">
                             @else
                                 {{-- If there is no cover picture --}}
-                                <img src="{{ asset('/img/book_cover.png') }}" alt="Ukázkový obrázek přebalu"
-                                    class="max-h-20 {{ $position }} shadow absolute">
+                                <img src="{{ asset('/img/book_cover.svg') }}" alt="Ukázkový obrázek přebalu"
+                                    class="max-h-20 {{ $position }} drop-shadow absolute">
                             @endif
                         @else
                             {{-- If there is no book with this index --}}
-                            <div class="h-20 w-12 bg-slate-200 {{ $position }} shadow absolute"></div>
+                            <div class="h-20 w-14 bg-slate-200 {{ $position }} shadow rounded-sm absolute"></div>
                         @endif
                     @endfor
                 @elseif ($type = 'author')
