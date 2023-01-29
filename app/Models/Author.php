@@ -22,7 +22,7 @@ class Author extends Model
     protected function name(): Attribute
     {
         return Attribute::make(
-            fn () => $this->name_prefix . " " . $this->first_name . " " . $this->middle_name . " " . $this->last_name . " " . $this->name_suffix,
+            fn () => ($this->name_prefix == "" ? "" : $this->name_prefix . " ") . $this->first_name . " " . ($this->middle_name == "" ? "" : $this->middle_name . " ") . $this->last_name . ($this->name_suffix == "" ? NULL : " " . $this->name_suffix),
         );
     }
 }
