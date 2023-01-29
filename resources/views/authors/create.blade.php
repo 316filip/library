@@ -81,10 +81,12 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="create-author-image" class="block mb-1">Obrázek/Fotografie</label>
+                <label for="create-author-image" class="block mb-1">Obrázek / Fotografie</label>
                 <input type="file"
                     class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
-                    name="image" id="create-author-image" autocomplete="off">
+                    name="image" id="create-author-image" autocomplete="off"
+                    aria-describedby="create-author-image-hint">
+                <p id="create-author-image-hint" class="text-slate-500">Vyberte takový obrázek, aby hlava byla umístěna uprostřed.</p>
                 @error('image')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
