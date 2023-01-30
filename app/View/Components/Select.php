@@ -12,20 +12,29 @@ class Select extends Component
      *
      * @return void
      */
-    public $type, $values, $label, $placeholder, $search;
-    public function __construct($type, $values)
+    public $type, $id_value, $name_value, $values, $label, $placeholder, $search;
+    public function __construct($type, $target, $values)
     {
         $this->type = $type;
         $this->values = $values;
 
         if ($type == "author") {
             $this->label = "autor";
-            $this->placeholder = "Neznámý";
+            $this->placeholder = "Neznámý autor";
             $this->search = "autory";
         } elseif ($type == "work") {
             $this->label = "titul";
             $this->placeholder = "Bible";
             $this->search = "díla";
+        }
+
+        if ($target !== "") {
+            $this->id_value = old($type . "_id") == '' ? $target : old($type . "_id");
+            if ($type == "author") $this->name_value = old($type) == '' ? $values->firstWhere('id', $target)->name : old($type);
+            elseif ($type == "work") $this->name_value = old($type) == '' ? $values->firstWhere('id', $target)->title : old($type);
+        } else {
+            $this->id_value = old($type . "_id");
+            $this->name_value = old($type);
         }
     }
 

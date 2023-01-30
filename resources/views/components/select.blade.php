@@ -2,11 +2,11 @@
     <label for="form-select"
         class="block mb-1 capitalize after:content-['*'] after:ml-0.5 after:text-red-500">{{ $label }}</label>
     <div class="relative">
-        <input type="hidden" name="{{ $type }}_id" id="form-select-output" value="{{ old($type) }}"
+        <input type="hidden" name="{{ $type }}_id" id="form-select-output" value="{{ $id_value }}"
             autocomplete="off">
         <input type="text" name="{{ $type }}"
             class="p-2 w-full border border-slate-200 rounded-lg cursor-default" id="form-select"
-            placeholder="{{ $placeholder }}" onfocus="selectOpen()" readonly value="{{ old($type) }}"
+            placeholder="{{ $placeholder }}" onfocus="selectOpen()" readonly value="{{ $name_value }}"
             autocomplete="off">
         <span class="absolute right-3 top-2 text-slate-500 pointer-events-none"><i
                 class="fa-solid fa-angle-down"></i></span>
@@ -23,7 +23,7 @@
                     @if ($type == 'author')
                         <input type="button"
                             class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition italic"
-                            value="Neznámý" onclick="selectSet(1, 'Neznámý')">
+                            value="Neznámý autor" onclick="selectSet(1, 'Neznámý autor')">
                     @endif
                     @foreach ($values as $value)
                         @unless($type == 'author' && $value->id == 1)
