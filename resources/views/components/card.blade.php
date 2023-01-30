@@ -33,16 +33,18 @@
                             @endif
                         @else
                             {{-- If there is no book with this index --}}
-                            <div class="h-20 w-14 bg-slate-200 {{ $position }} shadow rounded-sm absolute"></div>
+                            <div
+                                class="h-20 w-14 bg-sky-100 border border-slate-200 {{ $position }} shadow rounded-sm absolute">
+                            </div>
                         @endif
                     @endfor
                 @elseif ($type = 'author')
                     {{-- When showing an author, display a profile picture --}}
                     @if ($values->image === null)
-                        <div class="absolute bg-sky-100 h-28 w-28 bg-cover bg-center rounded-full shadow"
+                        <div class="absolute h-28 w-28 bg-sky-100 bg-cover bg-center rounded-full border border-slate-200 shadow"
                             style="background-image: url({{ asset('/img/author_profile.svg') }})"></div>
                     @else
-                        <div class="absolute bg-sky-100 h-28 w-28 bg-cover bg-center rounded-full shadow"
+                        <div class="absolute h-28 w-28 bg-sky-100 bg-cover bg-center rounded-full border border-slate-200 shadow"
                             style="background-image: url({{ asset('/img/' . $values->image) }})"></div>
                     @endif
                 @endif
@@ -52,9 +54,17 @@
                 <h3 class="text-lg line-clamp-3">
                     {{ $type == 'author' ? $values->name : $values->title }}
                 </h3>
-                <p class="line-clamp-4">
-                    {{ $type == 'author' ? '' : $values->subtitle }}
-                </p>
+                @unless($type == 'author')
+                    <p class="line-clamp-4">
+                        {{ $values->subtitle }}
+                    </p>
+                    <div class="place-self-end">
+                        <hr class="mt-2 mb-1">
+                        <p>
+                            {{ $type == 'work' ? $values->author->name : $values->work->author->name }}
+                        </p>
+                    </div>
+                @endunless
             </div>
         </div>
         @if ($type == 'book')

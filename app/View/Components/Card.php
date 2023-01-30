@@ -12,7 +12,7 @@ class Card extends Component
      * @return void
      */
     public $type, $values, $classes, $title, $subtitle, $link, $overlay, $filter, $filter_text;
-    public function __construct($type, $data, $number)
+    public function __construct($type, $data, $number, $more)
     {
         if ($type == 'author') {
             $this->link = '/autor/' . $data['id'];
@@ -28,7 +28,11 @@ class Card extends Component
         $this->type = $type;
         $this->values = $data;
         $this->classes = ($number > 5 ? 'hidden' : 'block') . ($number > 7 ? ' md:hidden' : ' md:block') . ($number > 4 ? ' lg:hidden' : ' lg:block') . ($number > 5 ? ' xl:hidden' : ' xl:block');
-        $this->overlay = ($number != 5 ? ' hidden' : ' block') . ($number != 7 ? ' md:hidden' : ' md:block') . ($number != 4 ? ' lg:hidden' : ' lg:block') . ($number != 5 ? ' xl:hidden' : ' xl:block');
+        if ($more == 1) {
+            $this->overlay = ($number != 5 ? ' hidden' : ' block') . ($number != 7 ? ' md:hidden' : ' md:block') . ($number != 4 ? ' lg:hidden' : ' lg:block') . ($number != 5 ? ' xl:hidden' : ' xl:block');
+        } else {
+            $this->overlay = 'hidden';
+        }
         $this->filter = $type;
     }
 
