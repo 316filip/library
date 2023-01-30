@@ -131,12 +131,22 @@
             </div>
             <div class="mb-3">
                 <label for="create-book-image" class="block mb-1">Obrázek přebalu</label>
-                <input type="file"
-                    class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
-                    name="image" id="create-book-image" autocomplete="off">
+                <div class="flex gap-4">
+                    <input type="file" accept="image/*"
+                        class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
+                        name="image" id="create-book-image" autocomplete="off" onchange="preview(this)">
+                    <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow" onclick="empty(event)"
+                        title="Vyprázdnit výběr obrázku">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
                 @error('image')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
+            </div>
+            <div class="flex justify-center mb-3">
+                <img id="create-book-image-preview" class="max-h-40 drop-shadow" src="{{ asset('/img/book_cover.svg') }}"
+                    alt="Náhled přebalu" title="Náhled přebalu" onclick="$('#create-book-image').click()">
             </div>
             <div class="flex justify-center">
                 <div class="mb-3">
@@ -147,4 +157,21 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function preview(file) {
+            if (file.files === undefined) {
+                $('#create-book-image-preview').attr('src', '{{ asset('/img/book_cover.svg') }}');
+                return;
+            }
+            let src = URL.createObjectURL(file.files[0]);
+            $('#create-book-image-preview').attr('src', src);
+        }
+
+        function empty(e) {
+            e.preventDefault();
+            $('#create-book-image').val('');
+            preview($('#create-book-image'));
+        }
+    </script>
 </x-layout>

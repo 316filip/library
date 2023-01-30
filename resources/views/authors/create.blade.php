@@ -99,8 +99,10 @@
                 @enderror
             </div>
             <div class="flex justify-center mb-3">
-                <div id="create-author-image-preview" class="bg-sky-100 h-20 w-20 bg-cover bg-center rounded-full shadow"
-                    style="background-image: url({{ asset('/img/author_profile.svg') }})" title="Náhled obrázku"></div>
+                <div id="create-author-image-preview"
+                    class="bg-sky-100 h-20 w-20 bg-cover bg-center rounded-full shadow"
+                    style="background-image: url({{ asset('/img/author_profile.svg') }})" title="Náhled obrázku"
+                    onclick="$('#create-author-image').click()"></div>
             </div>
             <div class="flex justify-center">
                 <div class="mb-3">
