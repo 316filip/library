@@ -26,7 +26,7 @@
                 <div class="mb-3 col-span-3 sm:col-span-2">
                     <label for="create-author-middle_name" class="block mb-1">Prostřední jména</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="middle_name"
-                        id="create-author-middle_names" placeholder="Conan" value="{{ old('middle_name') }}"
+                        id="create-author-middle_name" placeholder="Conan" value="{{ old('middle_name') }}"
                         autocomplete="off">
                     @error('middle_name')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
