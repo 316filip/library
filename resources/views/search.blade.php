@@ -28,7 +28,7 @@
             <h2 class="text-2xl">Autoři</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
                 @foreach ($results['author'] as $author)
-                    <x-Card type="author" :data=$author number="{{ $loop->index }}" />
+                    <x-Card type="author" :data=$author number="{{ $loop->index }}" more="1" />
                 @endforeach
             </div>
         @endunless
@@ -36,7 +36,7 @@
             <h2 class="text-2xl">Díla</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
                 @foreach ($results['work'] as $work)
-                    <x-Card type="work" :data=$work number="{{ $loop->index }}" />
+                    <x-Card type="work" :data=$work number="{{ $loop->index }}" more="1" />
                 @endforeach
             </div>
         @endunless
@@ -44,7 +44,7 @@
             <h2 class="text-2xl">Knihy</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
                 @foreach ($results['book'] as $book)
-                    <x-Card type="book" :data=$book number="{{ $loop->index }}" />
+                    <x-Card type="book" :data=$book number="{{ $loop->index }}" more="1" />
                 @endforeach
             </div>
         @endunless
@@ -57,7 +57,7 @@
         @endif
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
             @foreach ($results['author'] as $author)
-                <x-Card :data=$author type="author" number="0" />
+                <x-Card :data=$author type="author" number="0" more="0" />
             @endforeach
         </div>
         {{ $results['author']->appends(request()->input())->links() }}
@@ -67,7 +67,7 @@
         @endif
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
             @foreach ($results['work'] as $work)
-                <x-Card :data=$work type="work" number="0" />
+                <x-Card :data=$work type="work" number="0" more="0" />
             @endforeach
         </div>
         {{ $results['work']->appends(request()->input())->links() }}
@@ -77,7 +77,7 @@
         @endif
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
             @foreach ($results['book'] as $book)
-                <x-Card :data=$book type="book" number="0" />
+                <x-Card :data=$book type="book" number="0" more="0" />
             @endforeach
         </div>
         {{ $results['book']->appends(request()->input())->links() }}
