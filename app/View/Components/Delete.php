@@ -16,8 +16,14 @@ class Delete extends Component
     {
         $this->id = $id;
         if ($type == 'author') {
-            $this->text = "autora";
-            $this->link = "autor";
+            $this->text = 'autora';
+            $this->link = 'autor';
+        } elseif ($type == 'work') {
+            $this->text = 'titul';
+            $this->link = 'titul';
+        } elseif ($type == 'book') {
+            $this->text = 'knihu';
+            $this->link = 'kniha';
         }
     }
 
