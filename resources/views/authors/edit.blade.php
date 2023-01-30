@@ -113,12 +113,13 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
-            <input type="hidden" name="image_update" id="edit-author-image_update" value="0" autocomplete="off">
+            <input type="hidden" name="image_update" id="edit-author-image_update" value="0"
+                autocomplete="off">
             <div class="flex justify-center mb-3">
                 <div id="edit-author-image-preview"
                     class="bg-sky-100 h-20 w-20 bg-cover bg-center rounded-full shadow"
                     style="background-image: url({{ asset('/img/' . ($author->image === null ? 'author_profile.svg' : $author->image)) }})"
-                    title="Náhled obrázku">
+                    title="Náhled obrázku" onclick="$('#edit-author-image').click()">
                 </div>
             </div>
             <div class="flex justify-center">
