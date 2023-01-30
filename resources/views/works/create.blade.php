@@ -31,7 +31,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <x-Select type="author" :values=$authors></x-Select>
+                <x-Select type="author" target="" :values=$authors></x-Select>
                 @error('author_id')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
