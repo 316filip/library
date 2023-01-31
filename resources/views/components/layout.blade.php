@@ -70,6 +70,11 @@
                         <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true"
                             onclick="$('#dropdown-menu').fadeToggle('fast');"
                             onblur="$('#dropdown-menu').fadeOut('fast');">
+                            @auth
+                                <i class="fa-regular fa-user"></i>
+                            @else
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            @endauth
                             Účet <i class="fa-solid fa-caret-down"></i>
                         </button>
                     </span>
@@ -81,10 +86,20 @@
                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
                     style="display: none">
                     <div class="py-1" role="none">
-                        <a href="#" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
-                            tabindex="-1" id="menu-item-0">Přihlásit se</a>
-                        <a href="#" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
-                            tabindex="-1" id="menu-item-1">Vytvořit účet</a>
+                        @auth
+                            <a href="/ucet" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
+                                tabindex="-1" id="menu-item-0">Správa účtu</a>
+                            <form action="/logout" method="post" role="menuitem" tabindex="-1" id="menu-item-1">
+                                @csrf
+                                <button class="block px-3 py-1 w-full text-left hover:text-yellow-400 transition">Odhlásit
+                                    se</button>
+                            </form>
+                        @else
+                            <a href="/prihlaseni" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
+                                tabindex="-1" id="menu-item-0">Přihlásit se</a>
+                            <a href="/registrace" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
+                                tabindex="-1" id="menu-item-1">Vytvořit účet</a>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -97,15 +112,24 @@
     {{-- Fullscreen menu --}}
     <div id="fullscreen-menu" style="display: none"
         class="fixed top-0 w-full h-full backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center">
-        <div class="grid grid-cols-1 mx-8 py-8 rounded-md shadow-md place-content-center place-items-center gap-3 bg-slate-50">
+        <div
+            class="grid grid-cols-1 mx-8 py-8 rounded-md shadow-md place-content-center place-items-center gap-3 bg-slate-50">
             <p><a href="/knihovna">Procházet</a></p>
             <p><a href="#">Kontakt</a></p>
             <div class="w-full">
                 <div
                     class="grid grid-cols-1 mx-8 py-8 rounded-md place-content-center place-items-center gap-3 bg-slate-100 shadow-inner">
                     <p class="font-bold">Účet:</p>
-                    <p><a href="#">Přihlásit se</a></p>
-                    <p><a href="#">Vytvořit účet</a></p>
+                    @auth
+                        <p><a href="/ucet">Správa účtu</a></p>
+                        <form action="/logout" method="post" role="menuitem" tabindex="-1" id="menu-item-1">
+                            @csrf
+                            <button>Odhlásit se</button>
+                        </form>
+                    @else
+                        <p><a href="/prihlaseni">Přihlásit se</a></p>
+                        <p><a href="/registrace">Vytvořit účet</a></p>
+                    @endauth
                 </div>
             </div>
         </div>

@@ -58,19 +58,19 @@
                     <p class="line-clamp-4">
                         {{ $values->subtitle }}
                     </p>
-                    <div class="place-self-end">
-                        <hr class="mt-2 mb-1">
-                        <p>
-                            {{ $type == 'work' ? $values->author->name : $values->work->author->name }}
-                        </p>
-                    </div>
                 @endunless
             </div>
         </div>
         @if ($type == 'book')
             {{-- When showing a book, display availibility info --}}
             <div class="w-full pt-3 place-self-end">
-                <p class="text-slate-500 text-sm">{{ count($values->bookings) }} rezervace</p>
+                <hr class="mb-1">
+                <p>
+                    {{ $values->work->author->name }}
+                </p>
+                @auth
+                    <p class="text-slate-500 text-sm">{{ count($values->bookings) }} rezervace</p>
+                @endauth
                 @if ($values->date === true)
                     <p class="text-lime-600 text-sm">Dostupné právě teď</p>
                 @elseif ($values->date === false)
@@ -80,6 +80,15 @@
                         {{ date('d. m. Y', strtotime($values->date)) }}
                     </p>
                 @endif
+            </div>
+        @elseif ($type == 'work')
+            {{-- When showing a work, display number of books --}}
+            <div class="w-full pt-3 place-self-end">
+                <hr class="mb-1">
+                <p>
+                    {{ $values->author->name }}
+                </p>
+                <p class="text-slate-500 text-sm">{{ count($values->books) }} vydání v naší knihovně</p>
             </div>
         @endif
     </div>
