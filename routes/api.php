@@ -22,9 +22,3 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
-
-// Return first five quick search results from each table ordered by similarity to the query
-Route::get('/search', function () {
-    return SearchHelper::search();
-});

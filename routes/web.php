@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\BrowseController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WorkController;
 use App\Models\Book;
 use App\Models\Author;
+use App\Helpers\SearchHelper;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,5 +75,8 @@ Route::post('/ucet', [UserController::class, 'store'])->middleware('guest');
 Route::get('/ucet', [UserController::class, 'show'])->middleware('auth');
 Route::get('/ucet/{user}', [UserController::class, 'show'])->middleware('auth');
 
-// SEARCH ROUTE
+// SEARCH ROUTES
 Route::get('/hledat', [SearchController::class, 'search']);
+Route::get('/search', function () {
+    return SearchHelper::search();
+});
