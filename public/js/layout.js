@@ -62,7 +62,7 @@ function search() {
 
     // Get quick results as JSON from API
     $.getJSON(
-        "/api/search?query=" + $("#search-input").val() + "&in=quick",
+        "/search?query=" + $("#search-input").val() + "&in=quick",
         function (result) {
             // Refresh results displayed below search field
             $("#search-results").empty();
@@ -136,6 +136,29 @@ function search() {
 
                 $("#search-results").append(
                     '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(\'book\')">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
+                );
+            }
+
+            if (result["user"].length !== 0) {
+                // Show results from users table
+                $("#search-results").append(
+                    '<p class="p-2 font-bold text-slate-500">Uživatelé:</p>'
+                );
+
+                $.each(result["user"], function (i, field) {
+                    $("#search-results").append(
+                        '<a href="/ucet/' +
+                            field["id"] +
+                            '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
+                            field["first_name"] +
+                            " " +
+                            field["last_name"] +
+                            "</p></a>"
+                    );
+                });
+
+                $("#search-results").append(
+                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(\'user\')">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
                 );
             }
 

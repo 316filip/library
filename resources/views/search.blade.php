@@ -21,6 +21,13 @@
                     class="{{ request('in') == 'book' ? 'px-5 py-2 bg-sky-100 rounded-md shadow-sm' : '' }}"
                     href="?query={{ request('query') }}&in=book&page=1">Knihy</a></p>
         </div>
+        @auth
+            <div class="flex-1">
+                <p class="text-center"><a
+                        class="{{ request('in') == 'user' ? 'px-5 py-2 bg-sky-100 rounded-md shadow-sm' : '' }}"
+                        href="?query={{ request('query') }}&in=user&page=1">Uživatelé</a></p>
+            </div>
+        @endauth
     </div>
     {{-- If all results are shown --}}
     @if (request('in') == 'all')
@@ -48,7 +55,20 @@
                 @endforeach
             </div>
         @endunless
-        @if (count($results['author']) == 0 && count($results['work']) == 0 && count($results['book']) == 0)
+        @auth
+            @unless(count($results['user']) == 0)
+                <h2 class="text-2xl">Uživatelé</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
+                    @foreach ($results['user'] as $user)
+                        <x-Card type="user" :data=$user number="{{ $loop->index }}" more="1" />
+                    @endforeach
+                </div>
+            @endunless
+        @endauth
+        @if (count($results['author']) == 0 &&
+                count($results['work']) == 0 &&
+                count($results['book']) == 0 &&
+                (auth()->check() == true ? count($results['user']) == 0 : true))
             <p class="text-center">Nebyly nalezeny žádné výsledky</p>
         @endif
     @elseif (request('in') == 'author')
@@ -81,5 +101,16 @@
             @endforeach
         </div>
         {{ $results['book']->appends(request()->input())->links() }}
+    @elseif (request('in') == 'user')
+        @if (count($results['user']) == 0 || !auth()->check())
+            <p class="text-center">Nebyli nalezeni žádní uživatelé</p>
+        @else
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
+                @foreach ($results['user'] as $user)
+                    <x-Card :data=$user type="user" number="0" more="0" />
+                @endforeach
+            </div>
+            {{ $results['user']->appends(request()->input())->links() }}
+        @endif
     @endif
 </x-layout>

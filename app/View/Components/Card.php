@@ -23,6 +23,9 @@ class Card extends Component
         } elseif ($type == 'book') {
             $this->link = '/kniha/' . $data['id'];
             $this->filter_text = "knih";
+        } elseif ($type == 'user') {
+            $this->link = '/ucet/' . $data['id'];
+            $this->filter_text = "uživatelů";
         }
 
         $this->type = $type;

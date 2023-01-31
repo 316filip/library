@@ -1,7 +1,8 @@
 <div class="relative {{ $classes }}">
     <div class="h-full border border-slate-200 shadow-sm rounded-lg p-4 grid">
         <div>
-            <div class="flex justify-center mb-1 mx-4{{ $type != 'book' ? ' h-28' : '' }} relative">
+            <div
+                class="flex justify-center {{ $type == 'user' ? '' : 'mb-1' }} mx-4{{ $type == 'work' || $type == 'author' ? ' h-28' : '' }} relative">
                 @if ($type == 'book')
                     {{-- When showing a book, display cover image --}}
                     @if ($values->image !== null)
@@ -38,7 +39,7 @@
                             </div>
                         @endif
                     @endfor
-                @elseif ($type = 'author')
+                @elseif ($type == 'author')
                     {{-- When showing an author, display a profile picture --}}
                     @if ($values->image === null)
                         <div class="absolute h-28 w-28 bg-sky-100 bg-cover bg-center rounded-full border border-slate-200 shadow"
@@ -52,7 +53,7 @@
             <div>
                 {{-- Name / title + subtitle --}}
                 <h3 class="text-lg line-clamp-3">
-                    {{ $type == 'author' ? $values->name : $values->title }}
+                    {{ $type == 'author' || $type == 'user' ? $values->name : $values->title }}
                 </h3>
                 @unless($type == 'author')
                     <p class="line-clamp-4">
