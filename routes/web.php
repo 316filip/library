@@ -42,31 +42,37 @@ Route::get('/info', function () {
 Route::get('/knihovna', [BrowseController::class, 'browse']);
 
 // AUTHOR ROUTES
-Route::get('/autor/tvorba', [AuthorController::class, 'create']);
-Route::post('/autor', [AuthorController::class, 'store']);
-Route::get('/autor/{author}/upravit', [AuthorController::class, 'edit']);
-Route::put('/autor/{author}', [AuthorController::class, 'update']);
-Route::delete('/autor/{author}', [AuthorController::class, 'destroy']);
+Route::get('/autor/tvorba', [AuthorController::class, 'create'])->middleware('auth');
+Route::post('/autor', [AuthorController::class, 'store'])->middleware('auth');
+Route::get('/autor/{author}/upravit', [AuthorController::class, 'edit'])->middleware('auth');
+Route::put('/autor/{author}', [AuthorController::class, 'update'])->middleware('auth');
+Route::delete('/autor/{author}', [AuthorController::class, 'destroy'])->middleware('auth');
 Route::get('/autor/{author}', [AuthorController::class, 'show']);
 
 // WORK ROUTES
-Route::get('/titul/tvorba', [WorkController::class, 'create']);
-Route::post('/titul', [WorkController::class, 'store']);
-Route::get('/titul/{work}/upravit', [WorkController::class, 'edit']);
-Route::put('/titul/{work}', [WorkController::class, 'update']);
-Route::delete('/titul/{work}', [WorkController::class, 'destroy']);
+Route::get('/titul/tvorba', [WorkController::class, 'create'])->middleware('auth');
+Route::post('/titul', [WorkController::class, 'store'])->middleware('auth');
+Route::get('/titul/{work}/upravit', [WorkController::class, 'edit'])->middleware('auth');
+Route::put('/titul/{work}', [WorkController::class, 'update'])->middleware('auth');
+Route::delete('/titul/{work}', [WorkController::class, 'destroy'])->middleware('auth');
 Route::get('/titul/{work}', [WorkController::class, 'show']);
 
 // BOOK ROUTES
-Route::get('/kniha/tvorba', [BookController::class, 'create']);
-Route::post('/kniha', [BookController::class, 'store']);
-Route::get('/kniha/{book}/upravit', [BookController::class, 'edit']);
-Route::put('/kniha/{book}', [BookController::class, 'update']);
-Route::delete('/kniha/{book}', [BookController::class, 'destroy']);
+Route::get('/kniha/tvorba', [BookController::class, 'create'])->middleware('auth');
+Route::post('/kniha', [BookController::class, 'store'])->middleware('auth');
+Route::get('/kniha/{book}/upravit', [BookController::class, 'edit'])->middleware('auth');
+Route::put('/kniha/{book}', [BookController::class, 'update'])->middleware('auth');
+Route::delete('/kniha/{book}', [BookController::class, 'destroy'])->middleware('auth');
 Route::get('/kniha/{book}', [BookController::class, 'show']);
 
 // USER ROUTES
-Route::get('/ucet/{user}', [UserController::class, 'show']);
+Route::get('/prihlaseni', [UserController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/authenticate', [UserController::class, 'authenticate'])->middleware('guest');
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+Route::get('/registrace', [UserController::class, 'create'])->middleware('guest');
+Route::post('/ucet', [UserController::class, 'store'])->middleware('guest');
+Route::get('/ucet', [UserController::class, 'show'])->middleware('auth');
+Route::get('/ucet/{user}', [UserController::class, 'show'])->middleware('auth');
 
 // SEARCH ROUTE
 Route::get('/hledat', [SearchController::class, 'search']);
