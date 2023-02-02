@@ -9,10 +9,16 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     // Get one user
-    public function show(User $user)
+    public function show($user = "")
     {
-        if ($user->id === null) {
+        if ($user === "") {
             $user = auth()->user();
+        } else {
+            $user = User::where('code', $user)->first();
+
+            if ($user === null) {
+                abort(404);
+            }
         }
 
         return view('user.show', [
@@ -69,6 +75,9 @@ class UserController extends Controller
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'confirmed', 'min:6']
         ]);
+
+        // Generate code
+        $formFields['code'] = uniqid();
 
         // Hash password
         $formFields['password'] = bcrypt($formFields['password']);
