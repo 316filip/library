@@ -4,17 +4,19 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Delete extends Component
+class Manage extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public $id, $text, $link;
-    public function __construct($id, $type)
+    public $type, $id, $text, $link;
+    public function __construct($type, $identifier)
     {
-        $this->id = $id;
+        $this->type = $type;
+        $this->id = $identifier;
+
         if ($type == 'author') {
             $this->text = 'autora';
             $this->link = 'autor';
@@ -24,6 +26,9 @@ class Delete extends Component
         } elseif ($type == 'book') {
             $this->text = 'knihu';
             $this->link = 'kniha';
+        } elseif ($type == 'user') {
+            $this->text = 'účet';
+            $this->link = 'ucet';
         }
     }
 
@@ -34,6 +39,6 @@ class Delete extends Component
      */
     public function render()
     {
-        return view('components.delete');
+        return view('components.manage');
     }
 }

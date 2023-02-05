@@ -1,3 +1,18 @@
+<div class="flex gap-3 justify-center mb-5">
+    <div class="h-8 w-8">
+        <p class="h-full w-full bg-yellow-400 rounded-full text-center">
+            <a class="align-middle" href="/{{ $link }}/{{ $id }}/upravit">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </a>
+        </p>
+    </div>
+    <div class="h-8 w-8">
+        <button class="h-full w-full bg-red-500 rounded-full" onclick="openDelete()">
+            <i class="fa-regular fa-trash-can"></i>
+        </button>
+    </div>
+</div>
+
 <div id="fullscreen-delete" style="display: none"
     class="fixed top-0 left-0 w-full h-full px-3 backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center">
     <div
@@ -25,3 +40,4 @@
         $("#fullscreen-delete").fadeOut("fast");
     }
 </script>
+
