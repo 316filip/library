@@ -47,7 +47,7 @@ class SearchHelper
         if (auth()->check()) {
             if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'user') {
                 $user_query = User::query();
-                $user_query->where(DB::raw('concat(first_name, " ", last_name)'), 'like', $request);
+                $user_query->where(DB::raw('concat(first_name, " ", last_name, " ", code)'), 'like', $request);
                 $user = $user_query->get();
                 foreach ($user as $i => $item) {
                     similar_text(strtolower($user[$i]['title']), strtolower(request('query')), $percent);
