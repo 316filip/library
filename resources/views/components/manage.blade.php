@@ -1,7 +1,7 @@
 <div class="flex gap-3 justify-center mb-5">
     <div class="h-8 w-8">
         <p class="h-full w-full bg-yellow-400 rounded-full text-center">
-            <a class="align-middle" href="/{{ $link }}/{{ $id }}/upravit">
+            <a class="align-middle" href="/{{ $link_edit }}/upravit">
                 <i class="fa-regular fa-pen-to-square"></i>
             </a>
         </p>
@@ -22,7 +22,7 @@
             <div class="flex justify-center" onclick="closeDelete()">
                 <button class="px-3 py-2 bg-sky-100 rounded-lg border border-slate-200">Zrušit</button>
             </div>
-            <form class="flex justify-center" action="/{{ $link }}/{{ $id }}" method="post">
+            <form class="flex justify-center" action="/{{ $link_delete }}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="px-3 py-2 bg-red-500 rounded-lg border border-slate-200">Odstranit</button>
@@ -40,4 +40,3 @@
         $("#fullscreen-delete").fadeOut("fast");
     }
 </script>
-
