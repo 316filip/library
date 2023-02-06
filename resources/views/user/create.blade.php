@@ -25,7 +25,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="mb-3 col-span-2">
+            <div class="mb-3">
                 <label for="create-user-email"
                     class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Email</label>
                 <input type="email" class="p-2 w-full border border-slate-200 rounded-lg" name="email"
@@ -35,7 +35,7 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="mb-3 col-span-3 sm:col-span-2">
+            <div class="mb-3">
                 <label for="create-user-password"
                     class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Heslo</label>
                 <input type="password" class="p-2 w-full border border-slate-200 rounded-lg" name="password"
@@ -44,7 +44,7 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="mb-3 col-span-2">
+            <div class="mb-3">
                 <label for="create-user-password_confirmation"
                     class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Znovu heslo</label>
                 <input type="password" class="p-2 w-full border border-slate-200 rounded-lg"

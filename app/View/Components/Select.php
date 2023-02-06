@@ -29,9 +29,9 @@ class Select extends Component
         }
 
         if ($target !== "") {
-            $this->id_value = old($type . "_id") == '' ? $target : old($type . "_id");
-            if ($type == "author") $this->name_value = old($type) == '' ? $values->firstWhere('id', $target)->name : old($type);
-            elseif ($type == "work") $this->name_value = old($type) == '' ? $values->firstWhere('id', $target)->title : old($type);
+            $this->id_value = old($type . "_id") ?? $target;
+            if ($type == "author") $this->name_value = old($type) ?? $values->firstWhere('id', $target)->name;
+            elseif ($type == "work") $this->name_value = old($type) ?? $values->firstWhere('id', $target)->title;
         } else {
             $this->id_value = old($type . "_id");
             $this->name_value = old($type);

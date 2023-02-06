@@ -28,8 +28,8 @@
                         @unless($type == 'author' && $value->id == 1)
                             <input type="button"
                                 class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
-                                value="{{ $value->name == '' ? $value->title : $value->name }}"
-                                onclick="selectSet({{ $value->id }}, '{{ $value->name == '' ? $value->title : $value->name }}')">
+                                value="{{ $value->name ?? $value->title }}"
+                                onclick="selectSet({{ $value->id }}, '{{ $value->name ?? $value->title }}')">
                         @endunless
                     @endforeach
                 </div>

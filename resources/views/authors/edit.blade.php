@@ -10,7 +10,7 @@
                     <label for="edit-author-name_prefix" class="block mb-1">Titul</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="name_prefix"
                         id="edit-author-name_prefix"
-                        value="{{ old('name_prefix') == '' ? $author->name_prefix : old('name_prefix') }}"
+                        value="{{ old('name_prefix') ?? $author->name_prefix }}"
                         autocomplete="off">
                     @error('name_prefix')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -21,7 +21,7 @@
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Jméno</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="first_name"
                         id="edit-author-first_name"
-                        value="{{ old('first_name') == '' ? $author->first_name : old('first_name') }}"
+                        value="{{ old('first_name') ?? $author->first_name }}"
                         autocomplete="off">
                     @error('first_name')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -31,7 +31,7 @@
                     <label for="edit-author-middle_name" class="block mb-1">Prostřední jména</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="middle_name"
                         id="edit-author-middle_names"
-                        value="{{ old('middle_name') == '' ? $author->middle_name : old('middle_name') }}"
+                        value="{{ old('middle_name') ?? $author->middle_name }}"
                         autocomplete="off">
                     @error('middle_name')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -42,7 +42,7 @@
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Příjmení</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="last_name"
                         id="edit-author-last_name"
-                        value="{{ old('last_name') == '' ? $author->last_name : old('last_name') }}" autocomplete="off">
+                        value="{{ old('last_name') ?? $author->last_name }}" autocomplete="off">
                     @error('last_name')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -51,7 +51,7 @@
                     <label for="edit-work-name_suffix" class="block mb-1">Titul</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="name_suffix"
                         id="edit-author-name_suffix"
-                        value="{{ old('name_suffix') == '' ? $author->name_suffix : old('name_suffix') }}"
+                        value="{{ old('name_suffix') ?? $author->name_suffix }}"
                         autocomplete="off">
                     @error('name_suffix')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -59,12 +59,12 @@
                 </div>
             </div>
             @php
-                $birth_date = old('birth_date') == '' ? $author->birth_date : old('birth_date');
+                $birth_date = old('birth_date') ?? $author->birth_date;
                 if ($birth_date !== null) {
                     $birth_date = date('Y-m-d', strtotime($birth_date));
                 }
                 
-                $death_date = old('death_date') == '' ? $author->death_date : old('death_date');
+                $death_date = old('death_date') ?? $author->death_date;
                 if ($death_date !== null) {
                     $death_date = date('Y-m-d', strtotime($death_date));
                 }
@@ -90,7 +90,7 @@
             <div class="mb-3">
                 <label for="edit-work-description" class="block mb-1">Popis</label>
                 <textarea name="description" class="p-2 w-full border border-slate-200 rounded-lg" id="edit-work-description"
-                    cols="30" rows="10" autocomplete="off">{{ old('description') == '' ? $author->description : old('description') }}</textarea>
+                    cols="30" rows="10" autocomplete="off">{{ old('description') ?? $author->description }}</textarea>
                 @error('description')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
