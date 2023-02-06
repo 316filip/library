@@ -11,9 +11,17 @@ class Flash extends Component
      *
      * @return void
      */
+    public $color_bg, $color_text;
     public function __construct()
     {
-        //
+        // Define colors based on received data
+        if (session('color') == 'success') {
+            $this->color_bg = 'sky-400';
+            $this->color_text = 'white';
+        } elseif (session('color') == 'fail') {
+            $this->color_bg = 'red-500';
+            $this->color_text = 'white';
+        }
     }
 
     /**
