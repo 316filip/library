@@ -8,6 +8,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\SearchController;
 
@@ -74,6 +75,9 @@ Route::get('/ucet/{user}/upravit', [UserController::class, 'edit'])->middleware(
 Route::get('/ucet/{user}', [UserController::class, 'show'])->middleware('admin');
 Route::put('/ucet/{user}', [UserController::class, 'update'])->middleware('auth');
 Route::delete('/ucet/{user}', [UserController::class, 'destroy'])->middleware('auth');
+
+// BOOKING ROUTES
+Route::post('/rezervace', [BookingController::class, 'store'])->middleware('auth');
 
 // SEARCH ROUTES
 Route::get('/hledat', [SearchController::class, 'search']);
