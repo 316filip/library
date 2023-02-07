@@ -26,12 +26,19 @@ class Select extends Component
             $this->label = "titul";
             $this->placeholder = "Bible";
             $this->search = "díla";
+        } elseif ($type == "user") {
+            $this->label = "rezervovat pro uživatele...";
+            $this->placeholder = "Jan Srna";
+            $this->search = "uživatele";
         }
 
         if ($target !== "") {
             $this->id_value = old($type . "_id") ?? $target;
             if ($type == "author") $this->name_value = old($type) ?? $values->firstWhere('id', $target)->name;
             elseif ($type == "work") $this->name_value = old($type) ?? $values->firstWhere('id', $target)->title;
+        } elseif ($type == "user") {
+            $this->id_value = old($type . "_id") ?? auth()->user()->id;
+            $this->name_value = old($type) ?? auth()->user()->label;
         } else {
             $this->id_value = old($type . "_id");
             $this->name_value = old($type);
