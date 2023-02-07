@@ -29,18 +29,26 @@ class Book extends Model
     {
         $bookings = $this->bookings->sortByDesc('to')->take($this->amount);
         $sorted = $bookings->sortBy('to');
-        $date = true;
+        $date = false;
+        $booked = 0;
         foreach ($sorted as $booking) {
             $diff = date_diff(date_create(date('Y-m-d')), date_create($booking->to))->format("%R%a");
             if ($booking->returned === 1) {
                 $date = true;
                 continue;
-            } elseif ($diff < 15 && $diff > 5) {
-                $date = $booking->to;
+            } elseif ($diff < 6) {
+                $booked += 1;
+                if ($date !== true) $date = "soon";
+            } elseif ($diff < 15) {
+                $booked += 1;
+                if ($date !== true && $date !== "soon" && ($date === false || date_diff($date, $booking->to) > 0)) $date = $booking->to;
+            } else {
+                $booked += 1;
+                $date = false;
             }
         }
-        if ($this->amount === 0) {
-            $date = false;
+        if ($this->amount > $booked) {
+            $date = true;
         }
         return Attribute::make(
             fn () => $date,
