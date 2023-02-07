@@ -24,7 +24,8 @@ class BookingFactory extends Factory
             'user_id' => fake()->numberBetween(1, 10),
             'from' => $reservationDate,
             'to' => Date('Y-m-d h:i:s', strtotime('+1 month', $reservationDate->getTimestamp())),
-            'returned' => fake()->boolean()
+            'borrowed' => fake()->boolean(),
+            'returned' => fake()->boolean(),
         ];
     }
 }
