@@ -10,12 +10,12 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,line-clamp"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/51eae37035.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.hotkeys/0.2.0/jquery.hotkeys.min.js"
         integrity="sha512-njd096AjZyGuWOttOsHolCOFjq9Xg9txZTl6Pd7FOpwf1nyBDsOXpS1cd184l/EWy5ekDJZldDMQPs9bLCSAtQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="/js/layout.js"></script>
+    <script src="/js/fontawesome.js"></script>
 </head>
 
 <body>
@@ -35,7 +35,10 @@
                         <input type="text" name="query"
                             class="h-10 w-full border border-slate-200 shadow-inner rounded-lg mb-2 pl-2 pr-10"
                             id="search-input" onfocus="showResults()" onblur="hideResults()" onkeyup="search()"
-                            autocomplete="off" placeholder="Hledat titul, autora, ISBN,@admin uživatele, @endadmin...">
+                            autocomplete="off"
+                            placeholder="Hledat titul, autora, ISBN, @admin
+uživatele,&nbsp;
+@endadmin...">
                         <input type="hidden" name="in" value="all" id="search-area">
                         <button class="absolute right-5 top-4" onclick="go()"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
