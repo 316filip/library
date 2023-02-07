@@ -11,7 +11,7 @@ class Card extends Component
      *
      * @return void
      */
-    public $type, $values, $classes, $title, $subtitle, $link, $overlay, $filter, $filter_text;
+    public $type, $values, $classes, $title, $subtitle, $link, $overlay, $filter, $filter_text, $bookable, $available;
     public function __construct($type, $data, $number, $more)
     {
         if ($type == 'author') {
@@ -23,6 +23,15 @@ class Card extends Component
         } elseif ($type == 'book') {
             $this->link = '/kniha/' . $data['id'];
             $this->filter_text = "knih";
+            $this->bookable = $data->date === true;
+            $this->available = $data->book;
+
+            if (auth()->check() && !auth()->user()->canBook) {
+                $this->bookable = false;
+            } elseif (auth()->check() && auth()->user()->bookings->contains('book_id', $data->id)) {
+                $this->bookable = false;
+                $this->available = 'booked';
+            }
         } elseif ($type == 'user') {
             $this->link = '/ucet/' . $data['id'];
             $this->filter_text = "uživatelů";

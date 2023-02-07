@@ -69,18 +69,7 @@
                 <p>
                     {{ $values->work->author->name }}
                 </p>
-                @auth
-                    <p class="text-slate-500 text-sm">{{ count($values->bookings) }} rezervace</p>
-                @endauth
-                @if ($values->date === true)
-                    <p class="text-lime-600 text-sm">Dostupné právě teď</p>
-                @elseif ($values->date === false)
-                    <p class="text-red-600 text-sm">Momentálně nedostupné</p>
-                @else
-                    <p class="text-amber-500 text-sm">Dostupné od
-                        {{ date('d. m. Y', strtotime($values->date)) }}
-                    </p>
-                @endif
+                <x-Book :data=$values placement="index" />
             </div>
         @elseif ($type == 'work')
             {{-- When showing a work, display number of books --}}
@@ -99,11 +88,11 @@
 
     {{-- For last search result in a row, display 'show more' link --}}
     <div class="{{ $overlay }}">
-        <div class="absolute inset-0 rounded-lg flex">
+        <div class="absolute inset-0 rounded-lg flex z-10">
             <div class="flex-auto w-32 rounded-l-lg bg-gradient-to-r from-transparent to-slate-100"></div>
             <div class="flex-auto w-64 rounded-r-lg bg-slate-100"></div>
         </div>
-        <a href="?query={{ request('query') }}&in={{ $filter }}" class="absolute inset-0 pointer-events-auto">
+        <a href="?query={{ request('query') }}&in={{ $filter }}" class="absolute inset-0 pointer-events-auto z-10">
             <div class="grid h-full content-center justify-end pr-3">
                 <span>Více {{ $filter_text }} <i class="fa-solid fa-arrow-right"></i></span>
             </div>
