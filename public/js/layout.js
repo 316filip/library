@@ -76,7 +76,7 @@ function search() {
                     $("#search-results").append(
                         '<a href="/autor/' +
                             field["id"] +
-                            '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
+                            '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
                             (field["name_prefix"] == null
                                 ? ""
                                 : field["name_prefix"] + " ") +
@@ -107,7 +107,7 @@ function search() {
                     $("#search-results").append(
                         '<a href="/titul/' +
                             field["id"] +
-                            '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
+                            '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
                             field["title"] +
                             "</p></a>"
                     );
@@ -128,7 +128,7 @@ function search() {
                     $("#search-results").append(
                         '<a href="/kniha/' +
                             field["id"] +
-                            '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
+                            '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
                             field["title"] +
                             "</p></a>"
                     );
@@ -149,7 +149,7 @@ function search() {
                     $("#search-results").append(
                         '<a href="/ucet/' +
                             field["id"] +
-                            '"><p class="p-2 rounded-md hover:bg-yellow-200/80 transition">' +
+                            '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
                             field["first_name"] +
                             " " +
                             field["last_name"] +

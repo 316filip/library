@@ -3,28 +3,28 @@
     <div class="flex mb-5">
         <div class="flex-1">
             <p class="text-center"><a
-                    class="{{ request('in') == 'all' ? 'px-5 py-2 bg-sky-100 rounded-md shadow-sm' : '' }}"
+                    class="{{ request('in') == 'all' ? 'px-5 py-2 bg-sky-100 rounded-lg shadow-sm' : '' }}"
                     href="?query={{ request('query') }}&in=all&page=1">Vše</a></p>
         </div>
         <div class="flex-1">
             <p class="text-center"><a
-                    class="{{ request('in') == 'author' ? 'px-5 py-2 bg-sky-100 rounded-md shadow-sm' : '' }}"
+                    class="{{ request('in') == 'author' ? 'px-5 py-2 bg-sky-100 rounded-lg shadow-sm' : '' }}"
                     href="?query={{ request('query') }}&in=author&page=1">Autoři</a></p>
         </div>
         <div class="flex-1">
             <p class="text-center"><a
-                    class="{{ request('in') == 'work' ? 'px-5 py-2 bg-sky-100 rounded-md shadow-sm' : '' }}"
+                    class="{{ request('in') == 'work' ? 'px-5 py-2 bg-sky-100 rounded-lg shadow-sm' : '' }}"
                     href="?query={{ request('query') }}&in=work&page=1">Díla</a></p>
         </div>
         <div class="flex-1">
             <p class="text-center"><a
-                    class="{{ request('in') == 'book' ? 'px-5 py-2 bg-sky-100 rounded-md shadow-sm' : '' }}"
+                    class="{{ request('in') == 'book' ? 'px-5 py-2 bg-sky-100 rounded-lg shadow-sm' : '' }}"
                     href="?query={{ request('query') }}&in=book&page=1">Knihy</a></p>
         </div>
         @auth
             <div class="flex-1">
                 <p class="text-center"><a
-                        class="{{ request('in') == 'user' ? 'px-5 py-2 bg-sky-100 rounded-md shadow-sm' : '' }}"
+                        class="{{ request('in') == 'user' ? 'px-5 py-2 bg-sky-100 rounded-lg shadow-sm' : '' }}"
                         href="?query={{ request('query') }}&in=user&page=1">Uživatelé</a></p>
             </div>
         @endauth

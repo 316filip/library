@@ -33,7 +33,7 @@
                     id="search-frame">
                     <form action="/hledat" method="GET" id="search-form">
                         <input type="text" name="query"
-                            class="h-10 w-full border border-slate-200 shadow-sm rounded-lg mb-2 pl-2 pr-10"
+                            class="h-10 w-full border border-slate-200 shadow-inner rounded-lg mb-2 pl-2 pr-10"
                             id="search-input" onfocus="showResults()" onblur="hideResults()" onkeyup="search()"
                             autocomplete="off" placeholder="Hledat titul, autora, ISBN,@admin uživatele, @endadmin...">
                         <input type="hidden" name="in" value="all" id="search-area">
@@ -50,13 +50,13 @@
                 <div class="flex my-auto space-x-3 md:space-x-6">
                     {{-- Show search button --}}
                     <button
-                        class="block xl:hidden rounded-md border border-slate-200 bg-yellow-400 px-4 py-2 shadow-sm hover:bg-amber-400 transition"
+                        class="block xl:hidden rounded-lg bg-yellow-400 px-4 py-2 shadow hover:bg-amber-400 transition"
                         onclick="showSearchBar()" id="show-search-bar">Hledat <i
                             class="fa-solid fa-magnifying-glass"></i></button>
 
                     {{-- Show fullscreen menu --}}
                     <button onclick="openMenu()"
-                        class="block md:hidden rounded-md border border-slate-200 bg-yellow-400 px-4 py-2 shadow-sm hover:bg-amber-400 transition">
+                        class="block md:hidden rounded-lg bg-yellow-400 px-4 py-2 shadow hover:bg-amber-400 transition">
                         <i class="fa-solid fa-bars"></i>
                     </button>
 
@@ -82,7 +82,7 @@
 
                 {{-- Dropdown menu --}}
                 <div id="dropdown-menu"
-                    class="absolute right-0 z-10 mt-12 w-44 origin-top-right rounded-md bg-white shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    class="absolute right-0 z-10 mt-12 w-44 origin-top-right rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
                     style="display: none">
                     <div class="py-1" role="none">
@@ -113,12 +113,12 @@
     <div id="fullscreen-menu" style="display: none"
         class="fixed top-0 w-full h-full backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center">
         <div
-            class="grid grid-cols-1 mx-8 py-8 rounded-md shadow-md place-content-center place-items-center gap-3 bg-slate-50">
+            class="grid grid-cols-1 mx-8 py-8 rounded-lg shadow-md place-content-center place-items-center gap-3 bg-slate-50">
             <p><a href="/knihovna">Procházet</a></p>
             <p><a href="#">Kontakt</a></p>
             <div class="w-full">
                 <div
-                    class="grid grid-cols-1 mx-8 py-8 rounded-md place-content-center place-items-center gap-3 bg-slate-100 shadow-inner">
+                    class="grid grid-cols-1 mx-8 py-8 rounded-lg place-content-center place-items-center gap-3 bg-slate-100 shadow-inner">
                     <p class="font-bold">Účet:</p>
                     @auth
                         <p><a href="/ucet">Správa účtu</a></p>

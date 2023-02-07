@@ -35,10 +35,6 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('/info', function () {
-    return view('info');
-});
-
 // BROWSE ROUTE
 Route::get('/knihovna', [BrowseController::class, 'browse']);
 

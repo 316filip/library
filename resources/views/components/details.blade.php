@@ -4,7 +4,7 @@
                 id="{{ $type }}-details-toggle"></i></a></h2>
     <div id="{{ $type }}-details-table" class="mb-5" style="{{ $placement == 'home' ? '' : 'display: none' }}">
         <table
-            class="table-auto w-full border border-slate-200 rounded-md border-separate border-spacing-x-4 border-spacing-y-3">
+            class="table-auto w-full border border-slate-200 rounded-lg border-separate border-spacing-x-4 border-spacing-y-3">
             @if ($heading != null && $placement == 'away')
                 <tr>
                     <td colspan="2">

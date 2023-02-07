@@ -1,7 +1,7 @@
 <x-layout>
     <h1 class="text-4xl text-center font-bold mb-5">Přidat titul</h1>
     <div class="flex justify-center">
-        <form method="POST" action="/titul" class="w-full px-2 max-w-2xl 2xl:max-w-3xl">
+        <form method="POST" action="/titul" class="w-full max-w-3xl">
             @csrf
             <div class="mb-3">
                 <label for="create-work-title"
@@ -68,8 +68,8 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="grid sm:grid-cols-3 sm:gap-4">
-                <div class="mb-3">
+            <div class="grid sm:grid-cols-3 sm:gap-4 place-items-end">
+                <div class="w-full mb-3">
                     <label for="create-work-language"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Jazyk originálu</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="language"
@@ -79,7 +79,7 @@
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="mb-3">
+                <div class="w-full mb-3">
                     <label for="create-work-year" class="block mb-1">Rok vzniku</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="year"
                         id="create-work-year" placeholder="" value="{{ old('year') }}" autocomplete="off">
@@ -87,7 +87,7 @@
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="mb-3">
+                <div class="w-full mb-3">
                     <label for="create-work-number" class="block mb-1">Počet básní/kapitol/dějství</label>
                     <input type="number" class="p-2 w-full border border-slate-200 rounded-lg" name="number"
                         id="create-work-number" placeholder="" min="1" value="{{ old('number') }}"
@@ -100,7 +100,7 @@
             <div class="flex justify-center">
                 <div class="mb-3">
                     <input type="submit"
-                        class="px-3 py-2 border border-slate-200 bg-yellow-400 hover:bg-amber-400 shadow-sm rounded-lg transition"
+                        class="px-3 py-2 bg-yellow-400 hover:bg-amber-400 shadow rounded-lg transition"
                         value="Vytvořit">
                 </div>
             </div>

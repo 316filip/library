@@ -12,8 +12,8 @@
                 class="fa-solid fa-angle-down"></i></span>
     </div>
 
-    <div class="h-fit w-full max-w-2xl 2xl:max-w-3xl z-50 p-2" id="form-select-dropdown">
-        <div class="h-full w-full rounded-md shadow-lg backdrop-blur-xl p-3" id="form-select-content"
+    <div class="h-fit w-full max-w-3xl z-50 px-6 py-1" id="form-select-dropdown">
+        <div class="h-full w-full rounded-lg shadow-lg backdrop-blur-xl p-3" id="form-select-content"
             style="display: none">
             <input type="text" class="p-2 mb-3 w-full border border-slate-200 rounded-lg" id="form-select-filter"
                 placeholder="Prohledat {{ $search }}..." onkeyup="selectFilter()" autocomplete="off">
@@ -21,13 +21,13 @@
                 <div id="form-select-options">
                     @if ($type == 'author')
                         <input type="button"
-                            class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition italic"
+                            class="block w-full text-left p-2 rounded-lg hover:bg-yellow-200/80 transition italic"
                             value="Neznámý autor" onclick="selectSet(1, 'Neznámý autor')">
                     @endif
                     @foreach ($values as $value)
                         @unless($type == 'author' && $value->id == 1)
                             <input type="button"
-                                class="block w-full text-left p-2 rounded-md hover:bg-yellow-200/80 transition"
+                                class="block w-full text-left p-2 rounded-lg hover:bg-yellow-200/80 transition"
                                 value="{{ $value->name ?? $value->title }}"
                                 onclick="selectSet({{ $value->id }}, '{{ $value->name ?? $value->title }}')">
                         @endunless
