@@ -40,10 +40,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Relationship to bookings
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'user_id');
+    }
+
     protected function name(): Attribute
     {
         return Attribute::make(
             fn ($value) => $this->first_name . " " . $this->last_name,
+        );
+    }
+
+    protected function label(): Attribute
+    {
+        return Attribute::make(
+            fn ($value) => $this->name . " (" . $this->code . ")",
+        );
+    }
+
+    protected function canBook(): Attribute
+    {
+        return Attribute::make(
+            fn ($value) => (count($this->bookings) < 6),
         );
     }
 }
