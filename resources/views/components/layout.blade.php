@@ -15,7 +15,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="/js/layout.js"></script>
-    <script src="/js/fontawesome.js"></script>
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/solid.css">
+    <link rel="stylesheet" href="/css/regular.css">
 </head>
 
 <body>
