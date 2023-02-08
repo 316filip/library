@@ -15,7 +15,7 @@
             top: 50%;
             left: 50%;
             width: 100%;
-            transform: translateX(-50%) translateY(-50%) perspective(40em) rotateX(-20deg) rotateY(-10deg);
+            transform: translateX(-50%) translateY(-50%) perspective(20em) rotateX(-20deg) rotateY(-9deg);
         }
     </style>
 </head>

@@ -13,7 +13,7 @@
     </div>
 
     <div class="h-fit w-full max-w-2xl md:max-w-3xl z-50 px-6 sm:px-10 md:px-6 lg:px-0 py-1" id="form-select-dropdown">
-        <div class="h-full w-full rounded-lg shadow-lg backdrop-blur-xl p-3" id="form-select-content"
+        <div class="h-full w-full rounded-lg shadow-lg backdrop-blur-xl bg-sky-100/30 p-3" id="form-select-content"
             style="display: none">
             <input type="text" class="p-2 mb-3 w-full border border-slate-200 rounded-lg" id="form-select-filter"
                 placeholder="Prohledat {{ $search }}..." onkeyup="selectFilter()" autocomplete="off">
