@@ -17,7 +17,7 @@ class WorkFactory extends Factory
     public function definition()
     {
         return [
-            'author_id' => fake()->numberBetween(1,10),
+            'author_id' => fake()->numberBetween(1, 11),
             'title' => fake()->text(50),
             'original_title' => fake()->text(50),
             'year' => fake()->year(),
