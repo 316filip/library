@@ -98,7 +98,7 @@ class UserController extends Controller
     // Update user data
     public function update(Request $request, User $user)
     {
-        if (!auth()->user()->admin && ($user->id !== auth()->user()->id)) {
+        if (!auth()->user()->librarian && ($user->id !== auth()->user()->id)) {
             return redirect('/ucet')->with('message', 'Nemáte oprávnění upravovat tohoto uživatele!')->with('color', 'fail');
         }
 
@@ -141,8 +141,13 @@ class UserController extends Controller
 
             return redirect($link)->with('message', 'Heslo bylo úspěšně změněno!')->with('color', 'success');
         } elseif ($request->type == 'competency') {
+            if (!auth()->user()->admin) {
+                return back()->with('message', 'Nemáte oprávnění upravovat tohoto uživatele!')->with('color', 'fail');
+            }
+
             $formFields = $request->validate([
                 'admin' => 'nullable',
+                'librarian' => 'nullable',
             ]);
 
             if (isset($formFields['admin']) && $formFields['admin'] == 1) {
@@ -151,8 +156,19 @@ class UserController extends Controller
                 $formFields['admin'] = false;
             }
 
+            if (isset($formFields['librarian']) && $formFields['librarian'] == 1) {
+                $formFields['librarian'] = true;
+            } else {
+                $formFields['librarian'] = false;
+            }
+
+            if ($formFields['admin'] === true && $formFields['librarian'] !== true) {
+                return back()->with('message', 'Aby byl uživatel správce, musí být i knihovník!')->with('color', 'fail');
+            }
+
             $user->update([
                 'admin' => $formFields['admin'],
+                'librarian' => $formFields['librarian'],
             ]);
 
             return redirect($link)->with('message', 'Oprávnění byla úspěšně použita!')->with('color', 'success');
@@ -162,8 +178,12 @@ class UserController extends Controller
     // Delete user
     public function destroy(User $user)
     {
-        if (!auth()->user()->admin && ($user->id !== auth()->user()->id)) {
+        if (!auth()->user()->librarian && ($user->id !== auth()->user()->id)) {
             return redirect('/ucet')->with('message', 'Nemáte oprávnění odstranit tohoto uživatele!')->with('color', 'fail');
+        }
+
+        if (!auth()->user()->admin && ($user->admin || $user->librarian)) {
+            return back()->with('message', 'Nemáte oprávnění odstranit tohoto uživatele!')->with('color', 'fail');
         }
 
         $user->delete();

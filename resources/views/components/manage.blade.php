@@ -1,4 +1,4 @@
-@admin
+@lib
     <div class="flex gap-3 justify-center mb-5">
         <div class="h-8 w-8">
             <p class="h-full w-full bg-yellow-400 rounded-full text-center">
@@ -41,4 +41,4 @@
             $("#fullscreen-delete").fadeOut("fast");
         }
     </script>
-@endadmin
+@endlib

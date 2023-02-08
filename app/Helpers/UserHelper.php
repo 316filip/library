@@ -12,7 +12,7 @@ class UserHelper {
         } else {
             $user = User::where('code', $user)->first();
 
-            if ($user === null || !auth()->user()->admin) {
+            if ($user === null || !auth()->user()->librarian) {
                 abort(404);
             }
         }

@@ -102,9 +102,23 @@
                     <div class="flex justify-center">
                         <div class="mb-1">
                             <input type="checkbox" class="p-2 mb-0.5 mr-1 border border-slate-200 rounded-lg"
+                                name="librarian" id="edit-user-librarian" placeholder="" value="1"
+                                {{ (old('librarian') ?? $user->librarian) == 1 ? 'checked' : '' }} autocomplete="off"
+                                onclick="check()" />
+                            <label for="edit-user-librarian" class="inline">Knihovník</label>
+                        </div>
+                    </div>
+                    @error('librarian')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <div class="flex justify-center">
+                        <div class="mb-1">
+                            <input type="checkbox" class="p-2 mb-0.5 mr-1 border border-slate-200 rounded-lg"
                                 name="admin" id="edit-user-admin" placeholder="" value="1"
-                                {{ (old('admin') ?? $user->admin) == 1 ? 'checked' : '' }} autocomplete="off">
-                            <label for="edit-user-admin" class="inline">Knihovník</label>
+                                {{ (old('admin') ?? $user->admin) == 1 ? 'checked' : '' }} autocomplete="off" />
+                            <label for="edit-user-admin" class="inline">Správce</label>
                         </div>
                     </div>
                     @error('admin')
@@ -120,5 +134,24 @@
                 </div>
             </form>
         </div>
+
+        <script>
+            function check() {
+                let librarian = $("#edit-user-librarian");
+                let admin = $("#edit-user-admin");
+                if (librarian.is(":checked")) {
+                    admin.prop("disabled", false);
+                    admin.removeClass("bg-slate-100");
+                } else {
+                    admin.prop("disabled", true);
+                    admin.addClass("bg-slate-100");
+                    admin.prop("checked", false);
+                }
+            }
+
+            $(document).ready(function() {
+                check();
+            });
+        </script>
     @endadmin
 </x-layout>

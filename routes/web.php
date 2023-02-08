@@ -40,27 +40,27 @@ Route::get('/', function () {
 Route::get('/knihovna', [BrowseController::class, 'browse']);
 
 // AUTHOR ROUTES
-Route::get('/autor/tvorba', [AuthorController::class, 'create'])->middleware('admin');
-Route::post('/autor', [AuthorController::class, 'store'])->middleware('admin');
-Route::get('/autor/{author}/upravit', [AuthorController::class, 'edit'])->middleware('admin');
-Route::put('/autor/{author}', [AuthorController::class, 'update'])->middleware('admin');
-Route::delete('/autor/{author}', [AuthorController::class, 'destroy'])->middleware('admin');
+Route::get('/autor/tvorba', [AuthorController::class, 'create'])->middleware('lib');
+Route::post('/autor', [AuthorController::class, 'store'])->middleware('lib');
+Route::get('/autor/{author}/upravit', [AuthorController::class, 'edit'])->middleware('lib');
+Route::put('/autor/{author}', [AuthorController::class, 'update'])->middleware('lib');
+Route::delete('/autor/{author}', [AuthorController::class, 'destroy'])->middleware('lib');
 Route::get('/autor/{author}', [AuthorController::class, 'show']);
 
 // WORK ROUTES
-Route::get('/titul/tvorba', [WorkController::class, 'create'])->middleware('admin');
-Route::post('/titul', [WorkController::class, 'store'])->middleware('admin');
-Route::get('/titul/{work}/upravit', [WorkController::class, 'edit'])->middleware('admin');
-Route::put('/titul/{work}', [WorkController::class, 'update'])->middleware('admin');
-Route::delete('/titul/{work}', [WorkController::class, 'destroy'])->middleware('admin');
+Route::get('/titul/tvorba', [WorkController::class, 'create'])->middleware('lib');
+Route::post('/titul', [WorkController::class, 'store'])->middleware('lib');
+Route::get('/titul/{work}/upravit', [WorkController::class, 'edit'])->middleware('lib');
+Route::put('/titul/{work}', [WorkController::class, 'update'])->middleware('lib');
+Route::delete('/titul/{work}', [WorkController::class, 'destroy'])->middleware('lib');
 Route::get('/titul/{work}', [WorkController::class, 'show']);
 
 // BOOK ROUTES
-Route::get('/kniha/tvorba', [BookController::class, 'create'])->middleware('admin');
-Route::post('/kniha', [BookController::class, 'store'])->middleware('admin');
-Route::get('/kniha/{book}/upravit', [BookController::class, 'edit'])->middleware('admin');
-Route::put('/kniha/{book}', [BookController::class, 'update'])->middleware('admin');
-Route::delete('/kniha/{book}', [BookController::class, 'destroy'])->middleware('admin');
+Route::get('/kniha/tvorba', [BookController::class, 'create'])->middleware('lib');
+Route::post('/kniha', [BookController::class, 'store'])->middleware('lib');
+Route::get('/kniha/{book}/upravit', [BookController::class, 'edit'])->middleware('lib');
+Route::put('/kniha/{book}', [BookController::class, 'update'])->middleware('lib');
+Route::delete('/kniha/{book}', [BookController::class, 'destroy'])->middleware('lib');
 Route::get('/kniha/{book}', [BookController::class, 'show']);
 
 // USER ROUTES
@@ -71,8 +71,8 @@ Route::get('/registrace', [UserController::class, 'create'])->middleware('guest'
 Route::post('/ucet', [UserController::class, 'store'])->middleware('guest');
 Route::get('/ucet', [UserController::class, 'show'])->middleware('auth');
 Route::get('/ucet/upravit', [UserController::class, 'edit'])->middleware('auth');
-Route::get('/ucet/{user}/upravit', [UserController::class, 'edit'])->middleware('admin');
-Route::get('/ucet/{user}', [UserController::class, 'show'])->middleware('admin');
+Route::get('/ucet/{user}/upravit', [UserController::class, 'edit'])->middleware('lib');
+Route::get('/ucet/{user}', [UserController::class, 'show'])->middleware('lib');
 Route::put('/ucet/{user}', [UserController::class, 'update'])->middleware('auth');
 Route::delete('/ucet/{user}', [UserController::class, 'destroy'])->middleware('auth');
 

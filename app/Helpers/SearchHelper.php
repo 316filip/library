@@ -44,7 +44,7 @@ class SearchHelper
             }
         }
 
-        if (auth()->check() && auth()->user()->admin) {
+        if (auth()->check() && auth()->user()->librarian) {
             if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'user') {
                 $user_query = User::query();
                 $user_query->where(DB::raw('concat(first_name, " ", last_name, " ", code)'), 'like', $request);

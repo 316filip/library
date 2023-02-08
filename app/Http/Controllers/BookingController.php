@@ -32,7 +32,7 @@ class BookingController extends Controller
             $formFields['user_id'] = auth()->user()->id;
         }
 
-        if (($formFields['user_id'] !== auth()->user()->id) && !auth()->user()->admin) {
+        if (($formFields['user_id'] !== auth()->user()->id) && !auth()->user()->librarian) {
             return back()->with('message', 'Nemáte oprávnění vytvořit tuto rezervaci!')->with('color', 'fail');
         }
 

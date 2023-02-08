@@ -36,9 +36,9 @@
                             class="h-10 w-full border border-slate-200 shadow-inner rounded-lg mb-2 pl-2 pr-10"
                             id="search-input" onfocus="showResults()" onblur="hideResults()" onkeyup="search()"
                             autocomplete="off"
-                            placeholder="Hledat titul, autora, ISBN, @admin
+                            placeholder="Hledat titul, autora, ISBN, @lib
 uživatele,&nbsp;
-@endadmin...">
+@endlib...">
                         <input type="hidden" name="in" value="all" id="search-area">
                         <button class="absolute right-5 top-4" onclick="go()"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>

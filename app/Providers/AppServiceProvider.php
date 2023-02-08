@@ -27,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('admin', function () {
             return (auth()->check() && auth()->user()->admin);
         });
+
+        Blade::if('lib', function () {
+            return (auth()->check() && auth()->user()->librarian);
+        });
     }
 }
