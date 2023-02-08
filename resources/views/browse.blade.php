@@ -4,7 +4,7 @@
         <h2 class="text-2xl font-bold mb-5">Novinky</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             @foreach ($works as $work)
-                <x-Card :data=$work type="work" number="{{ $loop->index }}" more="0" />
+                <x-Card :data=$work type="work" number="{{ $loop->index }}" more="0" placement="away" />
             @endforeach
         </div>
     @else
@@ -16,7 +16,7 @@
         <h2 class="text-2xl font-bold mb-5">Nejmladší</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             @foreach ($authors as $author)
-                <x-Card :data=$author type="author" number="{{ $loop->index }}" more="0" />
+                <x-Card :data=$author type="author" number="{{ $loop->index }}" more="0" placement="away" />
             @endforeach
         </div>
     @else

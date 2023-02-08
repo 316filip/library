@@ -11,8 +11,8 @@ class Card extends Component
      *
      * @return void
      */
-    public $type, $values, $classes, $title, $subtitle, $link, $overlay, $filter, $filter_text, $bookable, $available;
-    public function __construct($type, $data, $number, $more)
+    public $type, $values, $placement, $classes, $title, $subtitle, $link, $overlay, $filter, $filter_text, $bookable, $available;
+    public function __construct($type, $data, $number, $more, $placement)
     {
         if ($type == 'author') {
             $this->link = '/autor/' . $data['id'];
@@ -39,6 +39,7 @@ class Card extends Component
 
         $this->type = $type;
         $this->values = $data;
+        $this->placement = $placement;
         $this->classes = ($number > 5 ? 'hidden' : 'block') . ($number > 7 ? ' md:hidden' : ' md:block') . ($number > 4 ? ' lg:hidden' : ' lg:block') . ($number > 5 ? ' xl:hidden' : ' xl:block');
         if ($more == 1) {
             $this->overlay = ($number != 5 ? ' hidden' : ' block') . ($number != 7 ? ' md:hidden' : ' md:block') . ($number != 4 ? ' lg:hidden' : ' lg:block') . ($number != 5 ? ' xl:hidden' : ' xl:block');

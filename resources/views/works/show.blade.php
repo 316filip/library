@@ -7,7 +7,7 @@
     @unless(count($work->books) == 0)
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             @foreach ($work->books as $book)
-                <x-Card :data=$book type="book" number="0" more="0" />
+                <x-Card :data=$book type="book" number="0" more="0" placement="home" />
             @endforeach
         </div>
     @else
