@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $user = UserHelper::find($user);
 
-        return view('user.show', [
+        return view('users.show', [
             'user' => $user
         ]);
     }
@@ -23,7 +23,7 @@ class UserController extends Controller
     // Show login form
     public function login()
     {
-        return view('user.login');
+        return view('users.login');
     }
 
     // Log user in
@@ -57,7 +57,7 @@ class UserController extends Controller
     // Show create form
     public function create()
     {
-        return view('user.create');
+        return view('users.create');
     }
 
     // Store user data
@@ -90,7 +90,7 @@ class UserController extends Controller
     {
         $user = UserHelper::find($user);
 
-        return view('user.edit', [
+        return view('users.edit', [
             'user' => $user
         ]);
     }
