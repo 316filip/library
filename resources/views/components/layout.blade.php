@@ -18,6 +18,18 @@
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/solid.css">
     <link rel="stylesheet" href="/css/regular.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '500px',
+                    },
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -52,11 +64,11 @@ uživatele,&nbsp;
                 </div>
 
                 {{-- Menu items --}}
-                <div class="flex my-auto space-x-3 md:space-x-6">
+                <div class="flex my-auto space-x-3 md:space-x-6 pl-3">
                     {{-- Show search button --}}
                     <button
                         class="block xl:hidden rounded-lg bg-yellow-400 px-4 py-2 shadow hover:bg-amber-400 transition"
-                        onclick="showSearchBar()" id="show-search-bar">Hledat <i
+                        onclick="showSearchBar()" id="show-search-bar"><span class="hidden xs:inline">Hledat</span> <i
                             class="fa-solid fa-magnifying-glass"></i></button>
 
                     {{-- Show fullscreen menu --}}
