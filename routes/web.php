@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Book;
-use App\Models\Author;
-use App\Helpers\SearchHelper;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
@@ -11,6 +8,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\SearchController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +32,11 @@ use App\Http\Controllers\SearchController;
 
 Route::get('/', function () {
     return view('homepage');
+});
+
+// CRON route for some hosting services
+Route::get('/work', function () {
+    Artisan::call('queue:work', ['--stop-when-empty' => true]);
 });
 
 // BROWSE ROUTE
@@ -78,6 +81,8 @@ Route::delete('/ucet/{user}', [UserController::class, 'destroy'])->middleware('a
 
 // BOOKING ROUTES
 Route::post('/rezervace', [BookingController::class, 'store'])->middleware('auth');
+Route::get('/rezervace/{booking}', [BookingController::class, 'show'])->middleware('lib');
+Route::put('/rezervace/{booking}', [BookingController::class, 'update'])->middleware('lib');
 
 // SEARCH ROUTES
 Route::get('/hledat', [SearchController::class, 'search']);
