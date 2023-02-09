@@ -2,12 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\BorrowCheck;
 use App\Models\Book;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
+    // Get one booking
+    public function show($booking)
+    {
+        $booking = Booking::where('code', $booking)->first();
+
+        if ($booking === null) {
+            abort(404);
+        }
+
+        if (!$booking->borrowed) {
+            $diff = date_diff(date_create($booking->from), date_create(date('Y-m-d')))->format('%R%a');
+            if ($diff > 5) {
+                $problem = "Rezervace byla zrušena";
+            }
+        }
+
+        return view('bookings.show', [
+            'booking' => $booking,
+        ]);
+    }
+
     // Store booking data
     public function store(Request $request)
     {
@@ -28,7 +50,7 @@ class BookingController extends Controller
             return back()->with('message', 'Tuto knihu si nelze rezervovat!')->with('color', 'fail');
         }
 
-        if(!isset($formFields['user_id'])) {
+        if (!isset($formFields['user_id'])) {
             $formFields['user_id'] = auth()->user()->id;
         }
 
@@ -36,7 +58,30 @@ class BookingController extends Controller
             return back()->with('message', 'Nemáte oprávnění vytvořit tuto rezervaci!')->with('color', 'fail');
         }
 
-        Booking::create($formFields);
+        $booking = Booking::create($formFields);
+        dispatch(new BorrowCheck($booking))->delay(now()->addDays(5));
         return back()->with('message', 'Rezervace byla úspěšně vytvořena!')->with('color', 'success');
+    }
+
+    // Update booking data
+    public function update(Request $request, Booking $booking)
+    {
+        $formFields = $request->validate([
+            'status' => 'required',
+        ]);
+
+        $updateFields = [];
+        if ($formFields['status'] == 'booked') {
+            $updateFields['borrowed'] = 0;
+            $updateFields['returned'] = 0;
+        } elseif ($formFields['status'] == 'borrowed') {
+            $updateFields['borrowed'] = 1;
+            $updateFields['returned'] = 0;
+        } elseif ($formFields['status'] == 'returned') {
+            $updateFields['returned'] = 1;
+        }
+
+        $booking->update($updateFields);
+        return back()->with('message', 'Stav rezervace byl úspěšně změněn!')->with('color', 'success');
     }
 }
