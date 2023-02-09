@@ -33,35 +33,44 @@
     @if (request('in') == 'all')
         @unless(count($results['author']) == 0)
             <h2 class="text-2xl">Autoři</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
-                @foreach ($results['author'] as $author)
-                    <x-Card type="author" :data=$author number="{{ $loop->index }}" more="1" placement="away" />
-                @endforeach
+            <div class="py-3">
+                <x-Deck type="author">
+                    @foreach ($results['author'] as $author)
+                        <x-Card type="author" :data=$author number="{{ $loop->index }}" more="1"
+                            placement="away" />
+                    @endforeach
+                </x-Deck>
             </div>
         @endunless
         @unless(count($results['work']) == 0)
             <h2 class="text-2xl">Díla</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
-                @foreach ($results['work'] as $work)
-                    <x-Card type="work" :data=$work number="{{ $loop->index }}" more="1" placement="away" />
-                @endforeach
+            <div class="py-3">
+                <x-Deck type="work">
+                    @foreach ($results['work'] as $work)
+                        <x-Card type="work" :data=$work number="{{ $loop->index }}" more="1" placement="away" />
+                    @endforeach
+                </x-Deck>
             </div>
         @endunless
         @unless(count($results['book']) == 0)
             <h2 class="text-2xl">Knihy</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
-                @foreach ($results['book'] as $book)
-                    <x-Card type="book" :data=$book number="{{ $loop->index }}" more="1" placement="away" />
-                @endforeach
+            <div class="py-3">
+                <x-Deck type="book">
+                    @foreach ($results['book'] as $book)
+                        <x-Card type="book" :data=$book number="{{ $loop->index }}" more="1" placement="away" />
+                    @endforeach
+                </x-Deck>
             </div>
         @endunless
         @auth
             @unless(count($results['user']) == 0)
                 <h2 class="text-2xl">Uživatelé</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-3">
-                    @foreach ($results['user'] as $user)
-                        <x-Card type="user" :data=$user number="{{ $loop->index }}" more="1" placement="away" />
-                    @endforeach
+                <div class="py-3">
+                    <x-Deck type="user">
+                        @foreach ($results['user'] as $user)
+                            <x-Card type="user" :data=$user number="{{ $loop->index }}" more="1" placement="away" />
+                        @endforeach
+                    </x-Deck>
                 </div>
             @endunless
         @endauth
@@ -75,40 +84,48 @@
         @if (count($results['author']) == 0)
             <p class="text-center">Nebyli nalezeni žádní autoři</p>
         @endif
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
-            @foreach ($results['author'] as $author)
-                <x-Card :data=$author type="author" number="0" more="0" placement="away" />
-            @endforeach
+        <div class="pb-3">
+            <x-Deck type="author">
+                @foreach ($results['author'] as $author)
+                    <x-Card :data=$author type="author" number="0" more="0" placement="away" />
+                @endforeach
+            </x-Deck>
         </div>
         {{ $results['author']->appends(request()->input())->links() }}
     @elseif (request('in') == 'work')
         @if (count($results['work']) == 0)
             <p class="text-center">Nebyla nalezena žádná díla</p>
         @endif
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
-            @foreach ($results['work'] as $work)
-                <x-Card :data=$work type="work" number="0" more="0" placement="away" />
-            @endforeach
+        <div class="pb-3">
+            <x-Deck type="work">
+                @foreach ($results['work'] as $work)
+                    <x-Card :data=$work type="work" number="0" more="0" placement="away" />
+                @endforeach
+            </x-Deck>
         </div>
         {{ $results['work']->appends(request()->input())->links() }}
     @elseif (request('in') == 'book')
         @if (count($results['book']) == 0)
             <p class="text-center">Nebyly nalezeny žádné knihy</p>
         @endif
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
-            @foreach ($results['book'] as $book)
-                <x-Card :data=$book type="book" number="0" more="0" placement="away" />
-            @endforeach
+        <div class="pb-3">
+            <x-Deck type="book">
+                @foreach ($results['book'] as $book)
+                    <x-Card :data=$book type="book" number="0" more="0" placement="away" />
+                @endforeach
+            </x-Deck>
         </div>
         {{ $results['book']->appends(request()->input())->links() }}
     @elseif (request('in') == 'user')
         @if (count($results['user']) == 0 || !auth()->check())
             <p class="text-center">Nebyli nalezeni žádní uživatelé</p>
         @else
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-3">
-                @foreach ($results['user'] as $user)
-                    <x-Card :data=$user type="user" number="0" more="0" placement="away" />
-                @endforeach
+            <div class="pb-3" type="user">
+                <x-Deck>
+                    @foreach ($results['user'] as $user)
+                        <x-Card :data=$user type="user" number="0" more="0" placement="away" />
+                    @endforeach
+                </x-Deck>
             </div>
             {{ $results['user']->appends(request()->input())->links() }}
         @endif
