@@ -2,13 +2,14 @@
     <h2 class="text-2xl mb-5"><a href="javascript:void(0)" onclick="{{ $type }}Details()">{{ $slot }} <i
                 class="fa-solid fa-caret-right transition {{ $placement == 'home' ? 'rotate-90' : '' }}"
                 id="{{ $type }}-details-toggle"></i></a></h2>
-    <div id="{{ $type }}-details-table" class="mb-5" style="{{ $placement == 'home' ? '' : 'display: none' }}">
+    <div id="{{ $type }}-details-table" class="mb-5 text-left"
+        style="{{ $placement == 'home' ? '' : 'display: none' }}">
         <table
             class="table-auto w-full border border-slate-200 rounded-lg border-separate border-spacing-x-4 border-spacing-y-3">
             @if ($heading != null && $placement == 'away')
                 <tr>
                     <td colspan="2">
-                        <a class="underline" href="/titul/{{ $id }}">
+                        <a class="underline" href="/{{ $link }}/{{ $id }}">
                             <span class="font-bold">{{ $heading }}</span>
                             @unless($subheading == null)
                                 ({{ $subheading }})

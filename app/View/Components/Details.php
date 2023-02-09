@@ -11,7 +11,7 @@ class Details extends Component
      *
      * @return void
      */
-    public $type, $heading, $subheading, $rows, $id, $placement;
+    public $type, $heading, $subheading, $rows, $id, $placement, $link;
     public function __construct($type, $data, $placement)
     {
         $this->type = $type;
@@ -21,6 +21,7 @@ class Details extends Component
         if ($type == 'work') {
             $this->heading = $data->title;
             $this->subheading = $data->subtitle;
+            $this->link = 'titul';
             $this->rows = collect([
                 'Původní název' => [$data->original_title],
                 'Autor' => [$data->author->name, $data->author->id == 1 ? null : ('/autor/' . $data->author->id)],
@@ -34,6 +35,7 @@ class Details extends Component
         } elseif ($type == 'book') {
             $this->heading = $data->title;
             $this->subheading = $data->subtitle;
+            $this->link = 'kniha';
             $this->rows = collect([
                 'Popis' => [ucfirst($data->description)],
                 'Jazyk' => [ucfirst($data->language)],
@@ -51,6 +53,7 @@ class Details extends Component
 
             $this->heading = $data->name;
             $this->subheading = null;
+            $this->link = 'autor';
             $this->rows = collect([
                 'Popis' => [$data->description],
                 'Datum narození' => [is_null($data->birth_date) ? null : date('d. m. Y', strtotime($data->birth_date))],
@@ -60,10 +63,13 @@ class Details extends Component
         } elseif ($type == 'user') {
             $this->heading = $data->name;
             $this->subheading = null;
+            $this->link = 'ucet';
+            $this->id = $data->code;
             $this->rows = collect([
                 'Kód čtenáře' => [$data->code],
                 'Emailová adresa' => [$data->email],
                 'Datum registrace' => [date('d. m. Y', strtotime($data->created_at))],
+                'Aktuální výpůjčky' => [count($data->bookings)],
                 'Knihovník' => auth()->user()->librarian == 1 ? [$data->librarian == 1 ? 'Ano' : 'Ne'] : [null],
                 'Správce' => auth()->user()->librarian == 1 ? [$data->admin == 1 ? 'Ano' : 'Ne'] : [null],
             ]);
