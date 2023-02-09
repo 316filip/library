@@ -5,7 +5,7 @@
     <x-Details type="work" :data=$work placement="home">Informace o díle</x-Details>
     <h2 class="text-2xl mb-5">Vydání</h2>
     @unless(count($work->books) == 0)
-        <x-Deck>
+        <x-Deck type="book">
             @foreach ($work->books as $book)
                 <x-Card :data=$book type="book" number="0" more="0" placement="home" />
             @endforeach
