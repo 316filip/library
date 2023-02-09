@@ -1,0 +1,4 @@
+Require all granted
+RewriteEngine On
+RewriteBase /
+RewriteRule (.*) /public/$1
