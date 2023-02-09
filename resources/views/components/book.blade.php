@@ -5,7 +5,8 @@
     @elseif ($available === 'soon')
         <p class="text-amber-500 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Dostupné již brzy</p>
     @elseif ($available === 'booked')
-        <p class="text-slate-500 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Tuto knihu již máte půjčenou
+        <p class="text-slate-500 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Tuto knihu již máte
+            rezervovanou
         </p>
     @elseif($available === true)
         <p class="text-lime-600 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Dostupné právě teď</p>
