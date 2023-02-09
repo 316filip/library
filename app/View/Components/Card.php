@@ -40,9 +40,9 @@ class Card extends Component
         $this->type = $type;
         $this->values = $data;
         $this->placement = $placement;
-        $this->classes = ($number > 5 ? 'hidden' : 'block') . ($number > 7 ? ' md:hidden' : ' md:block') . ($number > 4 ? ' lg:hidden' : ' lg:block') . ($number > 5 ? ' xl:hidden' : ' xl:block');
+        $this->classes = (($number > 3 && ($type == 'book' || $type == 'work') || $number > 5) ? 'hidden' : 'block') . ($number > 5 ? ' xs:hidden' : ' xs:block') . ($number > 7 ? ' md:hidden' : ' md:block') . ($number > 4 ? ' lg:hidden' : ' lg:block') . ($number > 5 ? ' xl:hidden' : ' xl:block');
         if ($more == 1) {
-            $this->overlay = ($number != 5 ? ' hidden' : ' block') . ($number != 7 ? ' md:hidden' : ' md:block') . ($number != 4 ? ' lg:hidden' : ' lg:block') . ($number != 5 ? ' xl:hidden' : ' xl:block');
+            $this->overlay = (($number != 3 && ($type == 'book' || $type == 'work') || $number != 5) ? ' hidden' : ' block') . ($number != 5 ? ' xs:hidden' : ' xs:block') . ($number != 7 ? ' md:hidden' : ' md:block') . ($number != 4 ? ' lg:hidden' : ' lg:block') . ($number != 5 ? ' xl:hidden' : ' xl:block');
         } else {
             $this->overlay = 'hidden';
         }
