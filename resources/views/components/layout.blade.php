@@ -18,18 +18,6 @@
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/solid.css">
     <link rel="stylesheet" href="/css/regular.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    screens: {
-                        'xs': '500px',
-                    },
-                }
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -58,7 +46,7 @@ uživatele,&nbsp;
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <div class="h-80 rounded-lg overflow-auto" id="search-results" style="display: none">
-                        <div class="grid place-content-center h-full w-full"><span>Pro vyhledávání začněte psát</span>
+                        <div class="grid place-content-center h-full w-full text-center"><span>Pro vyhledávání začněte psát</span>
                         </div>
                     </div>
                 </div>
@@ -68,7 +56,8 @@ uživatele,&nbsp;
                     {{-- Show search button --}}
                     <button
                         class="block xl:hidden rounded-lg bg-yellow-400 px-4 py-2 shadow hover:bg-amber-400 transition"
-                        onclick="showSearchBar()" id="show-search-bar"><span class="hidden xs:inline">Hledat</span> <i
+                        onclick="showSearchBar()" id="show-search-bar"><span
+                            class="hidden min-[350px]:inline">Hledat</span> <i
                             class="fa-solid fa-magnifying-glass"></i></button>
 
                     {{-- Show fullscreen menu --}}
