@@ -2,17 +2,17 @@
 
 namespace App\Jobs;
 
-use App\Mail\BorrowNotification;
+use App\Mail\ReturnNotification;
 use App\Models\Booking;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class BorrowCheck implements ShouldQueue
+class ReturnNotify implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -36,13 +36,9 @@ class BorrowCheck implements ShouldQueue
     public function handle()
     {
         $booking = Booking::where('id', $this->id)->first();
-        if (!$booking->borrowed && !$booking->returned) {
-            $booking->update([
-                'returned' => 1,
-            ]);
-            Mail::to($this->email)->send(new BorrowNotification($booking));
-        } else {
-            dispatch(new ReturnNotify($booking))->delay(now()->addDays(19));
+        if ($booking->returned == 0) {
+            Mail::to($this->email)->send(new ReturnNotification($booking));
+            dispatch(new ReturnCheck($booking))->delay(now()->addDays(6));
         }
     }
 }
