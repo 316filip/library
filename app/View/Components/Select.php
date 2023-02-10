@@ -12,11 +12,12 @@ class Select extends Component
      *
      * @return void
      */
-    public $type, $id_value, $name_value, $values, $label, $placeholder, $search;
-    public function __construct($type, $target, $values)
+    public $type, $id_value, $name_value, $values, $label, $placeholder, $search, $id;
+    public function __construct($type, $target, $values, $identifier)
     {
         $this->type = $type;
         $this->values = $values;
+        $this->id = $identifier;
 
         if ($type == "author") {
             $this->label = "autor";

@@ -46,7 +46,8 @@ uživatele,&nbsp;
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <div class="h-80 rounded-lg overflow-auto" id="search-results" style="display: none">
-                        <div class="grid place-content-center h-full w-full text-center"><span>Pro vyhledávání začněte psát</span>
+                        <div class="grid place-content-center h-full w-full text-center"><span>Pro vyhledávání začněte
+                                psát</span>
                         </div>
                     </div>
                 </div>
@@ -70,7 +71,7 @@ uživatele,&nbsp;
                     <span class="hidden md:flex my-auto space-x-6">
                         <p class="my-auto"><a class="hover:text-yellow-400 transition" href="/knihovna">Procházet</a>
                         </p>
-                        <p class="my-auto"><a class="hover:text-yellow-400 transition" href="#">Kontakt</a></p>
+                        <p class="my-auto"><a class="hover:text-yellow-400 transition" href="/kontakt">Kontakt</a></p>
 
                         {{-- Account dropdown button --}}
                         <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true"
@@ -121,7 +122,7 @@ uživatele,&nbsp;
         <div
             class="grid grid-cols-1 mx-8 py-8 rounded-lg shadow-md place-content-center place-items-center gap-3 bg-slate-50">
             <p><a href="/knihovna">Procházet</a></p>
-            <p><a href="#">Kontakt</a></p>
+            <p><a href="/kontakt">Kontakt</a></p>
             <div class="w-full">
                 <div
                     class="grid grid-cols-1 mx-8 py-8 rounded-lg place-content-center place-items-center gap-3 bg-slate-100 shadow-inner">

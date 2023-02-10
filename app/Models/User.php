@@ -63,7 +63,7 @@ class User extends Authenticatable
     protected function canBook(): Attribute
     {
         return Attribute::make(
-            fn ($value) => (count($this->bookings) < 6),
+            fn ($value) => ((count($this->bookings) < 5) || $this->librarian),
         );
     }
 }

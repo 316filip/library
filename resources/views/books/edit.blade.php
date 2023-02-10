@@ -25,7 +25,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <x-Select type="work" target="{{ $book->work_id }}" :values=$works></x-Select>
+                <x-Select type="work" target="{{ $book->work_id }}" :values=$works identifier=""></x-Select>
                 @error('work_id')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror

@@ -23,9 +23,10 @@ class Book extends Component
 
         if (auth()->check() && !auth()->user()->canBook) {
             $this->bookable = false;
+            $this->available = 'over';
         } elseif (auth()->check() && auth()->user()->bookings->contains(function ($val) use ($data) {
             return $val->book_id == $data->id && !$val->returned;
-        })) {
+        }) && !auth()->user()->librarian) {
             $this->bookable = false;
             $this->available = 'booked';
         }

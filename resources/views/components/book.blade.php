@@ -8,6 +8,10 @@
         <p class="text-slate-500 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Tuto knihu již máte
             rezervovanou
         </p>
+    @elseif ($available === 'over')
+        <p class="text-slate-500 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Máte zarezervován maximální
+            počet knih
+        </p>
     @elseif($available === true)
         <p class="text-lime-600 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Dostupné právě teď</p>
     @else
@@ -18,7 +22,7 @@
     @if ($placement == 'index')
         <button
             class="px-3 py-2 shadow z-10 {{ $bookable ? 'bg-sky-100 hover:bg-sky-200' : 'bg-slate-100' }} transition rounded-lg"
-            {{ $bookable ? '' : 'disabled' }} title="Rezervovat" onclick="openBook()">
+            {{ $bookable ? '' : 'disabled' }} title="Rezervovat" onclick="openBook{{ $book->id }}()">
             <i class="fa-regular fa-bookmark"></i>
         </button>
     @endif
@@ -27,11 +31,11 @@
 @if ($placement == 'show')
     <div class="flex justify-center mb-5">
         <button class="px-3 py-2 shadow {{ $bookable ? 'bg-sky-100' : 'bg-slate-100' }} rounded-lg"
-            {{ $bookable ? '' : 'disabled' }} onclick="openBook()">Rezervovat</button>
+            {{ $bookable ? '' : 'disabled' }} onclick="openBook{{ $book->id }}()">Rezervovat</button>
     </div>
 @endif
 
-<div id="fullscreen-book" style="display: none"
+<div id="fullscreen-book-{{ $book->id }}" style="display: none"
     class="fixed top-0 left-0 w-full h-full px-3 backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center overflow-y-auto">
     <div class="mx-auto w-full max-w-7xl py-8 px-6 rounded-lg shadow-md bg-slate-50 grid grid-cols-2 xl:grid-cols-3">
         <div class="flex justify-center items-center col-span-2 xl:col-span-1 mb-5 xl:mb-0">
@@ -58,12 +62,12 @@
                         <input type="hidden" name="book_id" value="{{ old('book_id') ?? $book->id }}" autocomplete="off">
                         @lib
                             <div class="col-span-2">
-                                <x-Select type="user" target="" :values=$users />
+                                <x-Select type="user" target="" :values=$users identifier="{{ $book->id }}" />
                             </div>
                         @endlib
                         <div class="flex justify-center">
                             <input type="button" class="px-3 py-2 bg-sky-100 rounded-lg shadow cursor-pointer"
-                                value="Zrušit" onclick="closeBook()" />
+                                value="Zrušit" onclick="closeBook{{ $book->id }}()" />
                         </div>
                         <div class="flex justify-center">
                             <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow">Rezervovat</button>
@@ -73,7 +77,8 @@
                     <p class="text-center">Pro možnost rezervace knihy si prosím zřiďte uživatelský účet.</p>
                     <div class="grid grid-cols-2 gap-5 w-full">
                         <div class="flex justify-center">
-                            <button class="px-3 py-2 bg-sky-100 rounded-lg shadow" onclick="closeBook()">Zrušit</button>
+                            <button class="px-3 py-2 bg-sky-100 rounded-lg shadow"
+                                onclick="closeBook{{ $book->id }}()">Zrušit</button>
                         </div>
                         <div class="flex justify-center">
                             <a href="/registrace" class="px-3 py-2 bg-yellow-400 rounded-lg shadow">Registrovat</a>
@@ -86,14 +91,14 @@
 </div>
 
 <script>
-    function openBook() {
-        $("#fullscreen-book").fadeIn("fast");
+    function openBook{{ $book->id }}() {
+        $("#fullscreen-book-{{ $book->id }}").fadeIn("fast");
         @lib
-        placeDropdown();
+        placeDropdown{{ $book->id }}();
         @endlib
     }
 
-    function closeBook() {
-        $("#fullscreen-book").fadeOut("fast");
+    function closeBook{{ $book->id }}() {
+        $("#fullscreen-book-{{ $book->id }}").fadeOut("fast");
     }
 </script>
