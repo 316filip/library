@@ -7,5 +7,4 @@
     <p>Pátek: {{ $fri }}</p>
     <p>Sobota: {{ $sat }}</p>
     <p>Neděle: {{ $sun }}</p>
-    {{dd(now())}}
 </x-layout>
