@@ -34,6 +34,25 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/kontakt', function () {
+    $mon = explode(',', $_ENV['LIBRARY_MON']);
+    $tue = explode(',', $_ENV['LIBRARY_TUE']);
+    $wed = explode(',', $_ENV['LIBRARY_WED']);
+    $thu = explode(',', $_ENV['LIBRARY_THU']);
+    $fri = explode(',', $_ENV['LIBRARY_FRI']);
+    $sat = explode(',', $_ENV['LIBRARY_SAT']);
+    $sun = explode(',', $_ENV['LIBRARY_SUN']);
+    return view('contact', [
+        'mon' => $mon[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $mon[0])) . (isset($mon[1]) ? (' a od ' . join(' do ', explode('-', $mon[1]))) : '')),
+        'tue' => $tue[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $tue[0])) . (isset($tue[1]) ? (' a od ' . join(' do ', explode('-', $tue[1]))) : '')),
+        'wed' => $wed[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $wed[0])) . (isset($wed[1]) ? (' a od ' . join(' do ', explode('-', $wed[1]))) : '')),
+        'thu' => $thu[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $thu[0])) . (isset($thu[1]) ? (' a od ' . join(' do ', explode('-', $thu[1]))) : '')),
+        'fri' => $fri[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $fri[0])) . (isset($fri[1]) ? (' a od ' . join(' do ', explode('-', $fri[1]))) : '')),
+        'sat' => $sat[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $sat[0])) . (isset($sat[1]) ? (' a od ' . join(' do ', explode('-', $sat[1]))) : '')),
+        'sun' => $sun[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $sun[0])) . (isset($sun[1]) ? (' a od ' . join(' do ', explode('-', $sun[1]))) : '')),
+    ]);
+});
+
 // CRON route for some hosting services
 Route::get('/work', function () {
     Artisan::call('queue:work', ['--stop-when-empty' => true]);
