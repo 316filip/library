@@ -8,17 +8,22 @@
     style='padding: 1rem 0 1rem 0; background-color: #e0f2fe; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";'>
     <center>
         <table
-            style='background-color: white; width: 30rem; border-spacing: 1rem; text-align: center; border-radius: .5rem;'>
+            style='background-color: white; max-width: 30rem; border-spacing: 1rem; text-align: center; border-radius: .5rem;'>
             <tr>
                 <td>
-                    <h1 style="margin: 0;">Vaše rezervace byla zrušena</h1>
+                    <h1 style="margin: 0;">Potvrzení o zapůjčení knihy</h1>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <p>Dobrý den,<br>Vaše rezervace knihy {{ $booking->book->title }}, vytvořená před pěti dny,
-                        byla dnes zrušena, aniž by byla kniha vyzvednuta. Pokud jste o knihu neztratili zájem, můžete si
-                        ji rezervovat znovu, nebo nás rovnou navštívit osobně.</p>
+                    <p>Dobrý den,<br>právě jsme Vám zapůjčili knihu {{ $booking->book->title }} na dobu 30 dní. Prosíme
+                        o včasné navrácení knihy. Pokud Vám měsíc nebude stačit, můžete si po uplynutí poloviny doby
+                        Vaší rezervace tuto lhůtu navýšit o dalších 30 dní.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Kód rezervace: <strong>{{ $booking->code }}</strong></p>
                 </td>
             </tr>
             <tr>
