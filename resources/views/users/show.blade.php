@@ -6,4 +6,25 @@
     <div>
         <x-Details type="user" :data=$user placement="home">Informace o uživateli</x-Details>
     </div>
+    <a id="bookings"></a>
+    <h2 class="text-2xl mb-5">Rezervace</h2>
+    @unless(count($user->bookings) == 0)
+        @php
+            $bookings = $user->bookings->paginate(12);
+        @endphp
+        <x-Deck type="book">
+            @foreach ($bookings as $booking)
+                <x-Card :data=$booking type="booking" number="0" more="0" placement="home" />
+            @endforeach
+        </x-Deck>
+        {{ $bookings->links() }}
+    @else
+        <p>Žádné rezervace k zobrazení</p>
+    @endunless
+
+    <script>
+        @unless(request('page') == null)
+            window.location = "#bookings";
+        @endunless
+    </script>
 </x-layout>
