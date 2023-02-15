@@ -1,6 +1,6 @@
 <x-layout>
     <h1 class="text-4xl text-center font-bold mb-5">Rezervace #{{ $booking->code }}</h1>
-    <div class="grid grid-cols-12">
+    <div class="grid grid-cols-5 sm:grid-cols-12">
         <div class="border border-slate-200 rounded-lg px-5 pt-5 text-center col-span-5">
             <x-Image type="user" :data="$booking->user" placement="index" />
             <x-Details type="user" :data="$booking->user" placement="away">{{ $booking->user->name }}</x-Details>
