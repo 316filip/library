@@ -55,4 +55,14 @@
         <div class="absolute h-28 w-28 bg-sky-100 bg-cover bg-center rounded-full border border-slate-200 shadow"
             style="background-image: url({{ asset('/img/user_profile.svg') }})"></div>
     </div>
+@elseif ($type == 'booking' && ($values->book->image !== null || $placement == 'index'))
+    {{-- When showing a booking, display cover image --}}
+    <div class="flex justify-center mb-1 mx-4 relative">
+        @if ($values->book->image !== null)
+            <img src="{{ asset('/img/' . $values->book->image) }}" alt="Obrázek přebalu"
+                class="{{ $placement == 'index' ? 'max-h-28' : 'max-h-52' }} shadow">
+        @else
+            <img src="{{ asset('/img/book_cover.svg') }}" alt="Ukázkový obrázek přebalu" class="max-h-28 drop-shadow">
+        @endif
+    </div>
 @endif

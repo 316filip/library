@@ -5,9 +5,9 @@
             <div>
                 {{-- Name / title + subtitle --}}
                 <h3 class="text-lg text-center line-clamp-3">
-                    {{ $type == 'author' || $type == 'user' ? $values->name : $values->title }}
+                    {{ $type == 'author' || $type == 'user' ? $values->name : ($type == 'booking' ? $values->book->title : $values->title) }}
                 </h3>
-                @unless($type == 'author')
+                @unless($type == 'author' || $type == 'booking')
                     <p class="line-clamp-4 text-sm text-slate-500 pt-1">
                         {{ $values->subtitle }}
                     </p>
@@ -33,6 +33,12 @@
                     </p>
                 @endif
                 <p class="text-slate-500 text-sm">{{ count($values->books) }} vydání v naší knihovně</p>
+            </div>
+        @elseif ($type == 'booking')
+            {{-- When showing a booking, display booking details --}}
+            <div class="w-full place-self-end">
+                <p class="text-slate-500 text-sm">Uživatel: {{ $values->user->name }}</p>
+                <p class="{{ $values->late ? 'text-red-500' : 'text-slate-500' }} text-sm">{{ $values->until }}</p>
             </div>
         @endif
     </div>
