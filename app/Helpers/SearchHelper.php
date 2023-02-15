@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Book;
 use App\Models\Work;
 use App\Models\Author;
+use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -50,12 +51,23 @@ class SearchHelper
                 $user_query->where(DB::raw('concat(first_name, " ", last_name, " ", code)'), 'like', $request);
                 $user = $user_query->get();
                 foreach ($user as $i => $item) {
-                    similar_text(strtolower($user[$i]['title']), strtolower(request('query')), $percent);
+                    similar_text(strtolower($user[$i]['name']), strtolower(request('query')), $percent);
                     $user[$i]['similarity'] = $percent;
+                }
+            }
+
+            if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'booking') {
+                $booking_query = Booking::query();
+                $booking_query->where('code', 'like', $request);
+                $booking = $booking_query->get();
+                foreach ($booking as $i => $item) {
+                    similar_text(strtolower($booking[$i]['code']), strtolower(request('query')), $percent);
+                    $booking[$i]['similarity'] = $percent;
                 }
             }
         } else {
             $user = collect([]);
+            $booking = collect([]);
         }
 
         if (request('in') == 'quick') {
@@ -64,6 +76,7 @@ class SearchHelper
                 'work' => $work->sortByDesc('similarity')->values()->take(5),
                 'book' => $book->sortByDesc('similarity')->values()->take(5),
                 'user' => $user->sortByDesc('similarity')->values()->take(5),
+                'booking' => $booking->sortByDesc('similarity')->values()->take(5),
             ];
         }
         if (request('in') == 'all') {
@@ -72,6 +85,7 @@ class SearchHelper
                 'work' => $work->sortByDesc('similarity')->values()->take(8),
                 'book' => $book->sortByDesc('similarity')->values()->take(8),
                 'user' => $user->sortByDesc('similarity')->values()->take(8),
+                'booking' => $booking->sortByDesc('similarity')->values()->take(8),
             ];
         }
         if (request('in') == 'author') {
@@ -80,6 +94,7 @@ class SearchHelper
                 'work' => [],
                 'book' => [],
                 'user' => [],
+                'booking' => [],
             ];
         }
         if (request('in') == 'work') {
@@ -88,6 +103,7 @@ class SearchHelper
                 'work' => $work->sortByDesc('similarity')->values()->paginate(6),
                 'book' => [],
                 'user' => [],
+                'booking' => [],
             ];
         }
         if (request('in') == 'book') {
@@ -96,6 +112,7 @@ class SearchHelper
                 'work' => [],
                 'book' => $book->sortByDesc('similarity')->values()->paginate(6),
                 'user' => [],
+                'booking' => [],
             ];
         }
         if (request('in') == 'user') {
@@ -104,6 +121,16 @@ class SearchHelper
                 'work' => [],
                 'book' => [],
                 'user' => $user->sortByDesc('similarity')->values()->paginate(6),
+                'booking' => [],
+            ];
+        }
+        if (request('in') == 'booking') {
+            return [
+                'author' => [],
+                'work' => [],
+                'book' => [],
+                'user' => [],
+                'booking' => $booking->sortByDesc('similarity')->values()->paginate(6),
             ];
         }
     }

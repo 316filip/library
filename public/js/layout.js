@@ -162,6 +162,27 @@ function search() {
                 );
             }
 
+            if (result["booking"].length !== 0) {
+                // Show results from bookings table
+                $("#search-results").append(
+                    '<p class="p-2 font-bold text-slate-500">Rezervace:</p>'
+                );
+
+                $.each(result["booking"], function (i, field) {
+                    $("#search-results").append(
+                        '<a href="/rezervace/' +
+                            field["code"] +
+                            '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
+                            field["code"] +
+                            "</p></a>"
+                    );
+                });
+
+                $("#search-results").append(
+                    '<p class="p-2 text-right text-slate-500"><a href="javascript:void(0)" onclick="go(\'booking\')">Zobrazit vše <i class="fa-solid fa-arrow-right"></i></a></p>'
+                );
+            }
+
             // If nothing matches the query
             if ($("#search-results").html() == "") {
                 $("#search-results").append(
