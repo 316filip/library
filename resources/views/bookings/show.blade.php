@@ -1,11 +1,12 @@
 <x-layout>
     <h1 class="text-4xl text-center font-bold mb-5">Rezervace #{{ $booking->code }}</h1>
-    <div class="grid grid-cols-5 sm:grid-cols-12">
+    <p class="{{ $booking->late ? 'text-red-500' : '' }} text-center mb-5">{{ $booking->until }}</p>
+    <div class="grid grid-cols-5 lg:grid-cols-12">
         <div class="border border-slate-200 rounded-lg px-5 pt-5 text-center col-span-5">
             <x-Image type="user" :data="$booking->user" placement="index" />
             <x-Details type="user" :data="$booking->user" placement="away">{{ $booking->user->name }}</x-Details>
         </div>
-        <div class="col-span-2 grid grid-col-1 p-1">
+        <div class="col-span-5 lg:col-span-2 grid grid-col-1 p-1">
             <div class="flex justify-center items-center">
                 <form action="/rezervace/{{ $booking->id }}" method="post">
                     @csrf
