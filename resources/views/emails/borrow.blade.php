@@ -1,4 +1,4 @@
-<html>
+<html style="background-color: #e0f2fe;">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=">
@@ -16,9 +16,10 @@
             </tr>
             <tr>
                 <td>
-                    <p>Dobrý den,<br>právě jsme Vám zapůjčili knihu {{ $booking->book->title }} na dobu 30 dní. Prosíme
-                        o včasné navrácení knihy. Pokud Vám měsíc nebude stačit, můžete si po uplynutí poloviny doby
-                        Vaší rezervace tuto lhůtu navýšit o dalších 30 dní.</p>
+                    <p>Dobrý den,<br>právě jsme Vám zapůjčili knihu {{ $booking->book->title }} do
+                        {{ date('d. m. Y', strtotime($booking->book->to)) }}. Prosíme o včasné navrácení knihy. Pokud
+                        Vám jeden měsíc nebude stačit, můžete si po uplynutí poloviny doby Vaší rezervace tuto lhůtu
+                        navýšit o další.</p>
                 </td>
             </tr>
             <tr>

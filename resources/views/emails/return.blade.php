@@ -1,4 +1,4 @@
-<html>
+<html style="background-color: #e0f2fe;">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=">
@@ -28,7 +28,7 @@
             <tr>
                 <td>
                     <center>
-                        <a href="{{ url('/kniha/knihovna') }}"
+                        <a href="{{ url('/knihovna') }}"
                             style='display: inline-block; padding: .5rem 1rem; background-color: #facc15; border-radius: .5rem; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); color: black; text-decoration: none;'>Zobrazit
                             nabídku knih</a>
                     </center>

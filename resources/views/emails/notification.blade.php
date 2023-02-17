@@ -1,4 +1,4 @@
-<html>
+<html style="background-color: #e0f2fe;">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=">
@@ -16,10 +16,13 @@
             </tr>
             <tr>
                 <td>
-                    <p>Dobrý den,<br>lhůta pro vrácení knihy <a
+                    <p>
+                        Dobrý den,<br>lhůta pro vrácení knihy <a
                             href="{{ url('/kniha/' . $booking->book->id) }}">{{ $booking->book->title }}</a>, kterou máte
-                        zapůjčenou, vyprší za pět dní. Prosíme o včasné navrácení knihy. Pokud jste tak ještě neučinili,
-                        můžete si rezervaci jednou prodloužit o další měsíc.</p>
+                        zapůjčenou, vyprší {{ date('d. m. Y', strtotime($booking->book->to)) }}. Prosíme o včasné
+                        navrácení knihy. Pokud jste tak ještě neučinili, můžete si rezervaci jednou prodloužit o další
+                        měsíc.
+                    </p>
                 </td>
             </tr>
             <tr>

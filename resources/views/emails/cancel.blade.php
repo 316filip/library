@@ -1,4 +1,4 @@
-<html>
+<html style="background-color: #e0f2fe;">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=">
