@@ -38,7 +38,7 @@ class Booking extends Model
 
     protected function until(): Attribute
     {
-        $number = date_diff(now('Europe/Prague'), date_create($this->to))->format("%d");
+        $number = date_diff(now('Europe/Prague'), date_create($this->to))->format("%a");
         if ($this->late) {
             $text = "Skončila před";
             $days = $number == 1 ? "dnem" : "dny";
@@ -52,6 +52,20 @@ class Booking extends Model
         }
         return Attribute::make(
             fn ($value) => $text . " " . $number . " " . $days,
+        );
+    }
+
+    protected function extendable(): Attribute
+    {
+        $extendable = false;
+        if (date_diff(date_create($this->from), date_create($this->to))->format('%a') > 40 || $this->late || $this->returned) {
+            $extendable = 'hide';
+        } elseif (date_diff(now('Europe/Prague'), date_create($this->to))->format('%a') < 16) {
+            $extendable = true;
+        }
+
+        return Attribute::make(
+            fn ($value) => $extendable,
         );
     }
 }
