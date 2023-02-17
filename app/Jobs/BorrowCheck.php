@@ -42,7 +42,7 @@ class BorrowCheck implements ShouldQueue
             ]);
             Mail::to($this->email)->send(new BorrowNotification($booking));
         } else {
-            dispatch(new ReturnNotify($booking))->delay(now()->addDays(19));
+            dispatch(new ReturnNotify($booking))->delay(strtotime('-5 days', strtotime($booking->to)) - now('Europe/Prague'));
         }
     }
 }
