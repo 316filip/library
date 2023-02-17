@@ -41,7 +41,7 @@ class Book extends Model
                 if ($date !== true) $date = "soon";
             } elseif ($diff < 15) {
                 $booked += 1;
-                if ($date !== true && $date !== "soon" && ($date === false || date_diff($date, $booking->to) > 0)) $date = $booking->to;
+                if ($date !== true && $date !== "soon" && ($date === false || date_diff($date, $booking->to)->format('%R%a') > 0)) $date = $booking->to;
             } else {
                 $booked += 1;
                 $date = false;
