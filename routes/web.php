@@ -101,7 +101,7 @@ Route::delete('/ucet/{user}', [UserController::class, 'destroy'])->middleware('a
 // BOOKING ROUTES
 Route::post('/rezervace', [BookingController::class, 'store'])->middleware('auth');
 Route::get('/rezervace/{booking}', [BookingController::class, 'show'])->middleware('lib');
-Route::put('/rezervace/{booking}', [BookingController::class, 'update'])->middleware('lib');
+Route::put('/rezervace/{booking}', [BookingController::class, 'update'])->middleware('auth');
 
 // SEARCH ROUTES
 Route::get('/hledat', [SearchController::class, 'search']);
