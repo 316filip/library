@@ -36,7 +36,7 @@
             </div>
         @elseif ($type == 'booking')
             {{-- When showing a booking, display booking details --}}
-            <div class="w-full place-self-end flex border border-slate rounded-lg p-2 shadow-inner mt-3">
+            <div class="w-full place-self-end flex items-center border border-slate rounded-lg p-2 shadow-inner mt-3">
                 <div class="basis-full">
                     @if (auth()->user()->librarian)
                         <p class="text-slate-500 text-sm">Uživatel: {{ $values->user->name }}</p>
