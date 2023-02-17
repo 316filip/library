@@ -1,4 +1,4 @@
-<form class="z-10 {{ $booking->extendable == 'hide' ? 'hidden' : '' }}" action="/rezervace/{{ $booking->id }}"
+<form class="z-10 {{ $booking->extendable === 'hide' ? 'hidden' : '' }}" action="/rezervace/{{ $booking->id }}"
     method="post">
     @csrf
     @method('PUT')
