@@ -36,9 +36,14 @@
             </div>
         @elseif ($type == 'booking')
             {{-- When showing a booking, display booking details --}}
-            <div class="w-full place-self-end">
-                <p class="text-slate-500 text-sm">Uživatel: {{ $values->user->name }}</p>
-                <p class="{{ $values->late ? 'text-red-500' : 'text-slate-500' }} text-sm">{{ $values->until }}</p>
+            <div class="w-full place-self-end flex border border-slate rounded-lg p-2 shadow-inner mt-3">
+                <div class="basis-full">
+                    @if (auth()->user()->librarian)
+                        <p class="text-slate-500 text-sm">Uživatel: {{ $values->user->name }}</p>
+                    @endif
+                    <p class="{{ $values->late ? 'text-red-500' : 'text-slate-500' }} text-sm">{{ $values->until }}</p>
+                </div>
+                <x-Extend :data=$values placement="index" />
             </div>
         @endif
     </div>

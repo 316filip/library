@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Booking;
 use App\Jobs\BorrowCheck;
+use App\Jobs\ReturnNotify;
 use Illuminate\Http\Request;
 use App\Mail\BookConfirmation;
 use App\Mail\BorrowConfirmation;
+use App\Mail\ExtensionConfirmation;
 use App\Mail\ReturnConfirmation;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
@@ -122,11 +124,12 @@ class BookingController extends Controller
         if (($formFields['user_id'] !== auth()->user()->id) && !auth()->user()->librarian) {
             return back()->with('message', 'Nemáte oprávnění vytvořit tuto rezervaci!')->with('color', 'fail');
         }
-        
+
         // Create the booking
         $booking = Booking::create($formFields);
         // Dispatch a job to check in 6 days if the user has borrowed the book
-        dispatch(new BorrowCheck($booking))->delay(strtotime('+6 days', $from) - strtotime(now('Europe/Prague')));
+        // dispatch(new BorrowCheck($booking))->delay(strtotime('+6 days', $from) - strtotime(now('Europe/Prague')));
+        dispatch(new BorrowCheck($booking))->delay(strtotime('+5 minutes', $from) - strtotime(now('Europe/Prague')));
         // Email the user about the booking
         Mail::to($booking->user->email)->send(new BookConfirmation($booking));
         // Redirect the user
@@ -139,24 +142,41 @@ class BookingController extends Controller
     // Update booking data
     public function update(Request $request, Booking $booking)
     {
-        $formFields = $request->validate([
-            'status' => 'required',
-        ]);
+        if (!isset($request->type)) {
+            return back()->with('message', 'Pro změnu rezervace použijte ovládací prvky webu!')->with('color', 'fail');
+        } elseif ($request->type == 'manage') {
+            $formFields = $request->validate([
+                'status' => 'required',
+            ]);
 
-        $updateFields = [];
-        if ($formFields['status'] == 'booked') {
-            $updateFields['borrowed'] = 0;
-            $updateFields['returned'] = 0;
-        } elseif ($formFields['status'] == 'borrowed') {
-            $updateFields['borrowed'] = 1;
-            $updateFields['returned'] = 0;
-            Mail::to($booking->user->email)->send(new BorrowConfirmation($booking));
-        } elseif ($formFields['status'] == 'returned') {
-            $updateFields['returned'] = 1;
-            Mail::to($booking->user->email)->send(new ReturnConfirmation($booking));
+            $updateFields = [];
+            if ($formFields['status'] == 'booked') {
+                $updateFields['borrowed'] = 0;
+                $updateFields['returned'] = 0;
+            } elseif ($formFields['status'] == 'borrowed') {
+                $updateFields['borrowed'] = 1;
+                $updateFields['returned'] = 0;
+                Mail::to($booking->user->email)->send(new BorrowConfirmation($booking));
+            } elseif ($formFields['status'] == 'returned') {
+                $updateFields['returned'] = 1;
+                Mail::to($booking->user->email)->send(new ReturnConfirmation($booking));
+            }
+
+            $booking->update($updateFields);
+            return back()->with('message', 'Stav rezervace byl úspěšně změněn!')->with('color', 'success');
+        } elseif ($request->type == 'extend') {
+            if ($booking->extendable === false) {
+                return back()->with('message', 'Tuto rezervaci nelze prodloužit!')->with('color', 'fail');
+            }
+
+            $updateFields = [
+                'to' => date('Y-m-d H:i:s', strtotime('+1 month', strtotime($booking->to))),
+            ];
+
+            $booking->update($updateFields);
+            Mail::to($booking->user->email)->send(new ExtensionConfirmation($booking));
+            dispatch(new ReturnNotify($booking))->delay(strtotime('-5 days', strtotime($updateFields['to'])) - strtotime(now('Europe/Prague')));
+            return back()->with('message', 'Rezervace byla prodloužena o měsíc!')->with('color', 'success');
         }
-
-        $booking->update($updateFields);
-        return back()->with('message', 'Stav rezervace byl úspěšně změněn!')->with('color', 'success');
     }
 }
