@@ -33,7 +33,8 @@
                 {{-- Search bar --}}
                 <div class="absolute -top-20 xl:-top-2 left-1/2 -translate-x-1/2 h-fit w-full md:max-w-3xl lg:max-w-lg xl:max-w-2xl 2xl:max-w-3xl transition-all rounded-lg p-2"
                     id="search-frame">
-                    <form action="/hledat" method="GET" id="search-form">
+                    <form action="/knihovna" method="GET" id="search-form">
+                        <input type="hidden" name="filter" value="search">
                         <input type="text" name="query"
                             class="h-10 w-full border border-slate-200 shadow-inner rounded-lg mb-2 pl-2 pr-10"
                             id="search-input" onfocus="showResults()" onblur="hideResults()" onkeyup="search()"
@@ -104,8 +105,8 @@ uživatele,&nbsp;
                         @else
                             <a href="/prihlaseni" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
                                 tabindex="-1" id="menu-item-0">Přihlásit se</a>
-                            <a href="/registrace" class="block px-3 py-1 hover:text-yellow-400 transition" role="menuitem"
-                                tabindex="-1" id="menu-item-1">Vytvořit účet</a>
+                            <a href="/registrace" class="block px-3 py-1 hover:text-yellow-400 transition"
+                                role="menuitem" tabindex="-1" id="menu-item-1">Vytvořit účet</a>
                         @endauth
                     </div>
                 </div>

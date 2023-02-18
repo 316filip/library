@@ -11,7 +11,7 @@ class Manage extends Component
      *
      * @return void
      */
-    public $type, $id, $text, $link_edit, $link_delete;
+    public $type, $id, $slug, $text, $link_edit, $link_delete;
     public function __construct($type, $identifier)
     {
         $this->type = $type;
@@ -19,16 +19,16 @@ class Manage extends Component
 
         if ($type == 'author') {
             $this->text = 'autora';
-            $this->link_edit = 'autor/' . $identifier;
-            $this->link_delete = 'autor/' . $identifier;
+            $this->link_edit = 'autor/' . $identifier[1];
+            $this->link_delete = 'autor/' . $identifier[0];
         } elseif ($type == 'work') {
             $this->text = 'titul';
-            $this->link_edit = 'titul/' . $identifier;
-            $this->link_delete = 'titul/' . $identifier;
+            $this->link_edit = 'titul/' . $identifier[1];
+            $this->link_delete = 'titul/' . $identifier[0];
         } elseif ($type == 'book') {
             $this->text = 'knihu';
-            $this->link_edit = 'kniha/' . $identifier;
-            $this->link_delete = 'kniha/' . $identifier;
+            $this->link_edit = 'kniha/' . $identifier[1] . '/' . $identifier[0];
+            $this->link_delete = 'kniha/' . $identifier[0];
         } elseif ($type == 'user') {
             $this->text = 'účet';
 

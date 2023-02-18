@@ -17,7 +17,7 @@ class AssignmentFactory extends Factory
     public function definition()
     {
         return [
-            'book_id' => fake()->numberBetween(1,10),
+            'work_id' => fake()->numberBetween(1,10),
             'category_id' => fake()->numberBetween(1,10)
         ];
     }

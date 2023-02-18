@@ -9,7 +9,7 @@ class Work extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['author_id', 'title', 'original_title', 'year', 'description', 'subtitle', 'language', 'class', 'genre', 'number'];
+    protected $fillable = ['author_id', 'title', 'slug', 'original_title', 'year', 'description', 'subtitle', 'language', 'class', 'genre', 'number'];
 
     // Relationship to author
     public function author()
@@ -21,5 +21,11 @@ class Work extends Model
     public function books()
     {
         return $this->hasMany(Book::class, 'work_id');
+    }
+
+    // Relationship to assignments
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class, 'work_id');
     }
 }

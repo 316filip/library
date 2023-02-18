@@ -9,7 +9,7 @@
             @if ($heading != null && $placement == 'away')
                 <tr>
                     <td colspan="2">
-                        <a class="underline" href="/{{ $link }}/{{ $id }}">
+                        <a class="underline" href="/{{ $link }}">
                             <span class="font-bold">{{ $heading }}</span>
                             @unless($subheading == null)
                                 ({{ $subheading }})
@@ -34,6 +34,17 @@
                     </tr>
                 @endunless
             @endforeach
+            @if ($type == 'work')
+                <tr>
+                    <td class="align-top">Kategorie:</td>
+                    <td>
+                        @foreach ($values->assignments as $assignment)
+                            <a href="/knihovna?filter=category&query={{ $assignment->category->slug }}"
+                                class="px-4 py-1 rounded-full bg-yellow-400">{{ $assignment->category->name }}</a>
+                        @endforeach
+                    </td>
+                </tr>
+            @endif
         </table>
     </div>
 </div>

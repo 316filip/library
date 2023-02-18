@@ -80,10 +80,13 @@ Route::get('/titul/{work}', [WorkController::class, 'show']);
 // BOOK ROUTES
 Route::get('/kniha/tvorba', [BookController::class, 'create'])->middleware('lib');
 Route::post('/kniha', [BookController::class, 'store'])->middleware('lib');
-Route::get('/kniha/{book}/upravit', [BookController::class, 'edit'])->middleware('lib');
+Route::get('/kniha/{work}/{book}/upravit', [BookController::class, 'edit'])->middleware('lib');
 Route::put('/kniha/{book}', [BookController::class, 'update'])->middleware('lib');
 Route::delete('/kniha/{book}', [BookController::class, 'destroy'])->middleware('lib');
-Route::get('/kniha/{book}', [BookController::class, 'show']);
+Route::get('/kniha/{work}/{book}', [BookController::class, 'show']);
+Route::get('/kniha/{book}', function () {
+    abort(404);
+});
 
 // USER ROUTES
 Route::get('/prihlaseni', [UserController::class, 'login'])->name('login')->middleware('guest');
@@ -104,5 +107,4 @@ Route::get('/rezervace/{booking}', [BookingController::class, 'show'])->middlewa
 Route::put('/rezervace/{booking}', [BookingController::class, 'update'])->middleware('auth');
 
 // SEARCH ROUTES
-Route::get('/hledat', [SearchController::class, 'search']);
 Route::get('/search', [SearchController::class, 'quick']);

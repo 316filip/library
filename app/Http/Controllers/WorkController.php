@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author;
 use App\Models\Work;
+use App\Models\Author;
+use App\Helpers\WorkHelper;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class WorkController extends Controller
@@ -17,8 +19,9 @@ class WorkController extends Controller
     }
 
     // Get one work
-    public function show(Work $work)
+    public function show($work)
     {
+        $work = WorkHelper::find($work);
         return view('works.show', [
             'work' => $work
         ]);
@@ -48,14 +51,24 @@ class WorkController extends Controller
             'number' => 'nullable'
         ]);
 
+        $auto_slug = $formFields['title'];
+        $slug = Str::of($auto_slug)->ascii()->lower();
+        $i = 2;
+        while (Work::where('slug', $slug)->get()->count() !== 0) {
+            $slug = $auto_slug . '-' . $i;
+            $i += 1;
+        }
+        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+
         $work = Work::create($formFields);
 
-        return redirect('/')->with('message', 'Titul byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/titul/' . $work->id);
+        return redirect('/')->with('message', 'Titul byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/titul/' . $work->slug);
     }
 
     // Show edit form
-    public function edit(Work $work)
+    public function edit($work)
     {
+        $work = WorkHelper::find($work);
         return view('works.edit', [
             'work' => $work,
             'authors' => Author::orderBy("last_name")->get()
@@ -78,9 +91,20 @@ class WorkController extends Controller
             'number' => 'nullable'
         ]);
 
+        $auto_slug = $formFields['title'];
+        $slug = Str::of($auto_slug)->ascii()->lower();
+        if (Str::of($slug)->ascii()->lower() != $work->slug) {
+            $i = 2;
+            while (Work::where('slug', $slug)->get()->count() !== 0) {
+                $slug = $auto_slug . '-' . $i;
+                $i += 1;
+            }
+        }
+        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+
         $work->update($formFields);
 
-        return redirect('/titul/' . $work->id)->with('message', 'Titul byl úspěšně změněn!')->with('color', 'success');
+        return redirect('/titul/' . $work->slug)->with('message', 'Titul byl úspěšně změněn!')->with('color', 'success');
     }
 
     // Delete work

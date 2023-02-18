@@ -22,6 +22,7 @@ class AuthorFactory extends Factory
             'middle_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'name_suffix' => fake()->title(),
+            'slug' => uniqid(),
             'birth_date' => fake()->dateTime(),
             'death_date' => fake()->dateTime(),
             'description' => fake()->text(1000)

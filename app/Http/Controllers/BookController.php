@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     // Get one book
-    public function show(Book $book)
+    public function show($work, Book $book)
     {
         return view('books.show', [
             'book' => $book
@@ -51,11 +51,11 @@ class BookController extends Controller
 
         $book = Book::create($formFields);
 
-        return redirect('/')->with('message', 'Kniha byla úspěšně přidána do knihovny!')->with('color', 'success')->with('link', '/kniha/' . $book->id);
+        return redirect('/')->with('message', 'Kniha byla úspěšně přidána do knihovny!')->with('color', 'success')->with('link', '/kniha/' . $book->work->slug . '/' . $book->id);
     }
 
     // Show edit form
-    public function edit(Book $book)
+    public function edit($work, Book $book)
     {
         return view('books.edit', [
             'book' => $book,
@@ -92,7 +92,7 @@ class BookController extends Controller
 
         $book->update($formFields);
 
-        return redirect('/kniha/' . $book->id)->with('message', 'Kniha byla úspěšně upravena!')->with('color', 'success');
+        return redirect('/kniha/' . $book->work->slug . '/' . $book->id)->with('message', 'Kniha byla úspěšně upravena!')->with('color', 'success');
     }
 
     // Delete book

@@ -11,20 +11,20 @@ class Details extends Component
      *
      * @return void
      */
-    public $type, $heading, $subheading, $rows, $id, $placement, $link;
+    public $type, $values, $heading, $subheading, $rows, $placement, $link;
     public function __construct($type, $data, $placement)
     {
         $this->type = $type;
         $this->placement = $placement;
-        $this->id = $data->id;
+        $this->values = $data;
 
         if ($type == 'work') {
             $this->heading = $data->title;
             $this->subheading = $data->subtitle;
-            $this->link = 'titul';
+            $this->link = 'titul/' . $data->slug;
             $this->rows = collect([
                 'Původní název' => [$data->original_title],
-                'Autor' => [$data->author->name, $data->author->id == 1 ? null : ('/autor/' . $data->author->id)],
+                'Autor' => [$data->author->name, $data->author->id == 1 ? null : ('/autor/' . $data->author->slug)],
                 'Popis' => [$data->description],
                 'Rok' => [$data->year],
                 'Jazyk' => [ucfirst($data->language)],
@@ -35,7 +35,7 @@ class Details extends Component
         } elseif ($type == 'book') {
             $this->heading = $data->title;
             $this->subheading = $data->subtitle;
-            $this->link = 'kniha';
+            $this->link = 'kniha/' . $data->work->slug . '/' . $data->id;
             $this->rows = collect([
                 'Popis' => [ucfirst($data->description)],
                 'Jazyk' => [ucfirst($data->language)],
@@ -53,7 +53,7 @@ class Details extends Component
 
             $this->heading = $data->name;
             $this->subheading = null;
-            $this->link = 'autor';
+            $this->link = 'autor/' . $data->slug;
             $this->rows = collect([
                 'Popis' => [$data->description],
                 'Datum narození' => [is_null($data->birth_date) ? null : date('d. m. Y', strtotime($data->birth_date))],
@@ -63,8 +63,7 @@ class Details extends Component
         } elseif ($type == 'user') {
             $this->heading = $data->name;
             $this->subheading = null;
-            $this->link = 'ucet';
-            $this->id = $data->code;
+            $this->link = 'ucet/' . $data->code;
             $this->rows = collect([
                 'Kód čtenáře' => [$data->code],
                 'Emailová adresa' => [$data->email],

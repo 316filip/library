@@ -3,7 +3,7 @@
     <h1 class="text-4xl text-center font-bold mb-5">
         {{ $author->name }}
     </h1>
-    <x-Manage type="author" identifier="{{ $author->id }}"></x-Manage>
+    <x-Manage type="author" :identifier="[$author->id, $author->slug]"></x-Manage>
     <x-Details type="author" :data=$author placement="home">Informace o autorovi
     </x-Details>
     <h2 class="text-2xl">Tituly</h2>

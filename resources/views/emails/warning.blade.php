@@ -17,9 +17,10 @@
             <tr>
                 <td>
                     <p>Dobrý den,<br>lhůta pro vrácení knihy <a
-                            href="{{ url('/kniha/' . $booking->book->id) }}">{{ $booking->book->title }}</a>, kterou máte
-                        zapůjčenou, dnes vypršela, aniž by byla kniha vrácena. V souladu s pravidly naší knihovny po Vás
-                        budeme žádat poplatek za pozdní navrácení, který se bude s každým dnem zvyšovat o 5 Kč.</p>
+                            href="{{ url('/kniha/' . $booking->book->work->slug . '/' . $booking->book->id) }}">{{ $booking->book->title }}</a>,
+                        kterou máte zapůjčenou, dnes vypršela, aniž by byla kniha vrácena. V souladu s pravidly naší
+                        knihovny po Vás budeme žádat poplatek za pozdní navrácení, který se bude s každým dnem zvyšovat
+                        o 5 Kč.</p>
                 </td>
             </tr>
             <tr>

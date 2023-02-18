@@ -10,7 +10,7 @@ class Author extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name_prefix', 'first_name', 'middle_name', 'last_name', 'name_suffix', 'birth_date', 'death_date', 'description', 'image'];
+    protected $fillable = ['name_prefix', 'first_name', 'middle_name', 'last_name', 'name_suffix', 'slug', 'birth_date', 'death_date', 'description', 'image'];
 
     // Relationship to works
     public function works()

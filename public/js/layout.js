@@ -75,7 +75,7 @@ function search() {
                 $.each(result["author"], function (i, field) {
                     $("#search-results").append(
                         '<a href="/autor/' +
-                            field["id"] +
+                            field["slug"] +
                             '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
                             (field["name_prefix"] == null
                                 ? ""
@@ -106,7 +106,7 @@ function search() {
                 $.each(result["work"], function (i, field) {
                     $("#search-results").append(
                         '<a href="/titul/' +
-                            field["id"] +
+                            field["slug"] +
                             '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
                             field["title"] +
                             "</p></a>"
@@ -127,6 +127,8 @@ function search() {
                 $.each(result["book"], function (i, field) {
                     $("#search-results").append(
                         '<a href="/kniha/' +
+                            field["work"]["slug"] +
+                            "/" +
                             field["id"] +
                             '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
                             field["title"] +

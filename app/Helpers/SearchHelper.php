@@ -42,6 +42,7 @@ class SearchHelper
             foreach ($book as $i => $item) {
                 similar_text(strtolower($book[$i]['title']), strtolower(request('query')), $percent);
                 $book[$i]['similarity'] = $percent;
+                $book[$i]['work'] = $item->work;
             }
         }
 

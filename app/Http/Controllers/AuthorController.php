@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AuthorHelper;
 use App\Models\Author;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -15,18 +17,19 @@ class AuthorController extends Controller
         ]);
     }
 
+    // Get one author
+    public function show($author)
+    {
+        $author = AuthorHelper::find($author);
+        return view('authors.show', [
+            'author' => $author
+        ]);
+    }
+
     // Show create form
     public function create()
     {
         return view('authors.create');
-    }
-
-    // Get one author
-    public function show(Author $author)
-    {
-        return view('authors.show', [
-            'author' => $author
-        ]);
     }
 
     // Store author data
@@ -44,18 +47,28 @@ class AuthorController extends Controller
             'image' => 'nullable|image',
         ]);
 
+        $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
+        $slug = Str::of($auto_slug)->ascii()->lower();
+        $i = 2;
+        while (Author::where('slug', $slug)->get()->count() !== 0) {
+            $slug = $auto_slug . '-' . $i;
+            $i += 1;
+        }
+        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('authors', 'public');
         }
 
         $author = Author::create($formFields);
 
-        return redirect('/')->with('message', 'Autor byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/autor/' . $author->id);
+        return redirect('/')->with('message', 'Autor byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/autor/' . $author->slug);
     }
 
     // Show edit form
-    public function edit(Author $author)
+    public function edit($author)
     {
+        $author = AuthorHelper::find($author);
         return view('authors.edit', ['author' => $author]);
     }
 
@@ -74,6 +87,17 @@ class AuthorController extends Controller
             'image' => 'nullable|image',
         ]);
 
+        $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
+        $slug = $auto_slug;
+        if (Str::of($slug)->ascii()->lower() != $author->slug) {
+            $i = 1;
+            while (Author::where('slug', $slug)->get()->count() !== 0) {
+                $slug = $auto_slug . '-' . $i;
+                $i += 1;
+            }
+        }
+        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('authors', 'public');
         } elseif ($request->image_update == 1) {
@@ -82,7 +106,7 @@ class AuthorController extends Controller
 
         $author->update($formFields);
 
-        return redirect('/autor/' . $author->id)->with('message', 'Profil autora byl úspěšně změněn!')->with('color', 'success');
+        return redirect('/autor/' . $author->slug)->with('message', 'Profil autora byl úspěšně změněn!')->with('color', 'success');
     }
 
     // Delete author

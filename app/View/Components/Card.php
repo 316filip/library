@@ -15,13 +15,13 @@ class Card extends Component
     public function __construct($type, $data, $number, $more, $placement)
     {
         if ($type == 'author') {
-            $this->link = '/autor/' . $data['id'];
+            $this->link = '/autor/' . $data->slug;
             $this->filter_text = "autorů";
         } elseif ($type == 'work') {
-            $this->link = '/titul/' . $data['id'];
+            $this->link = '/titul/' . $data->slug;
             $this->filter_text = "děl";
         } elseif ($type == 'book') {
-            $this->link = '/kniha/' . $data['id'];
+            $this->link = '/kniha/' . $data->work->slug . '/' . $data->id;
             $this->filter_text = "knih";
             $this->bookable = $data->date === true;
             $this->available = $data->book;

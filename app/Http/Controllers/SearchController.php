@@ -9,13 +9,6 @@ use Spatie\FlareClient\View;
 
 class SearchController extends Controller
 {
-    public function search()
-    {
-        return view('search', [
-            'results' => SearchHelper::search()
-        ]);
-    }
-
     public function quick()
     {
         return SearchHelper::search();
