@@ -66,6 +66,25 @@ function search() {
         function (result) {
             // Refresh results displayed below search field
             $("#search-results").empty();
+
+            if (result["category"].length !== 0) {
+                // Show results from categories table
+                $("#search-results").append(
+                    '<p class="p-2 font-bold text-slate-500">Kategorie:</p>' +
+                        '<div class="overflow-auto"><div class="flex px-2 gap-2 flex-nowrap" id="category-results"></div></div>'
+                );
+
+                $.each(result["category"], function (i, field) {
+                    $("#category-results").append(
+                        '<a class="flex-none" href="/knihovna?filter=category&query=' +
+                            field["slug"] +
+                            '"><p class="px-4 py-1 rounded-full bg-yellow-400">' +
+                            field["name"] +
+                            "</p></a>"
+                    );
+                });
+            }
+
             if (result["author"].length !== 0) {
                 // Show results from authors table
                 $("#search-results").append(

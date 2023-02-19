@@ -34,7 +34,7 @@
                     </tr>
                 @endunless
             @endforeach
-            @if ($type == 'work')
+            @if ($type == 'work' && count($values->assignments) !== 0)
                 <tr>
                     <td class="align-top">Kategorie:</td>
                     <td>

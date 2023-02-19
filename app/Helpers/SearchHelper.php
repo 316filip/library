@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Work;
 use App\Models\Author;
 use App\Models\Booking;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -72,12 +73,23 @@ class SearchHelper
         }
 
         if (request('in') == 'quick') {
+            $category_query = Category::query();
+            $category_query->where('name', 'like', $request);
+            $category = $category_query->get();
+            foreach ($category as $i => $item) {
+                similar_text(strtolower($category[$i]['name']), strtolower(request('query')), $percent);
+                $category[$i]['similarity'] = $percent;
+            }
+        }
+
+        if (request('in') == 'quick') {
             return [
                 'author' => $author->sortByDesc('similarity')->values()->take(5),
                 'work' => $work->sortByDesc('similarity')->values()->take(5),
                 'book' => $book->sortByDesc('similarity')->values()->take(5),
                 'user' => $user->sortByDesc('similarity')->values()->take(5),
                 'booking' => $booking->sortByDesc('similarity')->values()->take(5),
+                'category' => $category->sortByDesc('similarity')->values(),
             ];
         }
         if (request('in') == 'all') {
