@@ -74,7 +74,7 @@ class SearchHelper
 
         if (request('in') == 'quick') {
             $category_query = Category::query();
-            $category_query->where('name', 'like', $request);
+            $category_query->where(DB::raw('concat(name, " ", coalesce(description, ""))'), 'like', $request);
             $category = $category_query->get();
             foreach ($category as $i => $item) {
                 similar_text(strtolower($category[$i]['name']), strtolower(request('query')), $percent);
