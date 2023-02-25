@@ -37,8 +37,8 @@
 
 <div id="fullscreen-book-{{ $book->id }}" style="display: none"
     class="fixed top-0 left-0 w-full h-full px-3 backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center overflow-y-auto">
-    <div class="mx-auto w-full max-w-7xl py-8 px-6 rounded-lg shadow-md bg-slate-50 grid grid-cols-2 xl:grid-cols-3">
-        <div class="flex justify-center items-center col-span-2 xl:col-span-1 mb-5 xl:mb-0">
+    <div class="mx-auto w-full max-w-3xl xl:max-w-5xl py-8 px-6 rounded-lg shadow-md bg-slate-50 grid xl:grid-cols-2">
+        <div class="flex justify-center items-center mb-5 xl:mb-0">
             <div class="h-min">
                 <div class="flex justify-center">
                     @if ($book->image !== null)
@@ -52,7 +52,7 @@
                 <p class="text-center">{{ $book->work->author->name }}</p>
             </div>
         </div>
-        <div class="col-span-2">
+        <div>
             <div class="mx-auto max-w-3xl grid grid-cols-1 place-content-center place-items-center gap-5">
                 <h2 class="text-2xl font-bold text-center">Rezervace knihy</h2>
                 @auth
@@ -65,22 +65,22 @@
                                 <x-Select type="user" :target="[]" :values=$users identifier="{{ $book->id }}" />
                             </div>
                         @endlib
-                        <div class="flex justify-center">
+                        <div class="flex justify-start">
                             <input type="button" class="px-3 py-2 bg-sky-100 rounded-lg shadow cursor-pointer"
                                 value="Zrušit" onclick="closeBook{{ $book->id }}()" />
                         </div>
-                        <div class="flex justify-center">
+                        <div class="flex justify-end">
                             <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow">Rezervovat</button>
                         </div>
                     </form>
                 @else
                     <p class="text-center">Pro možnost rezervace knihy si prosím zřiďte uživatelský účet.</p>
                     <div class="grid grid-cols-2 gap-5 w-full">
-                        <div class="flex justify-center">
+                        <div class="flex justify-start">
                             <button class="px-3 py-2 bg-sky-100 rounded-lg shadow"
                                 onclick="closeBook{{ $book->id }}()">Zrušit</button>
                         </div>
-                        <div class="flex justify-center">
+                        <div class="flex justify-end">
                             <a href="/registrace" class="px-3 py-2 bg-yellow-400 rounded-lg shadow">Registrovat</a>
                         </div>
                     </div>
