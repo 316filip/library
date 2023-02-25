@@ -62,7 +62,7 @@
                         <input type="hidden" name="book_id" value="{{ old('book_id') ?? $book->id }}" autocomplete="off">
                         @lib
                             <div class="col-span-2">
-                                <x-Select type="user" target="" :values=$users identifier="{{ $book->id }}" />
+                                <x-Select type="user" :target="[]" :values=$users identifier="{{ $book->id }}" />
                             </div>
                         @endlib
                         <div class="flex justify-center">

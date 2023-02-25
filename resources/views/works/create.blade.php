@@ -21,8 +21,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="create-work-original_title"
-                    class="block mb-1">Originální název</label>
+                <label for="create-work-original_title" class="block mb-1">Originální název</label>
                 <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="original_title"
                     id="create-work-original_title" placeholder="τὰ βιβλíα" value="{{ old('original_title') }}"
                     autocomplete="off">
@@ -31,7 +30,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <x-Select type="author" target="" :values=$authors identifier=""></x-Select>
+                <x-Select type="author" :target="[]" :values=$authors identifier="author"></x-Select>
                 @error('author_id')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
@@ -68,7 +67,13 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="grid sm:grid-cols-3 sm:gap-4 place-items-end">
+            <div class="mb-3">
+                <x-Select type="category" :target="[]" :values=$categories identifier="category"></x-Select>
+                @error('category_id')
+                    <p class="text-red-500 text-sm">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="grid sm:grid-cols-3 sm:gap-4">
                 <div class="w-full mb-3">
                     <label for="create-work-language"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Jazyk originálu</label>
