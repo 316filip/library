@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Work;
 use App\Models\Author;
 use App\Helpers\WorkHelper;
+use App\Models\Assignment;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -31,7 +33,8 @@ class WorkController extends Controller
     public function create()
     {
         return view('works.create', [
-            'authors' => Author::orderBy("last_name")->get()
+            'authors' => Author::orderBy("last_name")->get(),
+            'categories' => Category::orderBy("name")->get(),
         ]);
     }
 
@@ -51,6 +54,12 @@ class WorkController extends Controller
             'number' => 'nullable'
         ]);
 
+        foreach (explode(', ', $request->category_id) as $id) {
+            if (Category::where('id', $id)->first() == null) {
+                return back()->withInput($request->input())->withErrors(['category_id' => 'Použili jste kategorii, která neexistuje.']);
+            }
+        }
+
         $auto_slug = $formFields['title'];
         $slug = Str::of($auto_slug)->ascii()->lower();
         $i = 2;
@@ -62,6 +71,13 @@ class WorkController extends Controller
 
         $work = Work::create($formFields);
 
+        foreach (explode(', ', $request->category_id) as $id) {
+            Assignment::create([
+                'work_id' => $work->id,
+                'category_id' => $id,
+            ]);
+        }
+
         return redirect('/')->with('message', 'Titul byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/titul/' . $work->slug);
     }
 
@@ -69,9 +85,20 @@ class WorkController extends Controller
     public function edit($work)
     {
         $work = WorkHelper::find($work);
+
+        $identifiers = [];
+        $names = [];
+        $assignments = Assignment::where('work_id', $work->id)->get();
+        foreach ($assignments as $assignment) {
+            array_push($identifiers, $assignment->category_id);
+            array_push($names, $assignment->category->name);
+        }
+
         return view('works.edit', [
             'work' => $work,
-            'authors' => Author::orderBy("last_name")->get()
+            'authors' => Author::orderBy('last_name')->get(),
+            'categories' => Category::orderBy('name')->get(),
+            'target' => [join(', ', $identifiers), join(', ', $names)],
         ]);
     }
 
@@ -91,6 +118,13 @@ class WorkController extends Controller
             'number' => 'nullable'
         ]);
 
+        // Check for problems with categories
+        foreach (explode(', ', $request->category_id) as $id) {
+            if (Category::where('id', $id)->first() == null) {
+                return back()->withInput($request->input())->withErrors(['category_id' => 'Použili jste kategorii, která neexistuje.']);
+            }
+        }
+
         $auto_slug = $formFields['title'];
         $slug = Str::of($auto_slug)->ascii()->lower();
         if (Str::of($slug)->ascii()->lower() != $work->slug) {
@@ -103,6 +137,17 @@ class WorkController extends Controller
         $formFields['slug'] = Str::of($slug)->ascii()->lower();
 
         $work->update($formFields);
+
+        // Remove all connections to categories
+        Assignment::where('work_id', $work->id)->delete();
+
+        // Create new connections to categories
+        foreach (explode(', ', $request->category_id) as $id) {
+            Assignment::create([
+                'work_id' => $work->id,
+                'category_id' => $id,
+            ]);
+        }
 
         return redirect('/titul/' . $work->slug)->with('message', 'Titul byl úspěšně změněn!')->with('color', 'success');
     }

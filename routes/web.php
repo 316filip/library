@@ -7,6 +7,7 @@ use App\Http\Controllers\WorkController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -105,6 +106,14 @@ Route::delete('/ucet/{user}', [UserController::class, 'destroy'])->middleware('a
 Route::post('/rezervace', [BookingController::class, 'store'])->middleware('auth');
 Route::get('/rezervace/{booking}', [BookingController::class, 'show'])->middleware('lib');
 Route::put('/rezervace/{booking}', [BookingController::class, 'update'])->middleware('auth');
+
+// CATEGORY ROUTES
+Route::get('/kategorie/tvorba', [CategoryController::class, 'create'])->middleware('lib');
+Route::post('/kategorie', [CategoryController::class, 'store'])->middleware('lib');
+Route::get('/kategorie/{category}/upravit', [CategoryController::class, 'edit'])->middleware('lib');
+Route::get('/kategorie/{category}', [CategoryController::class, 'show']);
+Route::put('/kategorie/{category}', [CategoryController::class, 'update'])->middleware('lib');
+Route::delete('/kategorie/{category}', [CategoryController::class, 'destroy'])->middleware('lib');
 
 // SEARCH ROUTES
 Route::get('/search', [SearchController::class, 'quick']);

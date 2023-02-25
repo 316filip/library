@@ -9,6 +9,8 @@ class Assignment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['work_id', 'category_id'];
+
     // Relationship to work
     public function work()
     {
