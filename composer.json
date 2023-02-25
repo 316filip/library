@@ -25,6 +25,7 @@
     "autoload": {
         "files": [
             "app/Helpers/AuthorHelper.php",
+            "app/Helpers/CategoryHelper.php",
             "app/Helpers/SearchHelper.php",
             "app/Helpers/UserHelper.php",
             "app/Helpers/WorkHelper.php"
