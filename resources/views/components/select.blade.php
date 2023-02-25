@@ -1,6 +1,6 @@
-<div>
+<div class="relative">
     <label for="form-select"
-        class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">{{ ucfirst($label) }}</label>
+        class="block mb-1 {{ $type == 'category' ? '' : 'after:content-[\'*\'] after:ml-0.5 after:text-red-500' }}">{{ ucfirst($label) }}</label>
     <div class="relative">
         <input type="hidden" name="{{ $type }}_id" id="form-select-output-{{ $id }}"
             value="{{ $id_value }}" autocomplete="off">
@@ -12,8 +12,7 @@
                 class="fa-solid fa-angle-down"></i></span>
     </div>
 
-    <div class="h-fit w-full max-w-2xl md:max-w-3xl z-50 px-6 sm:px-10 md:px-6 lg:px-0 py-1"
-        id="form-select-dropdown-{{ $id }}">
+    <div class="h-fit z-50 !inset-x-0 py-1" id="form-select-dropdown-{{ $id }}">
         <div class="h-full w-full rounded-lg shadow-lg backdrop-blur-xl bg-sky-100/30 p-3"
             id="form-select-content-{{ $id }}" style="display: none">
             <input type="text" class="p-2 mb-3 w-full border border-slate-200 rounded-lg"
@@ -27,12 +26,26 @@
                             value="Neznámý autor" onclick="selectSet{{ $id }}(1, 'Neznámý autor')">
                     @endif
                     @foreach ($values as $value)
-                        @unless($type == 'author' && $value->id == 1)
-                            <input type="button"
-                                class="block w-full text-left p-2 rounded-lg hover:bg-yellow-200/80 transition"
-                                value="{{ $value->label ?? ($value->name ?? $value->title) }}"
-                                onclick="selectSet{{ $id }}({{ $value->id }}, '{{ $value->label ?? ($value->name ?? $value->title) }}')">
-                        @endunless
+                        @if ($type == 'category')
+                            <div class="block w-full text-left p-2 rounded-lg">
+                                <input type="checkbox" id="form-select-{{ $id }}-option-{{ $value->id }}"
+                                    class="border border-slate-200 rounded-lg mb-0.5 mr-1"
+                                    name="category_option_{{ $value->id }}"
+                                    onchange="selectCheck{{ $id }}({{ $value->id }}, '{{ $value->name }}')"
+                                    autocomplete="off"
+                                    {{ old('category_option_' . $value->id) ? 'checked' : (in_array($value->id, explode(', ', $id_value)) ? 'checked' : '') }}>
+                                <label for="form-select-{{ $id }}-option-{{ $value->id }}">
+                                    {{ $value->name }}
+                                </label>
+                            </div>
+                        @else
+                            @unless($type == 'author' && $value->id == 1)
+                                <input type="button"
+                                    class="block w-full text-left p-2 rounded-lg hover:bg-yellow-200/80 transition"
+                                    value="{{ $value->label ?? ($value->name ?? $value->title) }}"
+                                    onclick="selectSet{{ $id }}({{ $value->id }}, '{{ $value->label ?? ($value->name ?? $value->title) }}')">
+                            @endunless
+                        @endif
                     @endforeach
                 </div>
                 <div class="grid place-content-center h-full w-full hidden"
@@ -92,15 +105,28 @@
          */
         function selectFilter{{ $id }}() {
             let empty = true;
-            $("#form-select-options-{{ $id }} *").filter(function() {
-                let compare = $(this).val().toLowerCase().indexOf($("#form-select-filter-{{ $id }}")
-                        .val().toLowerCase()) > -
-                    1;
-                $(this).toggle(compare);
-                if (compare == true) {
-                    empty = false;
-                }
-            });
+            @if ($type == 'category')
+                $("#form-select-options-{{ $id }} div").filter(function() {
+                    let compare = $(this).children('label').text().toLowerCase().indexOf($(
+                                "#form-select-filter-{{ $id }}")
+                            .val().toLowerCase()) > -
+                        1;
+                    $(this).toggle(compare);
+                    if (compare == true) {
+                        empty = false;
+                    }
+                });
+            @else
+                $("#form-select-options-{{ $id }} *").filter(function() {
+                    let compare = $(this).val().toLowerCase().indexOf($("#form-select-filter-{{ $id }}")
+                            .val().toLowerCase()) > -
+                        1;
+                    $(this).toggle(compare);
+                    if (compare == true) {
+                        empty = false;
+                    }
+                });
+            @endif
 
             if (empty) {
                 $("#form-select-options-empty-{{ $id }}").removeClass("hidden");
@@ -109,13 +135,40 @@
             }
         }
 
-        /**
-         * Sets selected option
-         */
-        function selectSet{{ $id }}(id, name) {
-            $("#form-select-{{ $id }}").val(name);
-            $("#form-select-output-{{ $id }}").val(id);
-            selectClose{{ $id }}();
-        }
+        @if ($type == 'category')
+            /**
+             * Adds checked option
+             */
+            function selectCheck{{ $id }}(id, name) {
+                let input = $("#form-select-{{ $id }}-option-" + id);
+                let preview = $("#form-select-{{ $id }}");
+                let output = $("#form-select-output-{{ $id }}");
+                if (input.is(":checked")) {
+                    if (preview.val() == "") {
+                        preview.val(name);
+                        output.val(id);
+                    } else {
+                        preview.val(preview.val() + ", " + name);
+                        output.val(output.val() + ", " + id);
+                    }
+                } else {
+                    preview.val(jQuery.grep(preview.val().split(", "), function(value) {
+                        return value != name;
+                    }).join(", "));
+                    output.val(jQuery.grep(output.val().split(", "), function(value) {
+                        return value != id;
+                    }).join(", "));
+                }
+            }
+        @else
+            /**
+             * Sets selected option
+             */
+            function selectSet{{ $id }}(id, name) {
+                $("#form-select-{{ $id }}").val(name);
+                $("#form-select-output-{{ $id }}").val(id);
+                selectClose{{ $id }}();
+            }
+        @endif
     </script>
 </div>

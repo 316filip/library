@@ -31,17 +31,20 @@ class Select extends Component
             $this->label = "rezervovat pro uživatele...";
             $this->placeholder = "Jan Srna";
             $this->search = "uživatele";
+        } elseif ($type == "category") {
+            $this->label = "kategorie";
+            $this->placeholder = "Přidat kategorie...";
+            $this->search = "kategorie";
         }
 
-        if ($target !== "") {
-            $this->id_value = old($type . "_id") ?? $target;
-            if ($type == "author") $this->name_value = old($type) ?? $values->firstWhere('id', $target)->name;
-            elseif ($type == "work") $this->name_value = old($type) ?? $values->firstWhere('id', $target)->title;
-        } elseif ($type == "user") {
-            $this->id_value = old($type . "_id") ?? auth()->user()->id;
+        if ($target !== []) {
+            $this->id_value = old($type . '_id') ?? $target[0];
+            $this->name_value = old($type) ?? $target[1];
+        } elseif ($type == 'user') {
+            $this->id_value = old($type . '_id') ?? auth()->user()->id;
             $this->name_value = old($type) ?? auth()->user()->label;
         } else {
-            $this->id_value = old($type . "_id");
+            $this->id_value = old($type . '_id');
             $this->name_value = old($type);
         }
     }

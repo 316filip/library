@@ -39,6 +39,10 @@ class Manage extends Component
 
             $this->link_edit = 'ucet' . $link;
             $this->link_delete = 'ucet/' . $identifier[1];
+        } elseif ($type == 'category') {
+            $this->text = 'kategorii';
+            $this->link_edit = 'kategorie/' . $identifier[1];
+            $this->link_delete = 'kategorie/' . $identifier[0];
         }
     }
 
