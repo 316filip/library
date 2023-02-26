@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'middle_name' => '',
             'last_name' => 'autor',
             'name_suffix' => '',
+            'slug' => '',
             'birth_date' => NULL,
             'death_date' => NULL,
             'description' => ''
