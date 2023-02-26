@@ -1,16 +1,15 @@
 <x-layout>
     <h1 class="text-4xl text-center font-bold mb-5">Upravit knihu</h1>
     <div class="flex justify-center">
-        <form method="POST" action="/kniha/{{ $book->id }}" enctype="multipart/form-data"
-            class="w-full max-w-3xl">
+        <form method="POST" action="/kniha/{{ $book->id }}" enctype="multipart/form-data" class="w-full max-w-3xl">
             @csrf
             @method('PUT')
             <div class="mb-3">
                 <label for="edit-book-title" class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Název
                     knihy</label>
                 <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="title"
-                    id="edit-book-title" placeholder="Bible"
-                    value="{{ old('title') ?? $book->title }}" autocomplete="off">
+                    id="edit-book-title" placeholder="Bible" value="{{ old('title') ?? $book->title }}"
+                    autocomplete="off">
                 @error('title')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
@@ -52,8 +51,7 @@
                 <div class="mb-3">
                     <label for="edit-book-translator" class="block mb-1">Překladatel</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="translator"
-                        id="edit-book-translator" placeholder=""
-                        value="{{ old('translator') ?? $book->translator }}"
+                        id="edit-book-translator" placeholder="" value="{{ old('translator') ?? $book->translator }}"
                         autocomplete="off">
                     @error('translator')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -63,8 +61,7 @@
                     <label for="edit-book-illustrator" class="block mb-1">Ilustrátor</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="illustrator"
                         id="edit-book-illustrator" placeholder=""
-                        value="{{ old('illustrator') ?? $book->illustrator }}"
-                        autocomplete="off">
+                        value="{{ old('illustrator') ?? $book->illustrator }}" autocomplete="off">
                     @error('illustrator')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -93,8 +90,8 @@
                     <label for="edit-book-year"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Rok vydání</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="year"
-                        id="edit-book-year" placeholder="2016"
-                        value="{{ old('year') ?? $book->year }}" autocomplete="off">
+                        id="edit-book-year" placeholder="2016" value="{{ old('year') ?? $book->year }}"
+                        autocomplete="off">
                     @error('year')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -102,8 +99,8 @@
                 <div class="mb-3">
                     <label for="edit-book-place" class="block mb-1">Místo vydání</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="place"
-                        id="edit-book-place" placeholder="Praha"
-                        value="{{ old('place') ?? $book->place }}" autocomplete="off">
+                        id="edit-book-place" placeholder="Praha" value="{{ old('place') ?? $book->place }}"
+                        autocomplete="off">
                     @error('place')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -112,8 +109,7 @@
                     <label for="edit-book-publication" class="block mb-1">Číslo publikace</label>
                     <input type="number" class="p-2 w-full border border-slate-200 rounded-lg" name="publication"
                         id="edit-book-publication" placeholder="22" min="1"
-                        value="{{ old('publication') ?? $book->publication }}"
-                        autocomplete="off">
+                        value="{{ old('publication') ?? $book->publication }}" autocomplete="off">
                     @error('publication')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -121,8 +117,8 @@
                 <div class="mb-3">
                     <label for="edit-book-ISBN" class="block mb-1">ISBN</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="ISBN"
-                        id="edit-book-ISBN" placeholder="978-80-7545-028-9"
-                        value="{{ old('ISBN') ?? $book->ISBN }}" autocomplete="off">
+                        id="edit-book-ISBN" placeholder="978-80-7545-028-9" value="{{ old('ISBN') ?? $book->ISBN }}"
+                        autocomplete="off">
                     @error('ISBN')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -144,8 +140,8 @@
                     <input type="file" accept="image/*"
                         class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
                         name="image" id="edit-book-image" autocomplete="off" onchange="preview(this)">
-                    <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow" onclick="empty(event)"
-                        title="Vyprázdnit výběr obrázku">
+                    <button class="px-3 py-2 bg-yellow-400 hover:bg-amber-400 transition rounded-lg shadow"
+                        onclick="empty(event)" title="Vyprázdnit výběr obrázku">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </div>

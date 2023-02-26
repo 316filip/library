@@ -1,5 +1,5 @@
 <div
-    class="flex {{ $placement == 'show' ? 'mb-5 justify-center' : 'items-center border border-slate rounded-lg p-2 shadow-inner mt-3' }}">
+    class="flex gap-2 {{ $placement == 'show' ? 'mb-5 justify-center' : 'items-center border border-slate rounded-lg p-2 shadow-inner mt-3' }}">
     @if ($available === false)
         <p class="text-red-600 text-sm {{ $placement == 'show' ? '' : 'flex-auto pr-1' }}">Momentálně nedostupné</p>
     @elseif ($available === 'soon')
@@ -30,7 +30,7 @@
 
 @if ($placement == 'show')
     <div class="flex justify-center mb-5">
-        <button class="px-3 py-2 shadow {{ $bookable ? 'bg-sky-100' : 'bg-slate-100' }} rounded-lg"
+        <button class="px-3 py-2 shadow {{ $bookable ? 'bg-sky-100 hover:bg-sky-200' : 'bg-slate-100' }} transition rounded-lg"
             {{ $bookable ? '' : 'disabled' }} onclick="openBook{{ $book->id }}()">Rezervovat</button>
     </div>
 @endif
@@ -38,7 +38,7 @@
 <div id="fullscreen-book-{{ $book->id }}" style="display: none"
     class="fixed top-0 left-0 w-full h-full px-3 backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center overflow-y-auto">
     <div class="mx-auto w-full max-w-3xl xl:max-w-5xl py-8 px-6 rounded-lg shadow-md bg-slate-50 grid xl:grid-cols-2">
-        <div class="flex justify-center items-center mb-5 xl:mb-0">
+        <div class="hidden sm:flex justify-center items-center mb-5 xl:mb-0">
             <div class="h-min">
                 <div class="flex justify-center">
                     @if ($book->image !== null)
@@ -66,22 +66,25 @@
                             </div>
                         @endlib
                         <div class="flex justify-start">
-                            <input type="button" class="px-3 py-2 bg-sky-100 rounded-lg shadow cursor-pointer"
+                            <input type="button"
+                                class="px-3 py-2 bg-sky-100 hover:bg-sky-200 transition rounded-lg shadow cursor-pointer"
                                 value="Zrušit" onclick="closeBook{{ $book->id }}()" />
                         </div>
                         <div class="flex justify-end">
-                            <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow">Rezervovat</button>
+                            <button
+                                class="px-3 py-2 bg-yellow-400 hover:bg-amber-400 transition rounded-lg shadow">Rezervovat</button>
                         </div>
                     </form>
                 @else
                     <p class="text-center">Pro možnost rezervace knihy si prosím zřiďte uživatelský účet.</p>
                     <div class="grid grid-cols-2 gap-5 w-full">
                         <div class="flex justify-start">
-                            <button class="px-3 py-2 bg-sky-100 rounded-lg shadow"
+                            <button class="px-3 py-2 bg-sky-100 hover:bg-sky-200 transition rounded-lg shadow"
                                 onclick="closeBook{{ $book->id }}()">Zrušit</button>
                         </div>
                         <div class="flex justify-end">
-                            <a href="/registrace" class="px-3 py-2 bg-yellow-400 rounded-lg shadow">Registrovat</a>
+                            <a href="/registrace"
+                                class="px-3 py-2 bg-yellow-400 hover:bg-amber-400 transition rounded-lg shadow">Registrovat</a>
                         </div>
                     </div>
                 @endauth

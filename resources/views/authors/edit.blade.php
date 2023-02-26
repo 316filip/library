@@ -1,16 +1,14 @@
 <x-layout>
     <h1 class="text-4xl text-center font-bold mb-5">Upravit autora</h1>
     <div class="flex justify-center">
-        <form method="POST" action="/autor/{{ $author->id }}" enctype="multipart/form-data"
-            class="w-full max-w-3xl">
+        <form method="POST" action="/autor/{{ $author->id }}" enctype="multipart/form-data" class="w-full max-w-3xl">
             @csrf
             @method('PUT')
             <div class="grid grid-cols-3 sm:grid-cols-8 gap-x-4">
                 <div class="mb-3">
                     <label for="edit-author-name_prefix" class="block mb-1">Titul</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="name_prefix"
-                        id="edit-author-name_prefix"
-                        value="{{ old('name_prefix') ?? $author->name_prefix }}"
+                        id="edit-author-name_prefix" value="{{ old('name_prefix') ?? $author->name_prefix }}"
                         autocomplete="off">
                     @error('name_prefix')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -20,8 +18,7 @@
                     <label for="edit-author-first_name"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Jméno</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="first_name"
-                        id="edit-author-first_name"
-                        value="{{ old('first_name') ?? $author->first_name }}"
+                        id="edit-author-first_name" value="{{ old('first_name') ?? $author->first_name }}"
                         autocomplete="off">
                     @error('first_name')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -30,8 +27,7 @@
                 <div class="mb-3 col-span-3 sm:col-span-2">
                     <label for="edit-author-middle_name" class="block mb-1">Prostřední jména</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="middle_name"
-                        id="edit-author-middle_names"
-                        value="{{ old('middle_name') ?? $author->middle_name }}"
+                        id="edit-author-middle_names" value="{{ old('middle_name') ?? $author->middle_name }}"
                         autocomplete="off">
                     @error('middle_name')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -41,8 +37,8 @@
                     <label for="edit-author-last_name"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Příjmení</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="last_name"
-                        id="edit-author-last_name"
-                        value="{{ old('last_name') ?? $author->last_name }}" autocomplete="off">
+                        id="edit-author-last_name" value="{{ old('last_name') ?? $author->last_name }}"
+                        autocomplete="off">
                     @error('last_name')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -50,8 +46,7 @@
                 <div class="mb-3">
                     <label for="edit-work-name_suffix" class="block mb-1">Titul</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="name_suffix"
-                        id="edit-author-name_suffix"
-                        value="{{ old('name_suffix') ?? $author->name_suffix }}"
+                        id="edit-author-name_suffix" value="{{ old('name_suffix') ?? $author->name_suffix }}"
                         autocomplete="off">
                     @error('name_suffix')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -102,8 +97,8 @@
                         class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
                         name="image" id="edit-author-image" autocomplete="off"
                         aria-describedby="edit-author-image-hint" onchange="preview(this)">
-                    <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow" onclick="empty(event)"
-                        title="Vyprázdnit výběr obrázku">
+                    <button class="px-3 py-2 bg-yellow-400 hover:bg-amber-400 transition rounded-lg shadow"
+                        onclick="empty(event)" title="Vyprázdnit výběr obrázku">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </div>

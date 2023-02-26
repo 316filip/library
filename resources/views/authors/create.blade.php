@@ -87,8 +87,8 @@
                         class="w-full border border-slate-200 rounded-lg file:font-sans file:border file:border-solid file:border-sky-100 file:bg-sky-200 file:shadow-sm file:px-3 file:py-2 file:mr-2 file:rounded-lg text-slate-500"
                         name="image" id="create-author-image" autocomplete="off"
                         aria-describedby="create-author-image-hint" onchange="preview(this)">
-                    <button class="px-3 py-2 bg-yellow-400 rounded-lg shadow" onclick="empty(event)"
-                        title="Vyprázdnit výběr obrázku">
+                    <button class="px-3 py-2 bg-yellow-400 hover:bg-amber-400 transition rounded-lg shadow"
+                        onclick="empty(event)" title="Vyprázdnit výběr obrázku">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </div>

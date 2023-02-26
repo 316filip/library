@@ -2,7 +2,9 @@
     <h1 class="text-4xl text-center font-bold mb-5">Rezervace #{{ $booking->code }}</h1>
     <div class="flex justify-center mb-5">
         <div class="flex gap-3 items-center">
-            <p class="inline {{ $booking->late ? 'text-red-500' : '' }}">{{ $booking->until }}</p>
+            <p class="inline {{ $booking->late ? 'text-red-500' : '' }}">
+                <i class="fa-regular fa-calendar"></i> {{ $booking->until }}
+            </p>
             <x-Extend :data=$booking placement="show" />
         </div>
     </div>
