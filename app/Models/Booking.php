@@ -40,14 +40,14 @@ class Booking extends Model
     {
         $number = date_diff(now('Europe/Prague'), date_create($this->to))->format("%a");
         if ($this->late) {
-            $text = "Skončila před";
+            $text = "Před";
             $days = $number == 1 ? "dnem" : "dny";
         } elseif ($this->returned) {
             $text = "Vrácena";
             $number = "";
             $days = "";
         } else {
-            $text = "Skončí za";
+            $text = "Za";
             $days = $number == 1 ? "den" : ($number > 1 && $number < 5 ? "dny" : "dní");
         }
         return Attribute::make(
