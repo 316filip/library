@@ -7,7 +7,7 @@
     @unless(count($work->books) == 0)
         <x-Deck type="book">
             @foreach ($work->books as $book)
-                <x-Card :data=$book type="book" number="0" more="0" placement="home" />
+                <x-Card :data=$book :info="['book', 0, 'work', '']" />
             @endforeach
         </x-Deck>
     @else

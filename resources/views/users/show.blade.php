@@ -14,7 +14,7 @@
         @endphp
         <x-Deck type="book">
             @foreach ($bookings as $booking)
-                <x-Card :data=$booking type="booking" number="0" more="0" placement="home" />
+                <x-Card :data=$booking :info="['booking', 0, '', '']" />
             @endforeach
         </x-Deck>
         {{ $bookings->links() }}

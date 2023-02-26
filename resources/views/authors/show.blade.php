@@ -11,7 +11,7 @@
         <div class="mt-5">
             <x-Deck type="work">
                 @foreach ($author->works as $work)
-                    <x-Card :data=$work type="work" number="0" more="0" placement="home" />
+                    <x-Card :data=$work :info="['work', 0, 'author', '']" />
                 @endforeach
             </x-Deck>
         </div>
