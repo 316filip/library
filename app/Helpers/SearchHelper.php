@@ -18,7 +18,7 @@ class SearchHelper
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'author') {
             $author_query = Author::query();
-            $author_query->where(DB::raw('concat(coalesce(name_prefix, ""), " ", first_name, " ", coalesce(middle_name, ""), " ", last_name, " ", coalesce(name_suffix, ""))'), 'like', $request);
+            $author_query->where(DB::raw('concat(coalesce(name_prefix, ""), " ", first_name, " ", coalesce(middle_name, ""), " ", last_name, " ", coalesce(name_suffix, ""))'), 'like', $request)->where('id', '<>', 1);
             $author = $author_query->get();
             foreach ($author as $i => $item) {
                 similar_text(strtolower($author[$i]['name']), strtolower(request('query')), $percent);
