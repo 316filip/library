@@ -54,13 +54,15 @@ class WorkController extends Controller
             'number' => 'nullable'
         ]);
 
-        foreach (explode(', ', $request->category_id) as $id) {
-            if (Category::where('id', $id)->first() == null) {
-                return back()->withInput($request->input())->withErrors(['category_id' => 'Použili jste kategorii, která neexistuje.']);
+        if ($request->category_id != '') {
+            foreach (explode(', ', $request->category_id) as $id) {
+                if (Category::where('id', $id)->first() == null) {
+                    return back()->withInput($request->input())->withErrors(['category_id' => 'Použili jste kategorii, která neexistuje.']);
+                }
             }
         }
 
-        $auto_slug = $formFields['title'];
+        $auto_slug = join('-', preg_replace('/[^a-z0-9 -]+/', '', explode(' ', $formFields['title'])));
         $slug = Str::of($auto_slug)->ascii()->lower();
         $i = 2;
         while (Work::where('slug', $slug)->get()->count() !== 0) {
@@ -71,11 +73,13 @@ class WorkController extends Controller
 
         $work = Work::create($formFields);
 
-        foreach (explode(', ', $request->category_id) as $id) {
-            Assignment::create([
-                'work_id' => $work->id,
-                'category_id' => $id,
-            ]);
+        if ($request->category_id != '') {
+            foreach (explode(', ', $request->category_id) as $id) {
+                Assignment::create([
+                    'work_id' => $work->id,
+                    'category_id' => $id,
+                ]);
+            }
         }
 
         return redirect('/')->with('message', 'Titul byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/titul/' . $work->slug);
@@ -119,13 +123,15 @@ class WorkController extends Controller
         ]);
 
         // Check for problems with categories
-        foreach (explode(', ', $request->category_id) as $id) {
-            if (Category::where('id', $id)->first() == null) {
-                return back()->withInput($request->input())->withErrors(['category_id' => 'Použili jste kategorii, která neexistuje.']);
+        if ($request->category_id != '') {
+            foreach (explode(', ', $request->category_id) as $id) {
+                if (Category::where('id', $id)->first() == null) {
+                    return back()->withInput($request->input())->withErrors(['category_id' => 'Použili jste kategorii, která neexistuje.']);
+                }
             }
         }
 
-        $auto_slug = $formFields['title'];
+        $auto_slug = join('-', preg_replace('/[^a-z0-9 -]+/', '', explode(' ', $formFields['title'])));
         $slug = Str::of($auto_slug)->ascii()->lower();
         if (Str::of($slug)->ascii()->lower() != $work->slug) {
             $i = 2;
@@ -142,11 +148,13 @@ class WorkController extends Controller
         Assignment::where('work_id', $work->id)->delete();
 
         // Create new connections to categories
-        foreach (explode(', ', $request->category_id) as $id) {
-            Assignment::create([
-                'work_id' => $work->id,
-                'category_id' => $id,
-            ]);
+        if ($request->category_id != '') {
+            foreach (explode(', ', $request->category_id) as $id) {
+                Assignment::create([
+                    'work_id' => $work->id,
+                    'category_id' => $id,
+                ]);
+            }
         }
 
         return redirect('/titul/' . $work->slug)->with('message', 'Titul byl úspěšně změněn!')->with('color', 'success');

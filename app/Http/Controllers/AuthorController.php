@@ -48,7 +48,7 @@ class AuthorController extends Controller
         ]);
 
         $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
-        $slug = Str::of($auto_slug)->ascii()->lower();
+        $slug = Str::of(preg_replace('/[^a-z0-9 -]+/', '', $auto_slug))->ascii()->lower();
         $i = 2;
         while (Author::where('slug', $slug)->get()->count() !== 0) {
             $slug = $auto_slug . '-' . $i;
@@ -89,7 +89,7 @@ class AuthorController extends Controller
 
         $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
         $slug = $auto_slug;
-        if (Str::of($slug)->ascii()->lower() != $author->slug) {
+        if (Str::of(preg_replace('/[^a-z0-9 -]+/', '', $slug))->ascii()->lower() != $author->slug) {
             $i = 1;
             while (Author::where('slug', $slug)->get()->count() !== 0) {
                 $slug = $auto_slug . '-' . $i;
