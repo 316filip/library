@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\UserHelper;
 use App\Models\User;
+use App\Helpers\UserHelper;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -34,7 +36,9 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if (auth()->attempt($formFields)) {
+        $remember = $request->remember == 'on' ? 1 : 0;
+
+        if (auth()->attempt($formFields, $remember)) {
             $request->session()->regenerate();
 
             return redirect('/')->with('message', 'Byli jste přihlášeni!')->with('color', 'success');
@@ -173,6 +177,59 @@ class UserController extends Controller
 
             return redirect($link)->with('message', 'Oprávnění byla úspěšně použita!')->with('color', 'success');
         }
+    }
+
+    // Show new password request form
+    public function request_password()
+    {
+        return view('users.request');
+    }
+
+    // Send password reset email
+    public function email_password(Request $request)
+    {
+        $formFields = $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $status = Password::sendResetLink($formFields);
+
+        $color = $status == 'passwords.sent' ? 'success' : 'fail';
+
+        return redirect('/prihlaseni')->with('message', __($status))->with('color', $color);
+    }
+
+    // Show password reset form
+    public function reset_password(Request $request)
+    {
+        return view('users.reset', [
+            'token' => $request->token,
+            'email' => $request->email,
+        ]);
+    }
+
+    // Update password data
+    public function update_password(Request $request)
+    {
+        $formFields = $request->validate([
+            'token' => 'required',
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:6', 'confirmed']
+        ]);
+
+        $formFields['password'] = bcrypt($formFields['password']);
+
+        $status = Password::reset($formFields, function (User $user, string $password) {
+            $user->forceFill([
+                'password' => $password,
+            ])->setRememberToken(Str::random(60));
+
+            $user->save();
+        });
+
+        $color = $status == 'passwords.reset' ? 'success' : 'fail';
+
+        return redirect('/prihlaseni')->with('message', __($status))->with('color', $color);
     }
 
     // Delete user
