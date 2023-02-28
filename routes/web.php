@@ -102,6 +102,10 @@ Route::get('/kniha/{book}', function () {
 Route::get('/prihlaseni', [UserController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/authenticate', [UserController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+Route::get('/reset', [UserController::class, 'request_password'])->middleware('guest');
+Route::post('/reset', [UserController::class, 'email_password'])->middleware('guest');
+Route::get('/heslo', [UserController::class, 'reset_password'])->middleware('guest');
+Route::post('/heslo', [UserController::class, 'update_password'])->middleware('guest');
 Route::get('/registrace', [UserController::class, 'create'])->middleware('guest');
 Route::post('/ucet', [UserController::class, 'store'])->middleware('guest');
 Route::get('/ucet', [UserController::class, 'show'])->middleware('auth');

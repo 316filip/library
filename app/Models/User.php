@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Mail\PasswordReset;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -65,5 +67,10 @@ class User extends Authenticatable
         return Attribute::make(
             fn ($value) => ((count($this->bookings) < 5) || $this->librarian),
         );
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to($this->email)->send(new PasswordReset($token, $this->email));
     }
 }

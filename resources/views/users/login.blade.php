@@ -22,6 +22,11 @@
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="mb-3">
+                <input class="p-2 mb-0.5 mr-1 border border-slate-200 rounded-lg" type="checkbox" name="remember"
+                    id="create-user-remember">
+                <label for="create-user-remember">Zapamatovat si mě</label>
+            </div>
             <div class="flex justify-center">
                 <div class="mb-3">
                     <input type="submit"
