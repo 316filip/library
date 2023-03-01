@@ -37,4 +37,5 @@
         </form>
     </div>
     <p class="text-center">Nemáte účet? <a href="/registrace" class="text-yellow-500">Vytvořte si ho!</a></p>
+    <p class="text-center">Zapomenuté heslo? <a href="/reset" class="text-yellow-500">Resetujte ho!</a></p>
 </x-layout>
