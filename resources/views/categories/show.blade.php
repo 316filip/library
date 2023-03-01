@@ -2,7 +2,9 @@
     <h1 class="text-4xl text-center font-bold mb-5">
         {{ $category->name }}
     </h1>
-    <x-Manage type="category" :identifier="[$category->id, $category->slug]"></x-Manage>
+    @lib
+        <x-Manage type="category" :identifier="[$category->id, $category->slug]"></x-Manage>
+    @endlib
     <p class="text-center mb-5">{{ $category->description }}</p>
     <x-Deck type="work">
         @foreach ($assignments as $assignment)
