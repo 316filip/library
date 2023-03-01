@@ -23,8 +23,8 @@
                 <td>
                     <center>
                         <a href="{{ url('/heslo?token=' . $token . '&email=' . $email) }}"
-                            style='display: inline-block; padding: .5rem 1rem; background-color: #facc15; border-radius: .5rem; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); color: black; text-decoration: none;'>Otevírací
-                            doba</a>
+                            style='display: inline-block; padding: .5rem 1rem; background-color: #facc15; border-radius: .5rem; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); color: black; text-decoration: none;'>Resetovat
+                            heslo</a>
                     </center>
                 </td>
             </tr>
