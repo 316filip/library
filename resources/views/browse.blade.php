@@ -1,13 +1,15 @@
 <x-layout>
     @lib
-        <h1 class="text-4xl text-center font-bold mb-5">Aktivní rezervace</h1>
-        <div class="mb-5">
-            <x-Deck type="booking">
-                @foreach ($bookings as $booking)
-                    <x-Card :data=$booking :info="['booking', $loop->index, 'bookings', '']" />
-                @endforeach
-            </x-Deck>
-        </div>
+        @unless(count($bookings) == 0)
+            <h1 class="text-4xl text-center font-bold mb-5">Aktivní rezervace</h1>
+            <div class="mb-5">
+                <x-Deck type="booking">
+                    @foreach ($bookings as $booking)
+                        <x-Card :data=$booking :info="['booking', $loop->index, 'bookings', '']" />
+                    @endforeach
+                </x-Deck>
+            </div>
+        @endunless
     @endlib
 
     <h1 class="text-4xl text-center font-bold mb-5">Knihy</h1>
