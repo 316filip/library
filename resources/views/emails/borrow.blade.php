@@ -17,9 +17,9 @@
             <tr>
                 <td>
                     <p>Dobrý den,<br>právě jsme Vám zapůjčili knihu {{ $booking->book->title }} do
-                        {{ date('d. m. Y', strtotime($booking->book->to)) }}. Prosíme o včasné navrácení knihy. Pokud
-                        Vám jeden měsíc nebude stačit, můžete si po uplynutí poloviny doby Vaší rezervace tuto lhůtu
-                        navýšit o další.</p>
+                        {{ date('d. m. Y', strtotime($booking->to)) }}. Prosíme o
+                        včasné navrácení knihy. Pokud Vám jeden měsíc nebude stačit, můžete si po uplynutí poloviny doby
+                        Vaší rezervace tuto lhůtu navýšit o další.</p>
                 </td>
             </tr>
             <tr>

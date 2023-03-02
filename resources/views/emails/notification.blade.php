@@ -19,7 +19,7 @@
                     <p>
                         Dobrý den,<br>lhůta pro vrácení knihy <a
                             href="{{ url('/kniha/' . $booking->book->work->slug . '/' . $booking->book->id) }}">{{ $booking->book->title }}</a>,
-                        kterou máte zapůjčenou, vyprší {{ date('d. m. Y', strtotime($booking->book->to)) }}. Prosíme o
+                        kterou máte zapůjčenou, vyprší {{ date('d. m. Y', strtotime($booking->to)) }}. Prosíme o
                         včasné navrácení knihy. Pokud jste tak ještě neučinili, můžete si rezervaci jednou prodloužit o
                         další měsíc.
                     </p>
