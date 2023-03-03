@@ -70,10 +70,29 @@
                 placeDropdown{{ $id }}();
             })
 
+        const sameWidth = {
+            name: "sameWidth",
+            enabled: true,
+            phase: "beforeWrite",
+            requires: ["computeStyles"],
+            fn: ({
+                state
+            }) => {
+                state.styles.popper.width = `${state.rects.reference.width}px`;
+            },
+            effect: ({
+                state
+            }) => {
+                state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`;
+            }
+        };
+
         function placeDropdown{{ $id }}() {
             Popper.createPopper(document.querySelector('#form-select-{{ $id }}'), document.querySelector(
                 '#form-select-dropdown-{{ $id }}'), {
                 placement: 'bottom',
+                strategy: 'fixed',
+                modifiers: [sameWidth],
             });
         }
 

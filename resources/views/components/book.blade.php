@@ -30,15 +30,17 @@
 
 @if ($placement == 'show')
     <div class="flex justify-center mb-5">
-        <button class="px-3 py-2 shadow {{ $bookable ? 'bg-sky-100 hover:bg-sky-200' : 'bg-slate-100' }} transition rounded-lg"
+        <button
+            class="px-3 py-2 shadow {{ $bookable ? 'bg-sky-100 hover:bg-sky-200' : 'bg-slate-100' }} transition rounded-lg"
             {{ $bookable ? '' : 'disabled' }} onclick="openBook{{ $book->id }}()">Rezervovat</button>
     </div>
 @endif
 
 <div id="fullscreen-book-{{ $book->id }}" style="display: none"
-    class="fixed top-0 left-0 w-full h-full px-3 backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center overflow-y-auto">
-    <div class="mx-auto w-full max-w-3xl xl:max-w-5xl py-8 px-6 rounded-lg shadow-md bg-slate-50 grid xl:grid-cols-2">
-        <div class="hidden sm:flex justify-center items-center mb-5 xl:mb-0">
+    class="fixed top-0 left-0 w-full h-full px-3 backdrop-blur bg-yellow-400/70 z-50 grid grid-cols-1 place-content-center overflow-y-auto overscroll-contain">
+    <div
+        class="mx-auto w-full max-w-3xl xl:max-w-5xl max-h-[92vh] py-8 px-6 rounded-lg shadow-md bg-slate-50 grid xl:grid-cols-2 overflow-y-auto overscroll-contain">
+        <div class="hidden xl:flex justify-center items-center mb-5 xl:mb-0">
             <div class="h-min">
                 <div class="flex justify-center">
                     @if ($book->image !== null)
