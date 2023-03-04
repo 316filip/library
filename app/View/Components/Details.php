@@ -68,7 +68,7 @@ class Details extends Component
                 'Kód čtenáře' => [$data->code],
                 'Emailová adresa' => [$data->email],
                 'Datum registrace' => [date('d. m. Y', strtotime($data->created_at))],
-                'Aktuální výpůjčky' => [count($data->bookings)],
+                'Otevřené rezervace' => [count($data->bookings)],
                 'Knihovník' => auth()->user()->librarian == 1 ? [$data->librarian == 1 ? 'Ano' : 'Ne'] : [null],
                 'Správce' => auth()->user()->librarian == 1 ? [$data->admin == 1 ? 'Ano' : 'Ne'] : [null],
             ]);
