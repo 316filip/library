@@ -12,7 +12,7 @@ class Select extends Component
      *
      * @return void
      */
-    public $type, $id_value, $name_value, $values, $label, $placeholder, $search, $id;
+    public $type, $id_value, $name_value, $values, $label, $placeholder, $search, $not_found, $id;
     public function __construct($type, $target, $values, $identifier)
     {
         $this->type = $type;
@@ -23,18 +23,22 @@ class Select extends Component
             $this->label = "autor";
             $this->placeholder = "Neznámý autor";
             $this->search = "autory";
+            $this->not_found = "Hledaný autor nebyl nalezen";
         } elseif ($type == "work") {
             $this->label = "titul";
             $this->placeholder = "Bible";
             $this->search = "díla";
+            $this->not_found = "Hledaný titul nebyl nalezen";
         } elseif ($type == "user") {
             $this->label = "rezervovat pro uživatele...";
             $this->placeholder = "Jan Srna";
             $this->search = "uživatele";
+            $this->not_found = "Hledaný uživatel nebyl nalezen";
         } elseif ($type == "category") {
             $this->label = "kategorie";
             $this->placeholder = "Přidat kategorie...";
             $this->search = "kategorie";
+            $this->not_found = "Hledaná kategorie nebyla nalezena";
         }
 
         if ($target !== []) {

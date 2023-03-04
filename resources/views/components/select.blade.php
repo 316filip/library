@@ -50,7 +50,7 @@
                 </div>
                 <div class="grid place-content-center h-full w-full hidden"
                     id="form-select-options-empty-{{ $id }}">
-                    <span>Hledaný {{ $label }} nebyl nalezen</span>
+                    <span>{{ $not_found }}</span>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 placeDropdown{{ $id }}();
             })
 
-        const sameWidth = {
+        sameWidth = {
             name: "sameWidth",
             enabled: true,
             phase: "beforeWrite",
