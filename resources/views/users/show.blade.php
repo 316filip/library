@@ -19,7 +19,7 @@
         </x-Deck>
         {{ $bookings->links() }}
     @else
-        <p>Žádné rezervace k zobrazení</p>
+        <p class="text-slate-500">Žádné rezervace k zobrazení...</p>
     @endunless
 
     <script>

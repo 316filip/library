@@ -21,12 +21,12 @@ class Select extends Component
 
         if ($type == "author") {
             $this->label = "autor";
-            $this->placeholder = "Neznámý autor";
+            $this->placeholder = "Sir Arthur Conan Doyle";
             $this->search = "autory";
             $this->not_found = "Hledaný autor nebyl nalezen";
         } elseif ($type == "work") {
             $this->label = "titul";
-            $this->placeholder = "Bible";
+            $this->placeholder = "Pes baskervillský";
             $this->search = "tituly";
             $this->not_found = "Hledaný titul nebyl nalezen";
         } elseif ($type == "user") {

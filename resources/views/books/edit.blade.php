@@ -8,7 +8,7 @@
                 <label for="edit-book-title" class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Název
                     knihy</label>
                 <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="title"
-                    id="edit-book-title" placeholder="Bible" value="{{ old('title') ?? $book->title }}"
+                    id="edit-book-title" placeholder="Pes baskervillský" value="{{ old('title') ?? $book->title }}"
                     autocomplete="off">
                 @error('title')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -17,8 +17,8 @@
             <div class="mb-3">
                 <label for="edit-book-subtitle" class="block mb-1">Podnázev</label>
                 <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="subtitle"
-                    id="edit-book-subtitle" placeholder="Písmo svaté Starého a Nového zákona"
-                    value="{{ old('subtitle') ?? $book->subtitle }}" autocomplete="off">
+                    id="edit-book-subtitle" placeholder="" value="{{ old('subtitle') ?? $book->subtitle }}"
+                    autocomplete="off">
                 @error('subtitle')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
@@ -42,8 +42,8 @@
                     <label for="edit-work-language"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Jazyk</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="language"
-                        id="edit-work-language" placeholder="Čeština (Český ekumenický překlad)"
-                        value="{{ old('language') ?? $book->language }}" autocomplete="off">
+                        id="edit-work-language" placeholder="Čeština" value="{{ old('language') ?? $book->language }}"
+                        autocomplete="off">
                     @error('language')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -51,8 +51,8 @@
                 <div class="mb-3">
                     <label for="edit-book-translator" class="block mb-1">Překladatel</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="translator"
-                        id="edit-book-translator" placeholder="" value="{{ old('translator') ?? $book->translator }}"
-                        autocomplete="off">
+                        id="edit-book-translator" placeholder="Josef Pachmayer"
+                        value="{{ old('translator') ?? $book->translator }}" autocomplete="off">
                     @error('translator')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -70,7 +70,7 @@
                     <label for="edit-book-length"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Počet stran</label>
                     <input type="number" class="p-2 w-full border border-slate-200 rounded-lg" name="length"
-                        id="edit-book-length" placeholder="1387" min="1"
+                        id="edit-book-length" placeholder="226" min="1"
                         value="{{ old('length') ?? $book->length }}" autocomplete="off">
                     @error('length')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -80,8 +80,8 @@
                     <label for="edit-book-house"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Nakladatelství</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="house"
-                        id="edit-book-house" placeholder="Česká biblická společnost"
-                        value="{{ old('house') ?? $book->house }}" autocomplete="off">
+                        id="edit-book-house" placeholder="Dobrovský" value="{{ old('house') ?? $book->house }}"
+                        autocomplete="off">
                     @error('house')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -90,7 +90,7 @@
                     <label for="edit-book-year"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Rok vydání</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="year"
-                        id="edit-book-year" placeholder="2016" value="{{ old('year') ?? $book->year }}"
+                        id="edit-book-year" placeholder="2014" value="{{ old('year') ?? $book->year }}"
                         autocomplete="off">
                     @error('year')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -108,7 +108,7 @@
                 <div class="mb-3">
                     <label for="edit-book-publication" class="block mb-1">Číslo publikace</label>
                     <input type="number" class="p-2 w-full border border-slate-200 rounded-lg" name="publication"
-                        id="edit-book-publication" placeholder="22" min="1"
+                        id="edit-book-publication" placeholder="1" min="1"
                         value="{{ old('publication') ?? $book->publication }}" autocomplete="off">
                     @error('publication')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -117,7 +117,7 @@
                 <div class="mb-3">
                     <label for="edit-book-ISBN" class="block mb-1">ISBN</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="ISBN"
-                        id="edit-book-ISBN" placeholder="978-80-7545-028-9" value="{{ old('ISBN') ?? $book->ISBN }}"
+                        id="edit-book-ISBN" placeholder="978-80-7390-142-4" value="{{ old('ISBN') ?? $book->ISBN }}"
                         autocomplete="off">
                     @error('ISBN')
                         <p class="text-red-500 text-sm">{{ $message }}</p>

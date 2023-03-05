@@ -7,7 +7,8 @@
                 <label for="create-work-title"
                     class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Název titulu</label>
                 <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="title"
-                    id="create-work-title" placeholder="Bible" value="{{ old('title') }}" autocomplete="off">
+                    id="create-work-title" placeholder="Pes baskervillský" value="{{ old('title') }}"
+                    autocomplete="off">
                 @error('title')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
@@ -23,8 +24,8 @@
             <div class="mb-3">
                 <label for="create-work-original_title" class="block mb-1">Originální název</label>
                 <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="original_title"
-                    id="create-work-original_title" placeholder="τὰ βιβλíα" value="{{ old('original_title') }}"
-                    autocomplete="off">
+                    id="create-work-original_title" placeholder="The Hound of the Baskervilles"
+                    value="{{ old('original_title') }}" autocomplete="off">
                 @error('original_title')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
@@ -53,7 +54,8 @@
                 <div class="mb-3">
                     <label for="create-work-genre" class="block mb-1">Žánr</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="genre"
-                        id="create-work-genre" placeholder="" value="{{ old('genre') }}" autocomplete="off">
+                        id="create-work-genre" placeholder="Detektivní román" value="{{ old('genre') }}"
+                        autocomplete="off">
                     @error('genre')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -78,7 +80,7 @@
                     <label for="create-work-language"
                         class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Jazyk originálu</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="language"
-                        id="create-work-language" placeholder="Hebrejština" value="{{ old('language') }}"
+                        id="create-work-language" placeholder="Angličtina" value="{{ old('language') }}"
                         autocomplete="off">
                     @error('language')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -87,7 +89,7 @@
                 <div class="w-full mb-3">
                     <label for="create-work-year" class="block mb-1">Rok vzniku</label>
                     <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="year"
-                        id="create-work-year" placeholder="" value="{{ old('year') }}" autocomplete="off">
+                        id="create-work-year" placeholder="1902" value="{{ old('year') }}" autocomplete="off">
                     @error('year')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -95,7 +97,7 @@
                 <div class="w-full mb-3">
                     <label for="create-work-number" class="block mb-1">Počet básní/kapitol/dějství</label>
                     <input type="number" class="p-2 w-full border border-slate-200 rounded-lg" name="number"
-                        id="create-work-number" placeholder="" min="1" value="{{ old('number') }}"
+                        id="create-work-number" placeholder="15" min="1" value="{{ old('number') }}"
                         autocomplete="off">
                     @error('number')
                         <p class="text-red-500 text-sm">{{ $message }}</p>

@@ -7,7 +7,7 @@
                 <label for="create-name"
                     class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Název</label>
                 <input type="text" class="p-2 w-full border border-slate-200 rounded-lg" name="name"
-                    id="create-name" placeholder="Pro děti" value="{{ old('name') }}" autocomplete="off">
+                    id="create-name" placeholder="Pro mládež" value="{{ old('name') }}" autocomplete="off">
                 @error('name')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
