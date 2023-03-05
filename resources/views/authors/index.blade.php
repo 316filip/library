@@ -8,6 +8,6 @@
         </x-Deck>
         {{ $authors->appends(request()->input())->links() }}
     @else
-        <p>Naše knihovna je momentálně prázdná</p>
+        <p class="text-center mb-5 text-slate-500">Žádní autoři v knihovně...</p>
     @endunless
 </x-layout>

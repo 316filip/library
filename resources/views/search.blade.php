@@ -15,7 +15,7 @@
             <div class="flex-1">
                 <p class="text-center"><a
                         class="{{ request('in') == 'work' ? 'px-5 py-2 bg-sky-100 rounded-lg shadow-sm' : '' }}"
-                        href="?filter=search&query={{ request('query') }}&in=work&page=1">Díla</a></p>
+                        href="?filter=search&query={{ request('query') }}&in=work&page=1">Tituly</a></p>
             </div>
             <div class="flex-1">
                 <p class="text-center"><a
@@ -49,7 +49,7 @@
             </div>
         @endunless
         @unless(count($results['work']) == 0)
-            <h2 class="text-2xl">Díla</h2>
+            <h2 class="text-2xl">Tituly</h2>
             <div class="py-3">
                 <x-Deck type="work">
                     @foreach ($results['work'] as $work)
@@ -95,12 +95,12 @@
                 count($results['book']) == 0 &&
                 (auth()->check() == true ? count($results['user']) == 0 : true) &&
                 (auth()->check() == true ? count($results['booking']) == 0 : true))
-            <p class="text-center">Nebyly nalezeny žádné výsledky</p>
+            <p class="text-center text-slate-500">Nebyly nalezeny žádné výsledky</p>
         @endif
     @elseif (request('in') == 'author')
         {{-- If only authors are shown --}}
         @if (count($results['author']) == 0)
-            <p class="text-center">Nebyli nalezeni žádní autoři</p>
+            <p class="text-center text-slate-500">Nebyli nalezeni žádní autoři</p>
         @endif
         <x-Deck type="author">
             @foreach ($results['author'] as $author)
@@ -111,7 +111,7 @@
     @elseif (request('in') == 'work')
         {{-- If only works are shown --}}
         @if (count($results['work']) == 0)
-            <p class="text-center">Nebyla nalezena žádná díla</p>
+            <p class="text-center text-slate-500">Nebyla nalezeny žádné tituly</p>
         @endif
         <x-Deck type="work">
             @foreach ($results['work'] as $work)
@@ -122,7 +122,7 @@
     @elseif (request('in') == 'book')
         {{-- If only books are shown --}}
         @if (count($results['book']) == 0)
-            <p class="text-center">Nebyly nalezeny žádné knihy</p>
+            <p class="text-center text-slate-500">Nebyly nalezeny žádné knihy</p>
         @endif
         <x-Deck type="book">
             @foreach ($results['book'] as $book)
@@ -133,7 +133,7 @@
     @elseif (request('in') == 'user')
         {{-- If only users are shown --}}
         @if (count($results['user']) == 0 || !auth()->check())
-            <p class="text-center">Nebyli nalezeni žádní uživatelé</p>
+            <p class="text-center text-slate-500">Nebyli nalezeni žádní uživatelé</p>
         @else
             <x-Deck type="user">
                 @foreach ($results['user'] as $user)
@@ -145,7 +145,7 @@
     @elseif (request('in') == 'booking')
         {{-- If only bookings are shown --}}
         @if (count($results['booking']) == 0 || !auth()->check())
-            <p class="text-center">Nebyly nalezeny žádné rezervace</p>
+            <p class="text-center text-slate-500">Nebyly nalezeny žádné rezervace</p>
         @else
             <x-Deck type="booking">
                 @foreach ($results['booking'] as $booking)

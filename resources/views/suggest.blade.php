@@ -8,6 +8,6 @@
         </x-Deck>
         {{ $suggestions->appends(request()->input())->links() }}
     @else
-        <p>Nemůžeme posoudit, která díla s tímto souvisejí</p>
+        <p>Nemůžeme posoudit, které tituly s tímto souvisejí</p>
     @endunless
 </x-layout>

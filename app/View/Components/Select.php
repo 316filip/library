@@ -27,7 +27,7 @@ class Select extends Component
         } elseif ($type == "work") {
             $this->label = "titul";
             $this->placeholder = "Bible";
-            $this->search = "díla";
+            $this->search = "tituly";
             $this->not_found = "Hledaný titul nebyl nalezen";
         } elseif ($type == "user") {
             $this->label = "rezervovat pro uživatele...";

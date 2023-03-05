@@ -20,7 +20,10 @@ function navbar() {
  * Shows live search results frame
  */
 function showResults() {
-    $("#search-frame").addClass("shadow-lg").addClass("backdrop-blur-xl");
+    $("#search-frame")
+        .addClass("shadow-lg")
+        .addClass("backdrop-blur-xl")
+        .addClass("bg-yellow-100/30");
     $("#search-results").stop().slideDown("fast");
 }
 
@@ -33,6 +36,7 @@ function hideResults() {
             $("#search-frame")
                 .removeClass("shadow-lg")
                 .removeClass("backdrop-blur-xl")
+                .removeClass("bg-yellow-100/30")
                 .removeClass("-top-2");
         });
     }, 100);
@@ -119,7 +123,7 @@ function search() {
             if (result["work"].length !== 0) {
                 // Show results from works table
                 $("#search-results").append(
-                    '<p class="p-2 font-bold text-slate-500">Díla:</p>'
+                    '<p class="p-2 font-bold text-slate-500">Tituly:</p>'
                 );
 
                 $.each(result["work"], function (i, field) {

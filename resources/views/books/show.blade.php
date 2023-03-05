@@ -7,7 +7,7 @@
     @endlib
     <x-Book :data=$book placement="show" />
     <div>
-        <x-Details type="work" :data='$book->work' placement="away">Informace o díle
+        <x-Details type="work" :data='$book->work' placement="away">Informace o titulu
         </x-Details>
         <x-Details type="book" :data=$book placement="home">Informace o knize</x-Details>
     </div>

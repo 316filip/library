@@ -1,5 +1,15 @@
 <x-layout>
     @lib
+        <div class="flex justify-center text-center">
+            <div
+                class="w-full max-w-xl border border-slate-200 bg-slate-50 rounded-lg p-3 flex gap-4 justify-center shadow-inner mb-5">
+                <a class="flex-1 hover:text-yellow-400 transition" href="/autor/tvorba">Přidat autora</a>
+                <a class="flex-1 hover:text-yellow-400 transition" href="/titul/tvorba">Přidat titul</a>
+                <a class="flex-1 hover:text-yellow-400 transition" href="/kniha/tvorba">Přidat knihu</a>
+                <a class="flex-1 hover:text-yellow-400 transition" href="/kategorie/tvorba">Přidat kategorii</a>
+            </div>
+        </div>
+
         @unless(count($bookings) == 0)
             <h1 class="text-4xl text-center font-bold mb-5">Aktivní rezervace</h1>
             <div class="mb-5">
@@ -12,7 +22,7 @@
         @endunless
     @endlib
 
-    <h1 class="text-4xl text-center font-bold mb-5">Knihy</h1>
+    <h1 class="text-4xl text-center font-bold mb-5">Tituly</h1>
     @unless(count($works) == 0)
         <h2 class="text-2xl font-bold mb-5">Novinky</h2>
         <div class="mb-5">
@@ -23,7 +33,7 @@
             </x-Deck>
         </div>
     @else
-        <p>Žádné knihy v knihovně</p>
+        <p class="text-center mb-5 text-slate-500">Knihovna je prázdná...</p>
     @endunless
 
     @foreach ($suggestions as $suggestion)
@@ -61,6 +71,6 @@
             </x-Deck>
         </div>
     @else
-        <p>Žádní autoři v knihovně</p>
+        <p class="text-center mb-5 text-slate-500">Žádní autoři v knihovně...</p>
     @endunless
 </x-layout>
