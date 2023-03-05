@@ -12,4 +12,7 @@
         @endforeach
     </x-Deck>
     {{ $assignments->appends(request()->input())->links() }}
+    @if (count($assignments) == 0)
+        <p class="text-center mb-5 text-slate-500">Žádný titul nemá tuto kategorii...</p>
+    @endif
 </x-layout>
