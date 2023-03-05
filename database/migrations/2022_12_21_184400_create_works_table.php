@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('original_title')->nullable();
-            $table->year('year')->nullable();
+            $table->integer('year')->nullable();
             $table->longText('description')->nullable();
             $table->string('subtitle')->nullable();
             $table->string('language');

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('illustrator')->nullable();
             $table->longText('description')->nullable();
             $table->string('house');
-            $table->year('year');
+            $table->integer('year');
             $table->integer('publication')->nullable();
             $table->string('place')->nullable();
             $table->string('image')->nullable();
