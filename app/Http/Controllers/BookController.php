@@ -51,7 +51,7 @@ class BookController extends Controller
 
         $book = Book::create($formFields);
 
-        return redirect('/')->with('message', 'Kniha byla úspěšně přidána do knihovny!')->with('color', 'success')->with('link', '/kniha/' . $book->work->slug . '/' . $book->id);
+        return redirect('/knihovna')->with('message', 'Kniha byla úspěšně přidána do knihovny!')->with('color', 'success')->with('link', '/kniha/' . $book->work->slug . '/' . $book->id);
     }
 
     // Show edit form
@@ -99,6 +99,6 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect('/')->with('message', 'Kniha byla úspěšně odstraněna!')->with('color', 'success');
+        return redirect('/knihovna')->with('message', 'Kniha byla úspěšně odstraněna!')->with('color', 'success');
     }
 }

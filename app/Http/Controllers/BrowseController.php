@@ -28,11 +28,11 @@ class BrowseController extends Controller
                 ]);
             } elseif (request('filter') == 'new') {
                 return view('works.index', [
-                    'works' => Work::orderBy('year', 'desc')->orderBy('created_at', 'desc')->paginate(6),
+                    'works' => Work::orderBy('year', 'desc')->orderBy('created_at', 'desc')->paginate(12),
                 ]);
             } elseif (request('filter') == 'young') {
                 return view('authors.index', [
-                    'authors' => Author::where('id', '<>', 1)->orderBy('birth_date', 'desc')->paginate(6),
+                    'authors' => Author::where('id', '<>', 1)->orderBy('birth_date', 'desc')->paginate(12),
                 ]);
             } elseif (request('filter') == 'read') {
                 $work = WorkHelper::find(request('query'));
@@ -59,11 +59,11 @@ class BrowseController extends Controller
 
                 return view('suggest', [
                     'work' => $work,
-                    'suggestions' => $suggestions->paginate(6),
+                    'suggestions' => $suggestions->paginate(12),
                 ]);
             } elseif (request('filter') == 'bookings' && auth()->check() && auth()->user()->librarian) {
                 return view('bookings.index', [
-                    'bookings' => Booking::where('borrowed', 1)->where('returned', 0)->orderBy('to')->paginate(6),
+                    'bookings' => Booking::where('borrowed', 1)->where('returned', 0)->orderBy('to')->paginate(12),
                 ]);
             } else {
                 abort(404);
@@ -123,7 +123,7 @@ class BrowseController extends Controller
             'works' => Work::orderByDesc('year')->limit(8)->get(),
             'suggestions' => $suggestions,
             'categories' => $categories,
-            'authors' => Author::orderByDesc('birth_date')->limit(8)->get(),
+            'authors' => Author::where('id', '<>', 1)->orderByDesc('birth_date')->limit(8)->get(),
         ]);
     }
 }

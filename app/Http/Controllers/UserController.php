@@ -41,7 +41,7 @@ class UserController extends Controller
         if (auth()->attempt($formFields, $remember)) {
             $request->session()->regenerate();
 
-            return redirect('/')->with('message', 'Byli jste přihlášeni!')->with('color', 'success');
+            return redirect('/knihovna')->with('message', 'Byli jste přihlášeni!')->with('color', 'success');
         }
 
         return back()->withErrors(['email' => 'Chybně jste zadali email nebo heslo.']);

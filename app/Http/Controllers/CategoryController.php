@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
         $category = Category::create($formFields);
 
-        return redirect('/')->with('message', 'Kategorie byla úspěšně vytvořena!')->with('color', 'success')->with('link', '/knihovna?filter=category&query=' . $category->slug);
+        return redirect('/knihovna')->with('message', 'Kategorie byla úspěšně vytvořena!')->with('color', 'success')->with('link', '/knihovna?filter=category&query=' . $category->slug);
     }
 
     // Show edit form
@@ -78,6 +78,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect('/')->with('message', 'Kategorie byla úspěšně odstraněna!')->with('color', 'success');
+        return redirect('/knihovna')->with('message', 'Kategorie byla úspěšně odstraněna!')->with('color', 'success');
     }
 }

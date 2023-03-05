@@ -103,7 +103,7 @@ class SearchHelper
         }
         if (request('in') == 'author') {
             return [
-                'author' => $author->sortByDesc('similarity')->values()->paginate(6),
+                'author' => $author->sortByDesc('similarity')->values()->paginate(12),
                 'work' => [],
                 'book' => [],
                 'user' => [],
@@ -113,7 +113,7 @@ class SearchHelper
         if (request('in') == 'work') {
             return [
                 'author' => [],
-                'work' => $work->sortByDesc('similarity')->values()->paginate(6),
+                'work' => $work->sortByDesc('similarity')->values()->paginate(12),
                 'book' => [],
                 'user' => [],
                 'booking' => [],
@@ -123,7 +123,7 @@ class SearchHelper
             return [
                 'author' => [],
                 'work' => [],
-                'book' => $book->sortByDesc('similarity')->values()->paginate(6),
+                'book' => $book->sortByDesc('similarity')->values()->paginate(12),
                 'user' => [],
                 'booking' => [],
             ];
@@ -133,7 +133,7 @@ class SearchHelper
                 'author' => [],
                 'work' => [],
                 'book' => [],
-                'user' => $user->sortByDesc('similarity')->values()->paginate(6),
+                'user' => $user->sortByDesc('similarity')->values()->paginate(12),
                 'booking' => [],
             ];
         }
@@ -143,7 +143,7 @@ class SearchHelper
                 'work' => [],
                 'book' => [],
                 'user' => [],
-                'booking' => $booking->sortByDesc('similarity')->values()->paginate(6),
+                'booking' => $booking->sortByDesc('similarity')->values()->paginate(12),
             ];
         }
     }

@@ -62,8 +62,8 @@ class WorkController extends Controller
             }
         }
 
-        $auto_slug = join('-', preg_replace('/[^a-z0-9 -]+/', '', explode(' ', $formFields['title'])));
-        $slug = Str::of($auto_slug)->ascii()->lower();
+        $auto_slug = join('-', explode(' ', $formFields['title']));
+        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
         $i = 2;
         while (Work::where('slug', $slug)->get()->count() !== 0) {
             $slug = $auto_slug . '-' . $i;
@@ -82,7 +82,7 @@ class WorkController extends Controller
             }
         }
 
-        return redirect('/')->with('message', 'Titul byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/titul/' . $work->slug);
+        return redirect('/knihovna')->with('message', 'Titul byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/titul/' . $work->slug);
     }
 
     // Show edit form
@@ -131,8 +131,8 @@ class WorkController extends Controller
             }
         }
 
-        $auto_slug = join('-', preg_replace('/[^a-z0-9 -]+/', '', explode(' ', $formFields['title'])));
-        $slug = Str::of($auto_slug)->ascii()->lower();
+        $auto_slug = join('-', explode(' ', $formFields['title']));
+        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
         if (Str::of($slug)->ascii()->lower() != $work->slug) {
             $i = 2;
             while (Work::where('slug', $slug)->get()->count() !== 0) {
@@ -164,6 +164,6 @@ class WorkController extends Controller
     public function destroy(Work $work)
     {
         $work->delete();
-        return redirect('/')->with('message', 'Titul byl úspěšně odstraněn!')->with('color', 'success');
+        return redirect('/knihovna')->with('message', 'Titul byl úspěšně odstraněn!')->with('color', 'success');
     }
 }

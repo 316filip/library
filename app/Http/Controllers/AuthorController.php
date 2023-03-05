@@ -48,13 +48,13 @@ class AuthorController extends Controller
         ]);
 
         $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
-        $slug = Str::of(preg_replace('/[^a-z0-9 -]+/', '', $auto_slug))->ascii()->lower();
+        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
         $i = 2;
         while (Author::where('slug', $slug)->get()->count() !== 0) {
-            $slug = $auto_slug . '-' . $i;
+            $slug .= '-' . $i;
             $i += 1;
         }
-        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+        $formFields['slug'] = $slug;
 
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('authors', 'public');
@@ -62,7 +62,7 @@ class AuthorController extends Controller
 
         $author = Author::create($formFields);
 
-        return redirect('/')->with('message', 'Autor byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/autor/' . $author->slug);
+        return redirect('/knihovna')->with('message', 'Autor byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/autor/' . $author->slug);
     }
 
     // Show edit form
@@ -88,15 +88,15 @@ class AuthorController extends Controller
         ]);
 
         $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
-        $slug = $auto_slug;
-        if (Str::of(preg_replace('/[^a-z0-9 -]+/', '', $slug))->ascii()->lower() != $author->slug) {
+        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
+        if ($slug != $author->slug) {
             $i = 1;
             while (Author::where('slug', $slug)->get()->count() !== 0) {
                 $slug = $auto_slug . '-' . $i;
                 $i += 1;
             }
         }
-        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+        $formFields['slug'] = $slug;
 
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('authors', 'public');
@@ -113,6 +113,6 @@ class AuthorController extends Controller
     public function destroy(Author $author)
     {
         $author->delete();
-        return redirect('/')->with('message', 'Profil autora byl úspěšně odstraněn!')->with('color', 'success');
+        return redirect('/knihovna')->with('message', 'Profil autora byl úspěšně odstraněn!')->with('color', 'success');
     }
 }
