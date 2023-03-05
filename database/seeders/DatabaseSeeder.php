@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Create 'unknown author'
         \App\Models\Author::factory(1)->create([
             'name_prefix' => '',
             'first_name' => 'Neznámý',
@@ -26,17 +27,13 @@ class DatabaseSeeder extends Seeder
             'description' => ''
         ]);
 
-        \App\Models\User::factory(10)->create();
-        \App\Models\Author::factory(10)->create();
-        \App\Models\Work::factory(10)->create();
-        \App\Models\Book::factory(10)->create();
-        \App\Models\Booking::factory(10)->create();
-        \App\Models\Category::factory(10)->create();
-        \App\Models\Assignment::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Uncomment these for testing purposes
+        // \App\Models\User::factory(10)->create();
+        // \App\Models\Author::factory(10)->create();
+        // \App\Models\Work::factory(10)->create();
+        // \App\Models\Book::factory(10)->create();
+        // \App\Models\Booking::factory(10)->create();
+        // \App\Models\Category::factory(10)->create();
+        // \App\Models\Assignment::factory(10)->create();
     }
 }
