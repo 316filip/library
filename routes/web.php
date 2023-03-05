@@ -1,15 +1,15 @@
 <?php
 
+use App\Helpers\SearchHelper;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SearchController;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,32 +35,22 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('/kontakt', function () {
-    $mon = explode(',', $_ENV['LIBRARY_MON']);
-    $tue = explode(',', $_ENV['LIBRARY_TUE']);
-    $wed = explode(',', $_ENV['LIBRARY_WED']);
-    $thu = explode(',', $_ENV['LIBRARY_THU']);
-    $fri = explode(',', $_ENV['LIBRARY_FRI']);
-    $sat = explode(',', $_ENV['LIBRARY_SAT']);
-    $sun = explode(',', $_ENV['LIBRARY_SUN']);
-    return view('contact', [
-        'mon' => $mon[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $mon[0])) . (isset($mon[1]) ? (' a od ' . join(' do ', explode('-', $mon[1]))) : '')),
-        'tue' => $tue[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $tue[0])) . (isset($tue[1]) ? (' a od ' . join(' do ', explode('-', $tue[1]))) : '')),
-        'wed' => $wed[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $wed[0])) . (isset($wed[1]) ? (' a od ' . join(' do ', explode('-', $wed[1]))) : '')),
-        'thu' => $thu[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $thu[0])) . (isset($thu[1]) ? (' a od ' . join(' do ', explode('-', $thu[1]))) : '')),
-        'fri' => $fri[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $fri[0])) . (isset($fri[1]) ? (' a od ' . join(' do ', explode('-', $fri[1]))) : '')),
-        'sat' => $sat[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $sat[0])) . (isset($sat[1]) ? (' a od ' . join(' do ', explode('-', $sat[1]))) : '')),
-        'sun' => $sun[0] == 'false' ? 'Zavřeno' : ('Od ' . join(' do ', explode('-', $sun[0])) . (isset($sun[1]) ? (' a od ' . join(' do ', explode('-', $sun[1]))) : '')),
-    ]);
-});
-
-// CRON route for some hosting services
-Route::get('/work', function () {
-    Artisan::call('queue:work', ['--stop-when-empty' => true]);
-});
-
 // BROWSE ROUTE
 Route::get('/knihovna', [BrowseController::class, 'browse']);
+
+// CONTACT ROUTE
+Route::get('/kontakt', function () {
+    // Passes opening hours from .ENV file
+    return view('contact', [
+        'mon' => explode(',', $_ENV['LIBRARY_MON']),
+        'tue' => explode(',', $_ENV['LIBRARY_TUE']),
+        'wed' => explode(',', $_ENV['LIBRARY_WED']),
+        'thu' => explode(',', $_ENV['LIBRARY_THU']),
+        'fri' => explode(',', $_ENV['LIBRARY_FRI']),
+        'sat' => explode(',', $_ENV['LIBRARY_SAT']),
+        'sun' => explode(',', $_ENV['LIBRARY_SUN']),
+    ]);
+});
 
 // AUTHOR ROUTES
 Route::get('/autor', function () {
@@ -134,5 +124,12 @@ Route::get('/kategorie/{category}', [CategoryController::class, 'show']);
 Route::put('/kategorie/{category}', [CategoryController::class, 'update'])->middleware('lib');
 Route::delete('/kategorie/{category}', [CategoryController::class, 'destroy'])->middleware('lib');
 
-// SEARCH ROUTES
-Route::get('/search', [SearchController::class, 'quick']);
+// SEARCH ROUTE
+Route::get('/search', function () {
+    return SearchHelper::search();
+});
+
+// CRON route for some hosting services
+Route::get('/work', function () {
+    Artisan::call('queue:work', ['--stop-when-empty' => true]);
+});
