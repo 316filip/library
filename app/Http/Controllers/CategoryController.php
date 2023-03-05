@@ -31,8 +31,8 @@ class CategoryController extends Controller
             'description' => 'nullable',
         ]);
 
-        $auto_slug = join('-', preg_replace('/[^a-z0-9 -]+/', '', explode(' ', $formFields['name'])));
-        $slug = Str::of($auto_slug)->ascii()->lower();
+        $auto_slug = join('-', explode(' ', $formFields['name']));
+        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
         if (Category::where('slug', $slug)->get()->count() !== 0) {
             return back()->with('message', 'Podobná kategorie už existuje!')->with('color', 'fail');
         }
@@ -60,8 +60,8 @@ class CategoryController extends Controller
             'description' => 'nullable',
         ]);
 
-        $auto_slug = join('-', preg_replace('/[^a-z0-9 -]+/', '', explode(' ', $formFields['name'])));
-        $slug = Str::of($auto_slug)->ascii()->lower();
+        $auto_slug = join('-', explode(' ', $formFields['name']));
+        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
         if ($slug != $category->slug) {
             if (Category::where('slug', $slug)->get()->count() !== 0) {
                 return back()->with('message', 'Podobná kategorie už existuje!')->with('color', 'fail');
