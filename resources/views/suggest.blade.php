@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Podobné {{ $work->title }}">
     <h1 class="text-4xl text-center font-bold mb-5">Protože jste četli {{ $work->title }}</h1>
     @unless(count($suggestions) == 0)
         <x-Deck type="work">
@@ -10,4 +10,4 @@
     @else
         <p>Nemůžeme posoudit, které tituly s tímto souvisejí</p>
     @endunless
-</x-layout>
+</x-Layout>

@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="{{ auth()->user()->librarian && $user->name !== auth()->user()->name ? $user->name : 'Můj účet' }}">
     <h1 class="text-4xl text-center font-bold mb-5">
         {{ $user->name }}
     </h1>
@@ -27,4 +27,4 @@
             window.location = "#bookings";
         @endunless
     </script>
-</x-layout>
+</x-Layout>

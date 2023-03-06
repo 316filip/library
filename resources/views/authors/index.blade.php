@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Nejmladší autoři">
     <h1 class="text-4xl text-center font-bold mb-5">Nejmladší autoři</h1>
     @unless(count($authors) == 0)
         <x-Deck type="work">
@@ -10,4 +10,4 @@
     @else
         <p class="text-center mb-5 text-slate-500">Žádní autoři v knihovně...</p>
     @endunless
-</x-layout>
+</x-Layout>

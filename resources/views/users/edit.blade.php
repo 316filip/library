@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Úpravy účtu">
     <h1 class="text-4xl text-center font-bold mb-5">Úpravy účtu</h1>
     <h2 class="text-2xl text-center font-bold my-3">Změna údajů</h2>
     <div class="flex justify-center">
@@ -154,4 +154,4 @@
             });
         </script>
     @endadmin
-</x-layout>
+</x-Layout>

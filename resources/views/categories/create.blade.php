@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Přidat kategorii">
     <h1 class="text-4xl text-center font-bold mb-5">Přidat kategorii</h1>
     <div class="flex justify-center">
         <form method="POST" action="/kategorie" class="w-full max-w-3xl">
@@ -29,4 +29,4 @@
             </div>
         </form>
     </div>
-</x-layout>
+</x-Layout>

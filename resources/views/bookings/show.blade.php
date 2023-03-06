@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Rezervace knihy {{ $booking->book->title }}">
     <h1 class="text-4xl text-center font-bold mb-5">Rezervace #{{ $booking->code }}</h1>
     <div class="flex justify-center mb-5">
         <div class="flex gap-3 items-center">
@@ -39,4 +39,4 @@
             <x-Details type="book" :data="$booking->book" placement="away">{{ $booking->book->title }}</x-Details>
         </div>
     </div>
-</x-layout>
+</x-Layout>

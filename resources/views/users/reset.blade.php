@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Tvorba nového hesla">
     <h1 class="text-4xl text-center font-bold mb-5">Tvorba nového hesla</h1>
     <div class="flex justify-center">
         <form method="POST" action="/heslo" class="w-full max-w-3xl">
@@ -34,4 +34,4 @@
         </form>
     </div>
     <p class="text-center">Vzpomněli jste si? <a href="/prihlaseni" class="text-yellow-500">Přihlašte se!</a></p>
-</x-layout>
+</x-Layout>

@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Domů">
     <div class="h-80 mb-8">
         <div class="absolute w-full h-80 left-0">
             <div
@@ -58,4 +58,4 @@
             $('#faq' + num + '-toggle').toggleClass('rotate-90');
         }
     </script>
-</x-layout>
+</x-Layout>

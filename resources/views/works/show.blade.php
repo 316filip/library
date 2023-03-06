@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="{{ $work->title }}">
     <h1 class="text-4xl text-center font-bold mb-5">{{ $work->title }}</h1>
     <p class="text-center text-xl mb-5">{{ $work->subtitle }}</p>
     @lib
@@ -15,4 +15,4 @@
     @else
         <p>Nemáme žádná vydání</p>
     @endunless
-</x-layout>
+</x-Layout>

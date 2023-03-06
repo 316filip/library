@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Aktivní rezervace">
     <h1 class="text-4xl text-center font-bold mb-5">Aktivní rezervace</h1>
     @unless(count($bookings) == 0)
         <x-Deck type="booking">
@@ -10,4 +10,4 @@
     @else
         <p>V tuto chvíli nemá nikdo vypůjčenu žádnou knihu</p>
     @endunless
-</x-layout>
+</x-Layout>

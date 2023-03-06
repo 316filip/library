@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Reset hesla">
     <h1 class="text-4xl text-center font-bold mb-5">Reset hesla</h1>
     <div class="flex justify-center">
         <form method="POST" action="/reset" class="w-full max-w-3xl">
@@ -23,4 +23,4 @@
         </form>
     </div>
     <p class="text-center">Vzpomněli jste si? <a href="/prihlaseni" class="text-yellow-500">Přihlašte se!</a></p>
-</x-layout>
+</x-Layout>

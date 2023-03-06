@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Přidat titul">
     <h1 class="text-4xl text-center font-bold mb-5">Přidat titul</h1>
     <div class="flex justify-center">
         <form method="POST" action="/titul" class="w-full max-w-3xl">
@@ -114,4 +114,4 @@
             </div>
         </form>
     </div>
-</x-layout>
+</x-Layout>

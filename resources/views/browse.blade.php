@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Procházet">
     @lib
         <div class="flex justify-center text-center">
             <div
@@ -73,4 +73,4 @@
     @else
         <p class="text-center mb-5 text-slate-500">Žádní autoři v knihovně...</p>
     @endunless
-</x-layout>
+</x-Layout>

@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Registrace">
     <h1 class="text-4xl text-center font-bold mb-5">Registrace</h1>
     <div class="flex justify-center">
         <form method="POST" action="/ucet" class="w-full max-w-3xl">
@@ -64,4 +64,4 @@
         </form>
     </div>
     <p class="text-center">Už máte účet? <a href="/prihlaseni" class="text-yellow-500">Přihlašte se!</a></p>
-</x-layout>
+</x-Layout>

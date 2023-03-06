@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="{{ $author->name }}">
     <x-Image type="author" :data=$author placement="show" />
     <h1 class="text-4xl text-center font-bold mb-5">
         {{ $author->name }}
@@ -20,4 +20,4 @@
     @else
         <p class="mt-5">Nemáme žádné tituly od tohoto autora</p>
     @endunless
-</x-layout>
+</x-Layout>

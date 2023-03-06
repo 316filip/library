@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Upravit autora">
     <h1 class="text-4xl text-center font-bold mb-5">Upravit autora</h1>
     <div class="flex justify-center">
         <form method="POST" action="/autor/{{ $author->id }}" enctype="multipart/form-data" class="w-full max-w-3xl">
@@ -145,4 +145,4 @@
             preview($('#edit-author-image'));
         }
     </script>
-</x-layout>
+</x-Layout>

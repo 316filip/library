@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Hledat">
     <h1 class="text-4xl text-center font-bold mb-5">Výsledky hledání</h1>
     <div class="overflow-x-auto">
         <div class="flex gap-8 py-2 mb-3 overflow-visible">
@@ -155,4 +155,4 @@
             {{ $results['booking']->appends(request()->input())->links() }}
         @endif
     @endif
-</x-layout>
+</x-Layout>

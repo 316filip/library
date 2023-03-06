@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Kontakt">
     <h1 class="text-4xl text-center font-bold mb-5">Kontakt</h1>
     <div class="grid gap-2 text-center mb-5">
         <p><i class="fa-solid fa-location-dot"></i> <a href="https://mapy.cz/s/holuceture" target="_blank"
@@ -45,4 +45,4 @@
             </table>
         </div>
     </div>
-</x-layout>
+</x-Layout>

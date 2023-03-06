@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Přidat knihu">
     <h1 class="text-4xl text-center font-bold mb-5">Přidat knihu</h1>
     <div class="flex justify-center">
         <form method="POST" action="/kniha" enctype="multipart/form-data" class="w-full max-w-3xl">
@@ -175,4 +175,4 @@
             preview($('#create-book-image'));
         }
     </script>
-</x-layout>
+</x-Layout>

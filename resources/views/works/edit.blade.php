@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Upravit titul {{ $work->title }}">
     <h1 class="text-4xl text-center font-bold mb-5">Upravit titul</h1>
     <div class="flex justify-center">
         <form method="POST" action="/titul/{{ $work->id }}" class="w-full max-w-3xl">
@@ -122,4 +122,4 @@
             </div>
         </form>
     </div>
-</x-layout>
+</x-Layout>

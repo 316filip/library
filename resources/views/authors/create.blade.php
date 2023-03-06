@@ -1,4 +1,4 @@
-<x-layout>
+<x-Layout heading="Přidat autora">
     <h1 class="text-4xl text-center font-bold mb-5">Přidat autora</h1>
     <div class="flex justify-center">
         <form method="POST" action="/autor" enctype="multipart/form-data" class="w-full max-w-3xl">
@@ -130,4 +130,4 @@
             preview($('#create-author-image'));
         }
     </script>
-</x-layout>
+</x-Layout>
