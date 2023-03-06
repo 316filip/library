@@ -35,11 +35,13 @@ class BrowseController extends Controller
                     'authors' => Author::where('id', '<>', 1)->orderBy('birth_date', 'desc')->paginate(12),
                 ]);
             } elseif (request('filter') == 'read') {
+                // Suggest works that have common categories with given book
                 $work = WorkHelper::find(request('query'));
                 $suggestions = collect([]);
                 $added = [$work->id];
                 $assignments = $work->assignments;
                 $categories = [];
+                // Get all assignments with common category IDs
                 foreach ($assignments as $assignment) {
                     array_push($categories, $assignment->category->id);
                 }
@@ -51,7 +53,13 @@ class BrowseController extends Controller
                             array_push($id, $assignment->category_id);
                         }
                         if (count(array_intersect($categories, $id)) > 2) {
-                            $suggestions->push($result->work);
+                            if ($result->work->author->id == $work->author->id) {
+                                // If the book has the same author, put it to the beginning
+                                $suggestions->prepend($result->work);
+                            } else {
+                                // If the book has different author, put it to the end
+                                $suggestions->push($result->work);
+                            }
                             array_push($added, $result->work->id);
                         }
                     }
@@ -75,14 +83,17 @@ class BrowseController extends Controller
             $bookings = Booking::where('borrowed', 1)->where('returned', 0)->orderBy('to')->limit(8)->get();
         }
 
+        // Suggest works that have common categories with recently borrowed books
         $suggestions = collect([]);
         if (auth()->check()) {
+            // Get latest bookings
             $latest = Booking::where('user_id', auth()->user()->id)->where('borrowed', 1)->latest()->limit(2)->get();
             foreach ($latest as $booking) {
                 $row = collect([]);
                 $added = [$booking->book->work->id];
                 $assignments = $booking->book->work->assignments;
                 $categories = [];
+                // Get all assignments with common category IDs
                 foreach ($assignments as $assignment) {
                     array_push($categories, $assignment->category->id);
                 }
@@ -94,7 +105,13 @@ class BrowseController extends Controller
                             array_push($id, $assignment->category_id);
                         }
                         if (count(array_intersect($categories, $id)) > 2) {
-                            $row->push($result->work);
+                            if ($result->work->author->id == $booking->book->work->author->id) {
+                                // If the book has the same author, put it to the beginning
+                                $row->prepend($result->work);
+                            } else {
+                                // If the book has different author, put it to the end
+                                $row->push($result->work);
+                            }
                             array_push($added, $result->work->id);
                             if (count($added) > 8) {
                                 continue;
