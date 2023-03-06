@@ -156,7 +156,7 @@ function search() {
                             '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition flex items-center gap-2">' +
                             (field["image"] == null
                                 ? ""
-                                : '<img class="max-h-10" src="/img/' +
+                                : '<img class="max-h-10 rounded" src="/img/' +
                                   field["image"] +
                                   '" alt="">') +
                             field["title"] +
