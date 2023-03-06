@@ -153,7 +153,12 @@ function search() {
                             field["work"]["slug"] +
                             "/" +
                             field["id"] +
-                            '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition">' +
+                            '"><p class="p-2 rounded-lg hover:bg-yellow-200/80 transition flex items-center gap-2">' +
+                            (field["image"] == null
+                                ? ""
+                                : '<img class="max-h-10" src="/img/' +
+                                  field["image"] +
+                                  '" alt="">') +
                             field["title"] +
                             "</p></a>"
                     );
