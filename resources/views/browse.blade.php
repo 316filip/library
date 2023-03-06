@@ -52,7 +52,7 @@
             <h2 class="text-2xl font-bold mb-5">{{ $category->name }}</h2>
             <div class="mb-5">
                 <x-Deck type="work">
-                    @foreach ($category->assignments->take(8) as $assignment)
+                    @foreach ($category->assignments->shuffle()->take(8) as $assignment)
                         <x-Card :data="$assignment->work" :info="['work', $loop->index, 'category', $category->slug]" />
                     @endforeach
                 </x-Deck>
