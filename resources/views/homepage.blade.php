@@ -12,7 +12,7 @@
     </div>
     <div>
         <h1 class="text-4xl text-center font-bold mb-5">Vítejte!</h1>
-        <p class="text-center mb-5">Vytvořte si účet v naší knihovně a otevřte si dveře do bezplatné knihony plné titulů,
+        <p class="text-center mb-5">Vytvořte si účet v naší knihovně a otevřete si dveře do bezplatné knihovny plné titulů,
             které Vás uchvátí.</p>
         <p class="text-center py-2 mb-5">
             <a href="/knihovna"
