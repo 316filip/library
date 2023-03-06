@@ -78,6 +78,7 @@
             <div class="mb-3">
                 <x-Select type="category" :target=$target :values=$categories identifier="category">
                 </x-Select>
+                <p class="text-slate-500 text-sm">Vyberte pokud možno alespoň tři kategorie.</p>
                 @error('category_id')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
