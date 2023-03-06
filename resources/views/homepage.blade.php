@@ -15,7 +15,7 @@
         <p class="text-center mb-5">Vytvořte si účet v naší knihovně a otevřte si dveře do bezplatné knihony plné titulů,
             které Vás uchvátí.</p>
         <p class="text-center py-2 mb-5">
-            <a href="#"
+            <a href="/knihovna"
                 class="px-3 py-2 shadow bg-yellow-400 hover:bg-amber-400 transition rounded-lg">Procházet</a>
         </p>
         <p class="text-center mb-5">Pokud hledáte něco konkrétního, můžete to zkusit vyhledat.</p>
