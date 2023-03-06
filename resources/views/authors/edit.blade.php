@@ -68,7 +68,7 @@
                 <div class="mb-3">
                     <label for="edit-author-birth_date" class="block mb-1">Datum narození</label>
                     <input type="date" class="p-2 w-full border border-slate-200 rounded-lg" name="birth_date"
-                        id="edit-author-birth_date" value="{{ $birth_date }}" autocomplete="off">
+                        id="edit-author-birth_date" value="{{ $birth_date }}" autocomplete="off" min="0001-01-01">
                     @error('bith_date')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -76,7 +76,7 @@
                 <div class="mb-3">
                     <label for="edit-author-death_date" class="block mb-1">Datum úmrtí</label>
                     <input type="date" class="p-2 w-full border border-slate-200 rounded-lg" name="death_date"
-                        id="edit-author-death_date" value="{{ $death_date }}" autocomplete="off">
+                        id="edit-author-death_date" value="{{ $death_date }}" autocomplete="off" min="0001-01-01">
                     @error('death_date')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror

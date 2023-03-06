@@ -57,7 +57,7 @@
                     <label for="create-author-birth_date" class="block mb-1">Datum narození</label>
                     <input type="date" class="p-2 w-full border border-slate-200 rounded-lg" name="birth_date"
                         id="create-author-birth_date" placeholder="22. 05. 1859" value="{{ old('bith_date') }}"
-                        autocomplete="off">
+                        autocomplete="off" min="0001-01-01">
                     @error('bith_date')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -66,7 +66,7 @@
                     <label for="create-author-death_date" class="block mb-1">Datum úmrtí</label>
                     <input type="date" class="p-2 w-full border border-slate-200 rounded-lg" name="death_date"
                         id="create-author-death_date" placeholder="07. 06. 1930" value="{{ old('death_date') }}"
-                        autocomplete="off">
+                        autocomplete="off" min="0001-01-01">
                     @error('death_date')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
