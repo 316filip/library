@@ -37,7 +37,7 @@
             @if ($type == 'work' && count($values->assignments) !== 0)
                 <tr>
                     <td class="align-top">Kategorie:</td>
-                    <td>
+                    <td class="flex flex-wrap gap-1">
                         @foreach ($values->assignments as $assignment)
                             <a href="/knihovna?filter=category&query={{ $assignment->category->slug }}"
                                 class="px-4 py-1 rounded-full bg-yellow-400">{{ $assignment->category->name }}</a>
