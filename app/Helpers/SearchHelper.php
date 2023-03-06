@@ -18,7 +18,7 @@ class SearchHelper
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'author') {
             $author_query = Author::query();
-            $author_query->where(DB::raw('concat(coalesce(name_prefix, ""), " ", first_name, " ", coalesce(middle_name, ""), " ", last_name, " ", coalesce(name_suffix, ""))'), 'like', $request)->where('id', '<>', 1);
+            $author_query->where(DB::raw('concat(coalesce(name_prefix, ""), " ", first_name, " ", coalesce(middle_name, ""), " ", last_name, " ", coalesce(name_suffix, ""), " ", coalesce(description, ""))'), 'like', $request)->where('id', '<>', 1);
             $author = $author_query->get();
             foreach ($author as $i => $item) {
                 similar_text(strtolower($author[$i]['name']), strtolower(request('query')), $percent);
@@ -38,7 +38,7 @@ class SearchHelper
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'book') {
             $book_query = Book::query();
-            $book_query->where(DB::raw('concat(title, " ", coalesce(subtitle, ""), " ", coalesce(description, ""))'), 'like', $request);
+            $book_query->where(DB::raw('concat(title, " ", coalesce(subtitle, ""), " ", coalesce(description, ""), " ", coalesce(ISBN, ""))'), 'like', $request);
             $book = $book_query->get();
             foreach ($book as $i => $item) {
                 similar_text(strtolower($book[$i]['title']), strtolower(request('query')), $percent);
