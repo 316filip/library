@@ -50,7 +50,7 @@ class BrowseController extends Controller
                         foreach ($result->work->assignments as $assignment) {
                             array_push($id, $assignment->category_id);
                         }
-                        if (count(array_intersect($categories, $id)) > 1) {
+                        if (count(array_intersect($categories, $id)) > 2) {
                             $suggestions->push($result->work);
                             array_push($added, $result->work->id);
                         }
@@ -93,7 +93,7 @@ class BrowseController extends Controller
                         foreach ($result->work->assignments as $assignment) {
                             array_push($id, $assignment->category_id);
                         }
-                        if (count(array_intersect($categories, $id)) > 1) {
+                        if (count(array_intersect($categories, $id)) > 2) {
                             $row->push($result->work);
                             array_push($added, $result->work->id);
                             if (count($added) > 8) {
