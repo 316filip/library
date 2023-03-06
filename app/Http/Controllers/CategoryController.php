@@ -38,6 +38,9 @@ class CategoryController extends Controller
         }
         $formFields['slug'] = Str::of($slug)->ascii()->lower();
 
+        // Capitalize category name
+        $formFields['name'] = ucfirst($formFields['name']);
+
         $category = Category::create($formFields);
 
         return redirect('/knihovna')->with('message', 'Kategorie byla úspěšně vytvořena!')->with('color', 'success')->with('link', '/knihovna?filter=category&query=' . $category->slug);
@@ -68,6 +71,9 @@ class CategoryController extends Controller
             }
         }
         $formFields['slug'] = Str::of($slug)->ascii()->lower();
+
+        // Capitalize category name
+        $formFields['name'] = ucfirst($formFields['name']);
 
         $category->update($formFields);
 
