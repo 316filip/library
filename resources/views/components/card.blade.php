@@ -59,8 +59,8 @@
     {{-- For last search result in a row, display 'show more' link --}}
     <div class="{{ $overlay }}">
         <div class="absolute inset-0 rounded-lg flex z-10">
-            <div class="flex-auto w-32 rounded-l-lg bg-gradient-to-r from-transparent to-slate-100"></div>
-            <div class="flex-auto w-64 rounded-r-lg bg-slate-100"></div>
+            <div class="flex-auto w-64 rounded-l-lg bg-gradient-to-r from-transparent to-slate-100"></div>
+            <div class="flex-auto w-32 rounded-r-lg bg-slate-100"></div>
         </div>
         <a href="?filter={{ $filter }}{{ $query }}{{ $in }}"
             class="absolute inset-0 pointer-events-auto z-10">
