@@ -47,6 +47,10 @@ class BookingController extends Controller
 
         $formFields['code'] = uniqid();
 
+        if (!isset($formFields['user_id'])) {
+            $formFields['user_id'] = auth()->user()->id;
+        }
+
         // Get user and book data
         $user = User::where('id', $formFields['user_id'])->first();
         $book = Book::where('id', $formFields['book_id'])->first();
@@ -115,10 +119,6 @@ class BookingController extends Controller
 
         if ($book === null || $book->date !== true) {
             return back()->with('message', 'Tuto knihu si nelze rezervovat!')->with('color', 'fail');
-        }
-
-        if (!isset($formFields['user_id'])) {
-            $formFields['user_id'] = auth()->user()->id;
         }
 
         if (($formFields['user_id'] !== auth()->user()->id) && !auth()->user()->librarian) {
