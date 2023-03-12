@@ -116,7 +116,7 @@
             setTimeout(() => {
                 $("#form-select-{{ $id }}").prop("disabled", false);
                 $("#form-select-content-{{ $id }}").slideUp("fast");
-            }, 100);
+            }, 150);
         }
 
         /**

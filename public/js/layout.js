@@ -39,7 +39,7 @@ function hideResults() {
                 .removeClass("bg-yellow-100/30")
                 .removeClass("-top-2");
         });
-    }, 100);
+    }, 150);
 }
 
 /**
@@ -243,7 +243,11 @@ function openMenu() {
 }
 
 function closeMenu() {
-    $("#fullscreen-menu").fadeOut("fast");
+    setTimeout(() => {
+        $("#search-results").slideUp("fast", function () {
+            $("#fullscreen-menu").fadeOut("fast");
+        });
+    }, 150);
 }
 
 $(document)

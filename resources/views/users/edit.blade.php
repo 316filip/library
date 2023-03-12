@@ -55,7 +55,7 @@
             <input type="hidden" name="type" value="password">
             <div class="mb-3">
                 <label for="edit-user-password_old"
-                    class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Heslo</label>
+                    class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Současné heslo</label>
                 <input type="password" class="p-2 w-full border border-slate-200 rounded-lg" name="password_old"
                     id="edit-user-password_old" placeholder="" value="{{ old('password_old') }}"
                     autocomplete="current-password">
@@ -65,7 +65,7 @@
             </div>
             <div class="mb-3">
                 <label for="edit-user-password"
-                    class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Heslo</label>
+                    class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Nové heslo</label>
                 <input type="password" class="p-2 w-full border border-slate-200 rounded-lg" name="password"
                     id="edit-user-password" placeholder="" value="{{ old('password') }}" autocomplete="new-password">
                 @error('password')
@@ -74,7 +74,7 @@
             </div>
             <div class="mb-3">
                 <label for="edit-user-password_confirmation"
-                    class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Znovu heslo</label>
+                    class="block mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Znovu nové heslo</label>
                 <input type="password" class="p-2 w-full border border-slate-200 rounded-lg"
                     name="password_confirmation" id="edit-user-password_confirmation" placeholder=""
                     value="{{ old('password_confirmation') }}" autocomplete="new-password">
