@@ -24,7 +24,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <x-Select type="work" :target="[$book->work_id, $book->work->name]" :values=$works identifier=""></x-Select>
+                <x-Select type="work" :target="[$book->work_id, $book->work->title]" :values=$works identifier=""></x-Select>
                 @error('work_id')
                     <p class="text-red-500 text-sm">{{ $message }}</p>
                 @enderror
