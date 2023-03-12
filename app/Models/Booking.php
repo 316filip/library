@@ -43,7 +43,15 @@ class Booking extends Model
             $text = "Před";
             $days = $number == 1 ? "dnem" : "dny";
         } elseif ($this->returned) {
-            $text = "Vrácena";
+            if ($this->borrowed) {
+                $text = "Vrácena";
+            } else {
+                $text = "Nebyla vypůjčena";
+            }
+            $number = "";
+            $days = "";
+        } elseif (!$this->borrowed) {
+            $text = "Čeká na vyzvednutí...";
             $number = "";
             $days = "";
         } else {
@@ -58,7 +66,7 @@ class Booking extends Model
     protected function extendable(): Attribute
     {
         $extendable = false;
-        if (date_diff(date_create($this->from), date_create($this->to))->format('%a') > 40 || $this->late || $this->returned) {
+        if (date_diff(date_create($this->from), date_create($this->to))->format('%a') > 40 || $this->late || $this->returned || !$this->borrowed) {
             $extendable = 'hide';
         } elseif (date_diff(now('Europe/Prague'), date_create($this->to))->format('%a') < 16) {
             $extendable = true;
