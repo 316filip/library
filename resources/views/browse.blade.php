@@ -11,7 +11,7 @@
         </div>
 
         @unless(count($bookings) == 0)
-            <h1 class="text-4xl text-center font-bold mb-5">Aktivní rezervace</h1>
+            <h1 class="text-4xl text-center font-bold mb-5">Výpůjčky</h1>
             <div class="mb-5">
                 <x-Deck type="booking">
                     @foreach ($bookings as $booking)

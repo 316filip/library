@@ -2,7 +2,7 @@
     <h1 class="text-4xl text-center font-bold mb-5">Kontakt</h1>
     <div class="grid gap-2 text-center mb-5">
         <p><i class="fa-solid fa-location-dot"></i> <a href="https://mapy.cz/s/holuceture" target="_blank"
-                rel="noopener noreferrer">Nad štolou 1510/1, 17000 Praha 7 - Holešovice, Česko</a></p>
+                rel="noopener noreferrer">Nad Štolou 1510/1, 17000 Praha 7 - Holešovice, Česko</a></p>
         <p><i class="fa-solid fa-envelope"></i> <a href="mailto:podpora@filiprund.cz">podpora@filiprund.cz</a></p>
         <p><i class="fa-solid fa-phone"></i> <a href="tel:+420 xxx xxx xxx">+420 xxx xxx xxx</a></p>
     </div>
