@@ -46,10 +46,10 @@ class Card extends Component
                 $this->available = 'booked';
             }
         } elseif ($type == 'user') {
-            $this->link = '/ucet/' . $data['code'];
+            $this->link = '/ucet/' . $data->code;
             $this->filter_text = "uživatelů";
         } elseif ($type == 'booking') {
-            $this->link = '/rezervace/' . $data['code'];
+            $this->link = auth()->user()->librarian ? '/rezervace/' . $data->code : '/kniha/' . $data->book->work->slug . '/' . $data->book->id;
             $this->filter_text = "rezervací";
         }
     }

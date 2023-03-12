@@ -128,8 +128,7 @@ class BookingController extends Controller
         // Create the booking
         $booking = Booking::create($formFields);
         // Dispatch a job to check in 6 days if the user has borrowed the book
-        // dispatch(new BorrowCheck($booking))->delay(strtotime('+6 days', $from) - strtotime(now('Europe/Prague')));
-        dispatch(new BorrowCheck($booking))->delay(strtotime('+5 minutes', $from) - strtotime(now('Europe/Prague')));
+        dispatch(new BorrowCheck($booking))->delay(strtotime('+6 days', $from) - strtotime(now('Europe/Prague')));
         // Email the user about the booking
         Mail::to($booking->user->email)->send(new BookConfirmation($booking));
         // Redirect the user

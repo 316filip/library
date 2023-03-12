@@ -10,7 +10,7 @@
     <h2 class="text-2xl mb-5">Rezervace</h2>
     @unless(count($user->bookings) == 0)
         @php
-            $bookings = $user->bookings->paginate(12);
+            $bookings = $user->bookings->sortByDesc('to')->paginate(12);
         @endphp
         <x-Deck type="book">
             @foreach ($bookings as $booking)
