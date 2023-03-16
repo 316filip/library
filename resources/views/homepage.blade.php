@@ -31,7 +31,7 @@
                             class="fa-solid fa-caret-right transition" id="faq1-toggle"></i></div>
                     <div class="pt-4 border-t border-slate-200 py-4" id="faq1" style="display: none;">
                         <p>Abyste si mohli začít půjčovat knihy v naší knihovně, stačí si vytvořit účet na našem webu.
-                            Při Vaší první osobní návštěvě Vám dáme Váš čtenářský průkaz. Jeho cena je 50 Kč.</p>
+                            Při Vaší první osobní návštěvě Vám vystavíme Váš čtenářský průkaz. Jeho cena je 50 Kč.</p>
                     </div>
                 </div>
                 <div class="border border-slate-200 rounded-lg px-4">
@@ -43,10 +43,10 @@
                     </div>
                 </div>
                 <div class="border border-slate-200 rounded-lg px-4">
-                    <div class="py-4 cursor-pointer" onclick="faq(3)">Kolik knih mohu mít půjčených současně? <i
+                    <div class="py-4 cursor-pointer" onclick="faq(3)">Kolik knih mohu mít rezervovaných současně? <i
                             class="fa-solid fa-caret-right transition" id="faq3-toggle"></i></div>
                     <div class="pt-4 border-t border-slate-200 py-4" id="faq3" style="display: none;">
-                        <p>V jednu chvíli můžete mít rezervovaných až pět knih.</p>
+                        <p>V jednu chvíli můžete mít rezervovaných, a tedy i vypůjčených, až pět knih.</p>
                     </div>
                 </div>
             </div>
