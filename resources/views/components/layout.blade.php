@@ -77,7 +77,7 @@ uživatele,&nbsp;
                         {{-- Account dropdown button --}}
                         <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true"
                             onclick="$('#dropdown-menu').fadeToggle('fast');"
-                            onblur="$('#dropdown-menu').fadeOut('fast');">
+                            onblur="setTimeout(() => {$('#dropdown-menu').fadeOut('fast')}, 150);">
                             @auth
                                 <i class="fa-regular fa-user"></i>
                             @else
@@ -151,7 +151,7 @@ uživatele,&nbsp;
 
     {{-- Page content --}}
     <div class="container mx-auto p-6">
-        {{ $slot }} {{-- Views output --}}
+        {{ $slot }}
     </div>
 </body>
 

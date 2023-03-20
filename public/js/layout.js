@@ -229,7 +229,7 @@ function search() {
 }
 
 /**
- * Go to dedicated search page
+ * Goes to dedicated search page
  *
  * @param {String} what Where to search for results
  */
@@ -238,23 +238,31 @@ function go(what = "all") {
     $("#search-form").submit();
 }
 
+/**
+ * Opens the fullscreen menu
+ */
 function openMenu() {
     $("#fullscreen-menu").fadeIn("fast");
 }
 
+/**
+ * Closes the fullscreen menu
+ */
 function closeMenu() {
-    setTimeout(() => {
-        $("#search-results").slideUp("fast", function () {
-            $("#fullscreen-menu").fadeOut("fast");
-        });
-    }, 150);
+    $("#fullscreen-menu").fadeOut("fast");
 }
 
 $(document)
     .ready(function () {
         navbar();
 
+        if (navigator.userAgent.indexOf("Chrome") !== -1) {
+            // Fix for an UI glitch in chromium-based browsers
+            $("#search-frame").addClass("!transition-none");
+        }
+
         $("#search-input")
+            // Shortcut keys for search box
             .bind("keydown", "esc", function () {
                 $("#search-input").blur();
                 return false;
@@ -265,6 +273,7 @@ $(document)
             });
     })
     .bind("keydown", "ctrl+k", function () {
+        // Shortcut key for search
         showSearchBar();
         return false;
     });
