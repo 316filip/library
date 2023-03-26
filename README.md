@@ -9,6 +9,9 @@ This website is almost prepared to be deployed, there are just a few things to d
 - On your development server, run `php artisan migrate`
 - Export your MySQL database
 - In the `.env` file, update database credentials once more, this time for production
+
+When deploying the website, do this:
+
 - Upload project files to the hosting service
 - Import the exported database to your hosting
 - Set up CRON task to visit `/work` as frequently as possible
