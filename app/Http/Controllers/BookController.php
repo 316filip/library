@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    // Get one book
+    /**
+     * Show book
+     * 
+     * @return object
+     */ 
     public function show($work, Book $book)
     {
         return view('books.show', [
@@ -16,7 +20,11 @@ class BookController extends Controller
         ]);
     }
 
-    // Show create form
+    /**
+     * Show create form
+     * 
+     * @return object
+     */ 
     public function create()
     {
         return view('books.create', [
@@ -24,7 +32,11 @@ class BookController extends Controller
         ]);
     }
 
-    // Store book data
+    /**
+     * Store book data
+     * 
+     * @return object
+     */ 
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -54,7 +66,11 @@ class BookController extends Controller
         return redirect('/knihovna')->with('message', 'Kniha byla úspěšně přidána do knihovny!')->with('color', 'success')->with('link', '/kniha/' . $book->work->slug . '/' . $book->id);
     }
 
-    // Show edit form
+    /**
+     * Show edit from
+     * 
+     * @return object
+     */ 
     public function edit($work, Book $book)
     {
         return view('books.edit', [
@@ -63,7 +79,11 @@ class BookController extends Controller
         ]);
     }
 
-    // Update book data
+    /**
+     * Update book data
+     * 
+     * @return object
+     */ 
     public function update(Request $request, Book $book)
     {
         $formFields = $request->validate([
@@ -95,7 +115,11 @@ class BookController extends Controller
         return redirect('/kniha/' . $book->work->slug . '/' . $book->id)->with('message', 'Kniha byla úspěšně upravena!')->with('color', 'success');
     }
 
-    // Delete book
+    /**
+     * Delete book
+     * 
+     * @return object
+     */ 
     public function destroy(Book $book)
     {
         $book->delete();

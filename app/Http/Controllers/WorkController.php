@@ -12,15 +12,11 @@ use Illuminate\Http\Request;
 
 class WorkController extends Controller
 {
-    // Get all works
-    public function index()
-    {
-        return view('works.index', [
-            'works' => Work::all()
-        ]);
-    }
-
-    // Get one work
+    /**
+     * Show work
+     * 
+     * @return object
+     */ 
     public function show($work)
     {
         $work = WorkHelper::find($work);
@@ -29,7 +25,11 @@ class WorkController extends Controller
         ]);
     }
 
-    // Show create form
+    /**
+     * Show create form
+     * 
+     * @return object
+     */ 
     public function create()
     {
         return view('works.create', [
@@ -38,7 +38,11 @@ class WorkController extends Controller
         ]);
     }
 
-    // Store work data
+    /**
+     * Store work data
+     * 
+     * @return object
+     */ 
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -85,7 +89,11 @@ class WorkController extends Controller
         return redirect('/knihovna')->with('message', 'Titul byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/titul/' . $work->slug);
     }
 
-    // Show edit form
+    /**
+     * Show edit form
+     * 
+     * @return object
+     */ 
     public function edit($work)
     {
         $work = WorkHelper::find($work);
@@ -106,7 +114,11 @@ class WorkController extends Controller
         ]);
     }
 
-    // Update work data
+    /**
+     * Update work data
+     * 
+     * @return object
+     */ 
     public function update(Request $request, Work $work)
     {
         $formFields = $request->validate([
@@ -160,7 +172,11 @@ class WorkController extends Controller
         return redirect('/titul/' . $work->slug)->with('message', 'Titul byl úspěšně změněn!')->with('color', 'success');
     }
 
-    // Delete work
+    /**
+     * Delete work
+     * 
+     * @return object
+     */ 
     public function destroy(Work $work)
     {
         $work->delete();

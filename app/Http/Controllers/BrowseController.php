@@ -12,25 +12,34 @@ use App\Helpers\WorkHelper;
 
 class BrowseController extends Controller
 {
-    // Browse works and authors
+    /**
+     * Browse and search authors, works, books, categories and bookings
+     * 
+     * @return object
+     */ 
     public function browse()
     {
         if (request('filter') !== null) {
+            // If a filter is set
             if (request('filter') == 'category' && request('query') !== null) {
+                // Results for specific category
                 $category = Category::where('slug', request('query'))->first();
                 return view('categories.show', [
                     'category' => $category,
                     'assignments' => $category->assignments->paginate(12),
                 ]);
             } elseif (request('filter') == 'search') {
+                // Search results
                 return view('search', [
                     'results' => SearchHelper::search()
                 ]);
             } elseif (request('filter') == 'new') {
+                // Newest books
                 return view('works.index', [
                     'works' => Work::orderBy('year', 'desc')->orderBy('created_at', 'desc')->paginate(12),
                 ]);
             } elseif (request('filter') == 'young') {
+                // Youngest authors
                 return view('authors.index', [
                     'authors' => Author::where('id', '<>', 1)->orderBy('birth_date', 'desc')->paginate(12),
                 ]);
@@ -70,14 +79,17 @@ class BrowseController extends Controller
                     'suggestions' => $suggestions->paginate(12),
                 ]);
             } elseif (request('filter') == 'bookings' && auth()->check() && auth()->user()->librarian) {
+                // Active bookings
                 return view('bookings.index', [
                     'bookings' => Booking::where('borrowed', 1)->where('returned', 0)->orderBy('to')->paginate(12),
                 ]);
             } else {
+                // For other filters, show 404
                 abort(404);
             }
         }
 
+        // == No filter is set ==
         $bookings = collect([]);
         if (auth()->check() && auth()->user()->librarian) {
             $bookings = Booking::where('borrowed', 1)->where('returned', 0)->orderBy('to')->limit(8)->get();

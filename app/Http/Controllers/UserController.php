@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
-    // Get one user
+    /**
+     * Show user
+     * 
+     * @return object
+     */
     public function show($user = "")
     {
         $user = UserHelper::find($user);
@@ -22,13 +26,21 @@ class UserController extends Controller
         ]);
     }
 
-    // Show login form
+    /**
+     * Show login form
+     * 
+     * @return object
+     */
     public function login()
     {
         return view('users.login');
     }
 
-    // Log user in
+    /**
+     * Log user in
+     * 
+     * @return object
+     */
     public function authenticate(Request $request)
     {
         $formFields = $request->validate([
@@ -47,7 +59,11 @@ class UserController extends Controller
         return back()->withErrors(['email' => 'Chybně jste zadali email nebo heslo.']);
     }
 
-    // Log user out
+    /**
+     * Log user out
+     * 
+     * @return object
+     */
     public function logout(Request $request)
     {
         auth()->logout();
@@ -58,13 +74,21 @@ class UserController extends Controller
         return redirect('/')->with('message', 'Byli jste odhlášeni!')->with('color', 'success');
     }
 
-    // Show create form
+    /**
+     * Show create form
+     * 
+     * @return object
+     */
     public function create()
     {
         return view('users.create');
     }
 
-    // Store user data
+    /**
+     * Store user data
+     * 
+     * @return object
+     */
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -89,7 +113,11 @@ class UserController extends Controller
         return redirect('/ucet')->with('message', 'Váš účet byl úspěšně vytvořen!')->with('color', 'success');
     }
 
-    // Show edit form
+    /**
+     * Show edit form
+     * 
+     * @return object
+     */
     public function edit($user = "")
     {
         $user = UserHelper::find($user);
@@ -99,7 +127,11 @@ class UserController extends Controller
         ]);
     }
 
-    // Update user data
+    /**
+     * Update user data
+     * 
+     * @return object
+     */
     public function update(Request $request, User $user)
     {
         if (!auth()->user()->librarian && ($user->id !== auth()->user()->id)) {
@@ -179,13 +211,21 @@ class UserController extends Controller
         }
     }
 
-    // Show new password request form
+    /**
+     * Show new password request form
+     * 
+     * @return object
+     */
     public function request_password()
     {
         return view('users.request');
     }
 
-    // Send password reset email
+    /**
+     * Send password reset email
+     * 
+     * @return object
+     */
     public function email_password(Request $request)
     {
         $formFields = $request->validate([
@@ -199,7 +239,11 @@ class UserController extends Controller
         return redirect('/prihlaseni')->with('message', __($status))->with('color', $color);
     }
 
-    // Show password reset form
+    /**
+     * Show password reset form
+     * 
+     * @return object
+     */
     public function reset_password(Request $request)
     {
         return view('users.reset', [
@@ -208,7 +252,11 @@ class UserController extends Controller
         ]);
     }
 
-    // Update password data
+    /**
+     * Update password data
+     * 
+     * @return object
+     */
     public function update_password(Request $request)
     {
         $formFields = $request->validate([
@@ -232,7 +280,11 @@ class UserController extends Controller
         return redirect('/prihlaseni')->with('message', __($status))->with('color', $color);
     }
 
-    // Delete user
+    /**
+     * Delete user
+     * 
+     * @return object
+     */
     public function destroy(User $user)
     {
         if (!auth()->user()->librarian && ($user->id !== auth()->user()->id)) {

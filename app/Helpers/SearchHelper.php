@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class SearchHelper
 {
+    /**
+     * Search authors, works, books, categories, users and bookings
+     * 
+     * @return array
+     */ 
     public static function search()
     {
         $request = "%" . str_replace(" ", "%", request("query")) . "%";

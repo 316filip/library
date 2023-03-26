@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
-    // Get one booking
+    /**
+     * Show booking
+     * 
+     * @return object
+     */ 
     public function show($booking)
     {
         $booking = Booking::where('code', $booking)->first();
@@ -37,7 +41,11 @@ class BookingController extends Controller
         ]);
     }
 
-    // Store booking data
+    /**
+     * Store booking data
+     * 
+     * @return object
+     */ 
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -138,7 +146,11 @@ class BookingController extends Controller
         return back()->with('message', 'Rezervace byla úspěšně vytvořena!')->with('color', 'success');
     }
 
-    // Update booking data
+    /**
+     * Update booking data
+     * 
+     * @return object
+     */ 
     public function update(Request $request, Booking $booking)
     {
         if (!isset($request->type)) {

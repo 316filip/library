@@ -5,6 +5,11 @@ namespace App\Helpers;
 use App\Models\User;
 
 class UserHelper {
+    /**
+     * Find user by code
+     * 
+     * @return object
+     */ 
     public static function find($user)
     {
         if ($user === "") {

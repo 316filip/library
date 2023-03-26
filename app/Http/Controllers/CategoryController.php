@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // Get one category
+    /**
+     * Show category
+     * 
+     * @return object
+     */ 
     public function show($category)
     {
         $category = CategoryHelper::find($category);
@@ -17,13 +21,21 @@ class CategoryController extends Controller
         return redirect('/knihovna?filter=category&query=' . $category->slug);
     }
 
-    // Show create form
+    /**
+     * Show create form
+     * 
+     * @return object
+     */ 
     public function create()
     {
         return view('categories.create');
     }
 
-    // Store category data
+    /**
+     * Store category data
+     * 
+     * @return object
+     */ 
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -46,7 +58,11 @@ class CategoryController extends Controller
         return redirect('/knihovna')->with('message', 'Kategorie byla úspěšně vytvořena!')->with('color', 'success')->with('link', '/knihovna?filter=category&query=' . $category->slug);
     }
 
-    // Show edit form
+    /**
+     * Show edit form
+     * 
+     * @return object
+     */ 
     public function edit($category)
     {
         $category = CategoryHelper::find($category);
@@ -55,7 +71,11 @@ class CategoryController extends Controller
         ]);
     }
 
-    // Update category data
+    /**
+     * Update category data
+     * 
+     * @return object
+     */ 
     public function update(Request $request, Category $category)
     {
         $formFields = $request->validate([
@@ -80,7 +100,11 @@ class CategoryController extends Controller
         return redirect('/knihovna?filter=category&query=' . $category->slug)->with('message', 'Kategorie byla úspěšně změněna!')->with('color', 'success');
     }
 
-    // Delete category
+    /**
+     * Delete category
+     * 
+     * @return object
+     */ 
     public function destroy(Category $category)
     {
         $category->delete();

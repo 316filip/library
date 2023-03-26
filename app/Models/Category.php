@@ -9,9 +9,18 @@ class Category extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = ['name', 'slug', 'description'];
 
-    // Relationship to assignments
+    /**
+     * Relationship to assignments
+     * 
+     * @return object
+     */
     public function assignments()
     {
         return $this->hasMany(Assignment::class, 'category_id');

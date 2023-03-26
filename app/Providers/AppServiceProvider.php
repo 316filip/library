@@ -24,10 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Blade directive for admins
         Blade::if('admin', function () {
             return (auth()->check() && auth()->user()->admin);
         });
 
+        // Blase directive for librarians
         Blade::if('lib', function () {
             return (auth()->check() && auth()->user()->librarian);
         });

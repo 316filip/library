@@ -9,15 +9,11 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    // Get all authors
-    public function index()
-    {
-        return view('authors.index', [
-            'authors' => Author::all()
-        ]);
-    }
-
-    // Get one author
+    /**
+     * Show author
+     * 
+     * @return object
+     */ 
     public function show($author)
     {
         $author = AuthorHelper::find($author);
@@ -26,13 +22,21 @@ class AuthorController extends Controller
         ]);
     }
 
-    // Show create form
+    /**
+     * Show create form
+     * 
+     * @return object
+     */ 
     public function create()
     {
         return view('authors.create');
     }
 
-    // Store author data
+    /**
+     * Store author data
+     * 
+     * @return object
+     */ 
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -65,14 +69,22 @@ class AuthorController extends Controller
         return redirect('/knihovna')->with('message', 'Autor byl úspěšně přidán do knihovny!')->with('color', 'success')->with('link', '/autor/' . $author->slug);
     }
 
-    // Show edit form
+    /**
+     * Show edit form
+     * 
+     * @return object
+     */ 
     public function edit($author)
     {
         $author = AuthorHelper::find($author);
         return view('authors.edit', ['author' => $author]);
     }
 
-    // Update author data
+    /**
+     * Update author data
+     * 
+     * @return object
+     */ 
     public function update(Request $request, Author $author)
     {
         $formFields = $request->validate([
@@ -109,7 +121,11 @@ class AuthorController extends Controller
         return redirect('/autor/' . $author->slug)->with('message', 'Profil autora byl úspěšně změněn!')->with('color', 'success');
     }
 
-    // Delete author
+    /**
+     * Delete author
+     * 
+     * @return object
+     */ 
     public function destroy(Author $author)
     {
         $author->delete();

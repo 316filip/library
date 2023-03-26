@@ -10,21 +10,38 @@ class Book extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = ['work_id', 'title', 'subtitle', 'length', 'language', 'translator', 'illustrator', 'description', 'house', 'year', 'publication', 'place', 'image', 'ISBN', 'amount'];
 
-    // Relationship to work
+    /**
+     * Relationship to work
+     * 
+     * @return object
+     */
     public function work()
     {
         return $this->belongsTo(Work::class, 'work_id');
     }
 
-    // Relationship to bookings
+    /**
+     * Relationship to bookings
+     * 
+     * @return object
+     */
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'book_id');
     }
 
-    // Attribute containing information about availability
+    /**
+     * Attribute containing information about availability
+     * 
+     * @return string
+     */
     protected function date(): Attribute
     {
         $bookings = $this->bookings->sortByDesc('to')->take($this->amount);

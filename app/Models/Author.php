@@ -10,15 +10,28 @@ class Author extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = ['name_prefix', 'first_name', 'middle_name', 'last_name', 'name_suffix', 'slug', 'birth_date', 'death_date', 'description', 'image'];
 
-    // Relationship to works
+    /**
+     * Relationship to works
+     * 
+     * @return object
+     */
     public function works()
     {
         return $this->hasMany(Work::class, 'author_id');
     }
 
-    // Attribute containing full name
+    /**
+     * Attribute containing full name
+     * 
+     * @return string
+     */
     protected function name(): Attribute
     {
         return Attribute::make(

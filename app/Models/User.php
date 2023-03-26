@@ -42,12 +42,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Relationship to bookings
+    /**
+     * Relationship to bookings
+     * 
+     * @return object
+     */
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'user_id');
     }
 
+    /**
+     * Attribute containing user's full name
+     * 
+     * @return string
+     */ 
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -55,6 +64,11 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * Attribute containing user's full name and code
+     * 
+     * @return string
+     */ 
     protected function label(): Attribute
     {
         return Attribute::make(
@@ -62,6 +76,11 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * Attribute indicating wether user can book or not
+     * 
+     * @return bool
+     */ 
     protected function canBook(): Attribute
     {
         return Attribute::make(
@@ -69,6 +88,11 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * Mails user his password reset link
+     * 
+     * @param string
+     */ 
     public function sendPasswordResetNotification($token)
     {
         Mail::to($this->email)->send(new PasswordReset($token, $this->email));
