@@ -16,3 +16,4 @@ When deploying the website, do this:
 - Import the exported database to your hosting
 - Set up CRON task to visit `/work` as frequently as possible
 - Test everything
+- Let the chief librarian create their account and then in MySQL database, users table, update their row with `librarian = 1` and `admin = 1`
