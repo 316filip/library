@@ -57,6 +57,7 @@ class BookController extends Controller
             'amount' => 'required'
         ]);
 
+        // Store attached image
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('books', 'public');
         }
@@ -104,6 +105,7 @@ class BookController extends Controller
             'amount' => 'required'
         ]);
 
+        // Store attached image
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('books', 'public');
         } elseif ($request->image_update == 1) {

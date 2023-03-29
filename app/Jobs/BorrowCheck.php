@@ -37,11 +37,13 @@ class BorrowCheck implements ShouldQueue
     {
         $booking = Booking::where('id', $this->id)->first();
         if (!$booking->borrowed && !$booking->returned) {
+            // Cancel the booking
             $booking->update([
                 'returned' => 1,
             ]);
             Mail::to($this->email)->send(new BorrowNotification($booking));
         } else {
+            // Dispatch a reminder five days before the booking end
             dispatch(new ReturnNotify($booking))->delay(strtotime('-5 days', strtotime($booking->to)) - now('Europe/Prague'));
         }
     }

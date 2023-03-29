@@ -37,7 +37,10 @@ class ReturnNotify implements ShouldQueue
     {
         $booking = Booking::where('id', $this->id)->first();
         if ($booking->returned == 0 && date_diff(now('Europe/Prague'), date_create($booking->to))->format('%R%a') < 10) {
+            // Alert the user about the end of the booking coming up
             Mail::to($this->email)->send(new ReturnNotification($booking));
+
+            // Dispatch a reminder at the day of the booking end
             dispatch(new ReturnCheck($booking))->delay(strtotime($booking->to) - strtotime(now('Europe/Prague')));
         }
     }

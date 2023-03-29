@@ -31,6 +31,7 @@ use App\Http\Controllers\CategoryController;
 // update - update
 // destroy - delete
 
+// HOMEPAGE ROUTE
 Route::get('/', function () {
     return view('homepage');
 });

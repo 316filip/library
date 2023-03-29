@@ -144,6 +144,7 @@ class UserController extends Controller
         }
 
         if ($request->type == 'data') {
+            // Update user data (name, email)
             $formFields = $request->validate([
                 'first_name' => ['required', 'min:3'],
                 'last_name' => ['required', 'min:3'],
@@ -162,6 +163,7 @@ class UserController extends Controller
 
             return redirect($link)->with('message', 'Uživatelský profil byl úspěšně aktualizován!')->with('color', 'success');
         } elseif ($request->type == 'password') {
+            // Update user password
             $formFields = $request->validate([
                 'password_old' => 'required',
                 'password' => ['required', 'confirmed', 'min:6'],
@@ -177,6 +179,7 @@ class UserController extends Controller
 
             return redirect($link)->with('message', 'Heslo bylo úspěšně změněno!')->with('color', 'success');
         } elseif ($request->type == 'competency') {
+            // Update user competency
             if (!auth()->user()->admin) {
                 return back()->with('message', 'Nemáte oprávnění upravovat tohoto uživatele!')->with('color', 'fail');
             }
@@ -186,12 +189,14 @@ class UserController extends Controller
                 'librarian' => 'nullable',
             ]);
 
+            // Admin competency
             if (isset($formFields['admin']) && $formFields['admin'] == 1) {
                 $formFields['admin'] = true;
             } else {
                 $formFields['admin'] = false;
             }
 
+            // Librarian competency
             if (isset($formFields['librarian']) && $formFields['librarian'] == 1) {
                 $formFields['librarian'] = true;
             } else {

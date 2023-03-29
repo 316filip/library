@@ -37,6 +37,7 @@ class ReturnCheck implements ShouldQueue
     {
         $booking = Booking::where('id', $this->id)->first();
         if ($booking->returned == 0 && date_diff(now('Europe/Prague'), date_create($booking->to))->format('%R%a') < 3) {
+            // Alert the user about the end of the booking
             Mail::to($this->email)->send(new ReturnWarning($booking));
         }
     }

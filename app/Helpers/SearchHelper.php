@@ -16,12 +16,13 @@ class SearchHelper
      * Search authors, works, books, categories, users and bookings
      * 
      * @return array
-     */ 
+     */
     public static function search()
     {
         $request = "%" . str_replace(" ", "%", request("query")) . "%";
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'author') {
+            // If needed, get search results for authors
             $author_query = Author::query();
             $author_query->where(DB::raw('concat(coalesce(name_prefix, ""), " ", first_name, " ", coalesce(middle_name, ""), " ", last_name, " ", coalesce(name_suffix, ""), " ", coalesce(description, ""))'), 'like', $request)->where('id', '<>', 1);
             $author = $author_query->get();
@@ -32,6 +33,7 @@ class SearchHelper
         }
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'work') {
+            // If needed, get search results for works
             $work_query = Work::query();
             $work_query->where(DB::raw('concat(title, " ", coalesce(original_title, ""), " ", coalesce(subtitle, ""), " ", coalesce(description, ""))'), 'like', $request);
             $work = $work_query->get();
@@ -42,6 +44,7 @@ class SearchHelper
         }
 
         if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'book') {
+            // If needed, get search results for books
             $book_query = Book::query();
             $book_query->where(DB::raw('concat(title, " ", coalesce(subtitle, ""), " ", coalesce(description, ""), " ", coalesce(ISBN, ""))'), 'like', $request);
             $book = $book_query->get();
@@ -54,6 +57,7 @@ class SearchHelper
 
         if (auth()->check() && auth()->user()->librarian) {
             if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'user') {
+                // If needed, get search results for users
                 $user_query = User::query();
                 $user_query->where(DB::raw('concat(first_name, " ", last_name, " ", code)'), 'like', $request);
                 $user = $user_query->get();
@@ -64,6 +68,7 @@ class SearchHelper
             }
 
             if (request('in') == 'quick' || request('in') == 'all' || request('in') == 'booking') {
+                // If needed, get search results for bookings
                 $booking_query = Booking::query();
                 $booking_query->where('code', 'like', $request);
                 $booking = $booking_query->get();
@@ -78,6 +83,7 @@ class SearchHelper
         }
 
         if (request('in') == 'quick') {
+            // If needed, get search results for categories
             $category_query = Category::query();
             $category_query->where(DB::raw('concat(name, " ", coalesce(description, ""))'), 'like', $request);
             $category = $category_query->get();
@@ -88,6 +94,7 @@ class SearchHelper
         }
 
         if (request('in') == 'quick') {
+            // Return quick results for search suggestions
             return [
                 'author' => $author->sortByDesc('similarity')->values()->take(5),
                 'work' => $work->sortByDesc('similarity')->values()->take(5),
@@ -98,6 +105,7 @@ class SearchHelper
             ];
         }
         if (request('in') == 'all') {
+            // Return recommended results for search page
             return [
                 'author' => $author->sortByDesc('similarity')->values()->take(8),
                 'work' => $work->sortByDesc('similarity')->values()->take(8),
@@ -107,6 +115,7 @@ class SearchHelper
             ];
         }
         if (request('in') == 'author') {
+            // Return results for author search
             return [
                 'author' => $author->sortByDesc('similarity')->values()->paginate(12),
                 'work' => [],
@@ -116,6 +125,7 @@ class SearchHelper
             ];
         }
         if (request('in') == 'work') {
+            // Return results for work search
             return [
                 'author' => [],
                 'work' => $work->sortByDesc('similarity')->values()->paginate(12),
@@ -125,6 +135,7 @@ class SearchHelper
             ];
         }
         if (request('in') == 'book') {
+            // Return results for book search
             return [
                 'author' => [],
                 'work' => [],
@@ -134,6 +145,7 @@ class SearchHelper
             ];
         }
         if (request('in') == 'user') {
+            // Return results for user search
             return [
                 'author' => [],
                 'work' => [],
@@ -143,6 +155,7 @@ class SearchHelper
             ];
         }
         if (request('in') == 'booking') {
+            // Return results for booking search
             return [
                 'author' => [],
                 'work' => [],

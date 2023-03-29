@@ -158,6 +158,7 @@ class BookingController extends Controller
         } elseif (!auth()->user()->librarian) {
             return back()->with('message', 'Nemáte oprávnění změnit stav rezervace!')->with('color', 'fail');
         } elseif ($request->type == 'manage') {
+            // Change booking state
             $formFields = $request->validate([
                 'status' => 'required',
             ]);
@@ -178,6 +179,7 @@ class BookingController extends Controller
             $booking->update($updateFields);
             return back()->with('message', 'Stav rezervace byl úspěšně změněn!')->with('color', 'success');
         } elseif ($request->type == 'extend') {
+            // Extend booking length
             if ($booking->extendable === false) {
                 return back()->with('message', 'Tuto rezervaci nelze prodloužit!')->with('color', 'fail');
             } elseif (!auth()->user()->librarian && $booking->user->id !== auth()->user()->id) {
