@@ -44,7 +44,7 @@ class BorrowCheck implements ShouldQueue
             Mail::to($this->email)->send(new BorrowNotification($booking));
         } else {
             // Dispatch a reminder five days before the booking end
-            dispatch(new ReturnNotify($booking))->delay(strtotime('-5 days', strtotime($booking->to)) - now('Europe/Prague'));
+            dispatch(new ReturnNotify($booking))->delay(strtotime('-5 days', strtotime($booking->to)) - strtotime(now('Europe/Prague')));
         }
     }
 }
