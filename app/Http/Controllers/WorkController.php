@@ -16,7 +16,7 @@ class WorkController extends Controller
      * Show work
      * 
      * @return object
-     */ 
+     */
     public function show($work)
     {
         $work = WorkHelper::find($work);
@@ -29,7 +29,7 @@ class WorkController extends Controller
      * Show create form
      * 
      * @return object
-     */ 
+     */
     public function create()
     {
         return view('works.create', [
@@ -42,7 +42,7 @@ class WorkController extends Controller
      * Store work data
      * 
      * @return object
-     */ 
+     */
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -58,6 +58,7 @@ class WorkController extends Controller
             'number' => 'nullable'
         ]);
 
+        // Check for problems with categories
         if ($request->category_id != '') {
             foreach (explode(', ', $request->category_id) as $id) {
                 if (Category::where('id', $id)->first() == null) {
@@ -66,17 +67,20 @@ class WorkController extends Controller
             }
         }
 
-        $auto_slug = join('-', explode(' ', $formFields['title']));
-        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
+        // Generate URL slug
+        $slug = Str::of($formFields['title'])->slug('-');
+        $end = '';
         $i = 2;
-        while (Work::where('slug', $slug)->get()->count() !== 0) {
-            $slug = $auto_slug . '-' . $i;
+        while (Work::where('slug', $slug . $end)->get()->count() !== 0) {
+            // While there are works with this slug, increase number at the end
+            $end = '-' . $i;
             $i += 1;
         }
-        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+        $formFields['slug'] = $slug . $end;
 
         $work = Work::create($formFields);
 
+        // Assign categories
         if ($request->category_id != '') {
             foreach (explode(', ', $request->category_id) as $id) {
                 Assignment::create([
@@ -93,7 +97,7 @@ class WorkController extends Controller
      * Show edit form
      * 
      * @return object
-     */ 
+     */
     public function edit($work)
     {
         $work = WorkHelper::find($work);
@@ -118,7 +122,7 @@ class WorkController extends Controller
      * Update work data
      * 
      * @return object
-     */ 
+     */
     public function update(Request $request, Work $work)
     {
         $formFields = $request->validate([
@@ -143,16 +147,19 @@ class WorkController extends Controller
             }
         }
 
-        $auto_slug = join('-', explode(' ', $formFields['title']));
-        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
-        if (Str::of($slug)->ascii()->lower() != $work->slug) {
+        // Generate URL slug
+        $slug = Str::of($formFields['title'])->slug('-');
+        if ($slug != $work->slug) {
+            // If the new slug is different from the previous one, check it
+            $end = '';
             $i = 2;
             while (Work::where('slug', $slug)->get()->count() !== 0) {
-                $slug = $auto_slug . '-' . $i;
+                // While there are works with this slug, increase number at the end
+                $end = '-' . $i;
                 $i += 1;
             }
         }
-        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+        $formFields['slug'] = $slug . $end;
 
         $work->update($formFields);
 
@@ -176,7 +183,7 @@ class WorkController extends Controller
      * Delete work
      * 
      * @return object
-     */ 
+     */
     public function destroy(Work $work)
     {
         $work->delete();

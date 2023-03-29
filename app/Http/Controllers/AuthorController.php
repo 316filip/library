@@ -13,7 +13,7 @@ class AuthorController extends Controller
      * Show author
      * 
      * @return object
-     */ 
+     */
     public function show($author)
     {
         $author = AuthorHelper::find($author);
@@ -26,7 +26,7 @@ class AuthorController extends Controller
      * Show create form
      * 
      * @return object
-     */ 
+     */
     public function create()
     {
         return view('authors.create');
@@ -36,7 +36,7 @@ class AuthorController extends Controller
      * Store author data
      * 
      * @return object
-     */ 
+     */
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -51,15 +51,18 @@ class AuthorController extends Controller
             'image' => 'nullable|image',
         ]);
 
-        $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
-        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
+        // Generate URL slug
+        $slug = Str::of($formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'])->slug('-');
+        $end = '';
         $i = 2;
-        while (Author::where('slug', $slug)->get()->count() !== 0) {
-            $slug .= '-' . $i;
+        while (Author::where('slug', $slug . $end)->get()->count() !== 0) {
+            // While there are authors with this slug, increase number at the end
+            $end = '-' . $i;
             $i += 1;
         }
-        $formFields['slug'] = $slug;
+        $formFields['slug'] = $slug . $end;
 
+        // Store attached image
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('authors', 'public');
         }
@@ -73,7 +76,7 @@ class AuthorController extends Controller
      * Show edit form
      * 
      * @return object
-     */ 
+     */
     public function edit($author)
     {
         $author = AuthorHelper::find($author);
@@ -84,7 +87,7 @@ class AuthorController extends Controller
      * Update author data
      * 
      * @return object
-     */ 
+     */
     public function update(Request $request, Author $author)
     {
         $formFields = $request->validate([
@@ -99,17 +102,21 @@ class AuthorController extends Controller
             'image' => 'nullable|image',
         ]);
 
-        $auto_slug = $formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'];
-        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
+        // Generate URL slug
+        $slug = Str::of($formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'])->slug('-');
         if ($slug != $author->slug) {
-            $i = 1;
-            while (Author::where('slug', $slug)->get()->count() !== 0) {
-                $slug = $auto_slug . '-' . $i;
+            // If the new slug is different from the previous one, check it
+            $end = '';
+            $i = 2;
+            while (Author::where('slug', $slug . $end)->get()->count() !== 0) {
+                // While there are authors with this slug, increase number at the end
+                $end = '-' . $i;
                 $i += 1;
             }
         }
-        $formFields['slug'] = $slug;
+        $formFields['slug'] = $slug . $end;
 
+        // Store attached image
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('authors', 'public');
         } elseif ($request->image_update == 1) {
@@ -125,7 +132,7 @@ class AuthorController extends Controller
      * Delete author
      * 
      * @return object
-     */ 
+     */
     public function destroy(Author $author)
     {
         $author->delete();

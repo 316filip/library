@@ -13,7 +13,7 @@ class CategoryController extends Controller
      * Show category
      * 
      * @return object
-     */ 
+     */
     public function show($category)
     {
         $category = CategoryHelper::find($category);
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      * Show create form
      * 
      * @return object
-     */ 
+     */
     public function create()
     {
         return view('categories.create');
@@ -35,7 +35,7 @@ class CategoryController extends Controller
      * Store category data
      * 
      * @return object
-     */ 
+     */
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -43,12 +43,12 @@ class CategoryController extends Controller
             'description' => 'nullable',
         ]);
 
-        $auto_slug = join('-', explode(' ', $formFields['name']));
-        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
+        // Generate URL slug
+        $slug = Str::of($formFields['name'])->slug('-');
         if (Category::where('slug', $slug)->get()->count() !== 0) {
             return back()->with('message', 'Podobná kategorie už existuje!')->with('color', 'fail');
         }
-        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+        $formFields['slug'] = $slug;
 
         // Capitalize category name
         $formFields['name'] = ucfirst($formFields['name']);
@@ -62,7 +62,7 @@ class CategoryController extends Controller
      * Show edit form
      * 
      * @return object
-     */ 
+     */
     public function edit($category)
     {
         $category = CategoryHelper::find($category);
@@ -75,7 +75,7 @@ class CategoryController extends Controller
      * Update category data
      * 
      * @return object
-     */ 
+     */
     public function update(Request $request, Category $category)
     {
         $formFields = $request->validate([
@@ -83,14 +83,14 @@ class CategoryController extends Controller
             'description' => 'nullable',
         ]);
 
-        $auto_slug = join('-', explode(' ', $formFields['name']));
-        $slug = preg_replace('/[^a-z0-9 -]+/', '', Str::of($auto_slug)->ascii()->lower());
+        // Generate URL slug
+        $slug = Str::of($formFields['name'])->slug('-');
         if ($slug != $category->slug) {
             if (Category::where('slug', $slug)->get()->count() !== 0) {
                 return back()->with('message', 'Podobná kategorie už existuje!')->with('color', 'fail');
             }
         }
-        $formFields['slug'] = Str::of($slug)->ascii()->lower();
+        $formFields['slug'] = $slug;
 
         // Capitalize category name
         $formFields['name'] = ucfirst($formFields['name']);
@@ -104,7 +104,7 @@ class CategoryController extends Controller
      * Delete category
      * 
      * @return object
-     */ 
+     */
     public function destroy(Category $category)
     {
         $category->delete();
