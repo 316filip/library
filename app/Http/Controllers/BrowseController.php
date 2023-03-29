@@ -16,7 +16,7 @@ class BrowseController extends Controller
      * Browse and search authors, works, books, categories and bookings
      * 
      * @return object
-     */ 
+     */
     public function browse()
     {
         if (request('filter') !== null) {
@@ -100,9 +100,14 @@ class BrowseController extends Controller
         if (auth()->check()) {
             // Get latest bookings
             $latest = Booking::where('user_id', auth()->user()->id)->where('borrowed', 1)->latest()->limit(2)->get();
+            $used = [];
             foreach ($latest as $booking) {
                 $row = collect([]);
                 $added = [$booking->book->work->id];
+                if (in_array($added[0], $used)) {
+                    continue;
+                }
+                array_push($used, $added[0]);
                 $assignments = $booking->book->work->assignments;
                 $categories = [];
                 // Get all assignments with common category IDs
