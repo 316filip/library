@@ -20,7 +20,7 @@ class BookingController extends Controller
      * Show booking
      * 
      * @return object
-     */ 
+     */
     public function show($booking)
     {
         $booking = Booking::where('code', $booking)->first();
@@ -45,7 +45,7 @@ class BookingController extends Controller
      * Store booking data
      * 
      * @return object
-     */ 
+     */
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -150,7 +150,7 @@ class BookingController extends Controller
      * Update booking data
      * 
      * @return object
-     */ 
+     */
     public function update(Request $request, Booking $booking)
     {
         if (!isset($request->type)) {
