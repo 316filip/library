@@ -12,7 +12,8 @@
     </div>
     <div>
         <h1 class="text-4xl text-center font-bold mb-5">Vítejte!</h1>
-        <p class="text-center mb-5">Vytvořte si účet v naší knihovně a otevřete si dveře do bezplatné knihovny plné titulů,
+        <p class="text-center mb-5">Vytvořte si účet v naší knihovně a otevřete si dveře do bezplatné knihovny plné
+            titulů,
             které Vás uchvátí.</p>
         <p class="text-center py-2 mb-5">
             <a href="/knihovna"
@@ -47,6 +48,14 @@
                             class="fa-solid fa-caret-right transition" id="faq3-toggle"></i></div>
                     <div class="pt-4 border-t border-slate-200 py-4" id="faq3" style="display: none;">
                         <p>V jednu chvíli můžete mít rezervovaných, a tedy i vypůjčených, až pět knih.</p>
+                    </div>
+                </div>
+                <div class="border border-slate-200 rounded-lg px-4">
+                    <div class="py-4 cursor-pointer" onclick="faq(4)">Jak dopadla tvá maturita? <i
+                            class="fa-solid fa-caret-right transition" id="faq4-toggle"></i></div>
+                    <div class="pt-4 border-t border-slate-200 py-4" id="faq4" style="display: none;">
+                        <p>Tento web vznikl jako praktická část mé maturitní práce z informatiky. Byl jsem odměněn
+                            velice příznivými odbornými posudky. 🤩👍🏻</p>
                     </div>
                 </div>
             </div>
