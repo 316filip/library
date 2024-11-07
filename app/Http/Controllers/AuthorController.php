@@ -104,9 +104,9 @@ class AuthorController extends Controller
 
         // Generate URL slug
         $slug = Str::of($formFields['first_name'] . '-' . (isset($formFields['middle_name']) ? $formFields['middle_name'] . '-' : '') . $formFields['last_name'])->slug('-');
+        $end = '';
         if ($slug != $author->slug) {
             // If the new slug is different from the previous one, check it
-            $end = '';
             $i = 2;
             while (Author::where('slug', $slug . $end)->get()->count() !== 0) {
                 // While there are authors with this slug, increase number at the end
