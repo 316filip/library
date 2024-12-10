@@ -132,5 +132,5 @@ Route::get('/search', function () {
 
 // CRON route for some hosting services
 Route::get('/work', function () {
-    Artisan::call('queue:work', ['--stop-when-empty' => true]);
+    Artisan::call('queue:work', ['--stop-when-empty' => true, '--max-time' => 60*14]);
 });
