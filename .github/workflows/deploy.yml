@@ -25,10 +25,43 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      # 3. Deploy files to FTPS server
+      # 3. Prepare flags/maintenance.flag file locally
+      - name: Create Maintenance Flag Locally
+        run: |
+          mkdir flags
+          echo "Maintenance Mode Enabled" > flags/maintenance.flag
+
+      # 4. Upload maintenance.flag to /flags directory
+      - name: Upload Maintenance Flag
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_LOGIN }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./flags
+          server-dir: /flags
+          dangerous-clean-slate: true
+
+      # 5. Deploy files to FTPS server
       - name: Deploy to FTPS server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ secrets.FTP_PASSWORD }}
+
+      # 6. Remove the flags/maintenance.flag file locally
+      - name: Remove Maintenance Flag Locally
+        run: |
+          rm flags/maintenance.flag
+
+      # 7. Upload maintenance.flag to /flags directory
+      - name: Remove Maintenance Flag from Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_LOGIN }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./flags
+          server-dir: /flags
+          dangerous-clean-slate: true
