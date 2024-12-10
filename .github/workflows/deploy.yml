@@ -38,8 +38,8 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./flags
-          server-dir: /flags
+          local-dir: ./flags/
+          server-dir: /flags/
           dangerous-clean-slate: true
 
       # 5. Deploy files to FTPS server
@@ -62,6 +62,6 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./flags
-          server-dir: /flags
+          local-dir: ./flags/
+          server-dir: /flags/
           dangerous-clean-slate: true
