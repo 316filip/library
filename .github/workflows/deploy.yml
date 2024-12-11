@@ -1,11 +1,9 @@
 name: Deploy to FTPS
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: "15 23 * * *"
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -16,6 +14,9 @@ jobs:
       # 1. Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
 
       # 2. Set up PHP and Composer
       - name: Set up PHP
