@@ -96,6 +96,8 @@ jobs:
       - name: Update Deployment Tag
         if: env.skip_deployment == 'false'
         run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git tag -d deployed || true
           git tag -a deployed -m "Deployed at $(date)"
           git push origin deployed
