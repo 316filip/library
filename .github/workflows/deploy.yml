@@ -12,23 +12,13 @@ jobs:
 
     steps:
       # 1. Checkout the repository code
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: main
-
-      # 2. Set up PHP and Composer
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.2"
-          tools: composer
-
-      - name: Install Composer dependencies
-        run: composer install --no-dev --optimize-autoloader
-
-      # 3. Check for the 'deployed' tag
+      
+      # 2. Check for the 'deployed' tag
       - name: Check Deployment Tag
         run: |
           LATEST_COMMIT=$(git rev-parse HEAD)
@@ -47,6 +37,18 @@ jobs:
             echo "No previous deployment found."
             echo "skip_deployment=false" >> $GITHUB_ENV
           fi
+
+      # 3. Set up PHP and Composer
+      - name: Set up PHP
+        if: env.skip_deployment == 'false'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer
+
+      - name: Install Composer Dependencies
+        if: env.skip_deployment == 'false'
+        run: composer install --no-dev --optimize-autoloader
 
       # 4. Prepare flags/maintenance.flag file locally
       - name: Create Maintenance Flag Locally
@@ -68,7 +70,7 @@ jobs:
           dangerous-clean-slate: true
 
       # 6. Deploy files to FTPS server
-      - name: Deploy to FTPS server
+      - name: Deploy to FTPS Server
         if: env.skip_deployment == 'false'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
