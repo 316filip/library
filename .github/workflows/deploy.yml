@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '15 23 * * *'
+    - cron: "15 23 * * *"
 
 jobs:
   deploy:
@@ -27,14 +27,34 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      # 3. Prepare flags/maintenance.flag file locally
+      # 3. Check for the 'deployed' tag
+      - name: Check Deployment Tag
+        run: |
+          LATEST_COMMIT=$(git rev-parse HEAD)
+          if git rev-parse -q --verify "refs/tags/deployed"; then
+            DEPLOYED_COMMIT=$(git rev-parse refs/tags/deployed)
+            if [ "$LATEST_COMMIT" = "$DEPLOYED_COMMIT" ]; then
+              echo "No changes since last deployment."
+              echo "skip_deployment=true" >> $GITHUB_ENV
+            else
+              echo "Changes detected since last deployment."
+              echo "skip_deployment=false" >> $GITHUB_ENV
+            fi
+          else
+            echo "No previous deployment found."
+            echo "skip_deployment=false" >> $GITHUB_ENV
+          fi
+
+      # 4. Prepare flags/maintenance.flag file locally
       - name: Create Maintenance Flag Locally
+        if: env.skip_deployment == 'false'
         run: |
           mkdir flags
           echo "Maintenance Mode Enabled" > flags/maintenance.flag
 
-      # 4. Upload maintenance.flag to /flags directory
+      # 5. Upload maintenance.flag to /flags directory
       - name: Upload Maintenance Flag
+        if: env.skip_deployment == 'false'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -44,21 +64,24 @@ jobs:
           server-dir: /flags/
           dangerous-clean-slate: true
 
-      # 5. Deploy files to FTPS server
+      # 6. Deploy files to FTPS server
       - name: Deploy to FTPS server
+        if: env.skip_deployment == 'false'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ secrets.FTP_PASSWORD }}
 
-      # 6. Remove the flags/maintenance.flag file locally
+      # 7. Remove the flags/maintenance.flag file locally
       - name: Remove Maintenance Flag Locally
+        if: env.skip_deployment == 'false'
         run: |
           rm flags/maintenance.flag
 
-      # 7. Upload maintenance.flag to /flags directory
+      # 8. Upload maintenance.flag to /flags directory
       - name: Remove Maintenance Flag from Server
+        if: env.skip_deployment == 'false'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -67,3 +90,11 @@ jobs:
           local-dir: ./flags/
           server-dir: /flags/
           dangerous-clean-slate: true
+
+      # 9. Tag the commit as 'deployed'
+      - name: Update Deployment Tag
+        if: env.skip_deployment == 'false'
+        run: |
+          git tag -d deployed || true
+          git tag -a deployed -m "Deployed at $(date)"
+          git push origin deployed
