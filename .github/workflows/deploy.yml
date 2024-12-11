@@ -101,5 +101,6 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git tag -d deployed || true
+          git push --delete origin refs/tags/deployed || true
           git tag -a deployed -m "Deployed at $(date)"
           git push origin deployed
