@@ -33,7 +33,7 @@ jobs:
         run: |
           LATEST_COMMIT=$(git rev-parse HEAD)
           if git rev-parse -q --verify "refs/tags/deployed" > /dev/null; then
-            DEPLOYED_COMMIT=$(rev-list -n 1 deployed)
+            DEPLOYED_COMMIT=$(git rev-list -n 1 deployed)
             echo "Last deployed commit: $DEPLOYED_COMMIT"
             echo "Latest commit: $LATEST_COMMIT"
             if [ "$LATEST_COMMIT" = "$DEPLOYED_COMMIT" ]; then
