@@ -1,3 +1,7 @@
+## About this project
+
+This website was created as a part of my graduation thesis. I've stopped working on this project since I finished my thesis, aiming to keep it in the same condition it was in when I finished grammar school. However, since the website is [deployed](https://knihovna.filiprund.cz), I decided to update the dependencies to keep visitors safe. According to the assignment, I also had to include the following instructions.
+
 ## Instructions for web deployment
 
 This website is almost prepared to be deployed, there are just a few things to do before:
