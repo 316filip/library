@@ -1,0 +1,51 @@
+services:
+    php:
+        container_name: 'library-php'
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+        env_file:
+            - .env
+        volumes:
+            - '.:/var/www/html:z'
+        ports:
+            - '8080:80'
+        command: sh -c "chown -R www-data:www-data /var/www/html/public/img /var/www/html/storage /var/www/html/bootstrap/cache && apache2-foreground"
+    db:
+        image: mysql:8.0
+        container_name: 'library-db'
+        volumes:
+            - db_data:/var/lib/mysql
+        env_file:
+            - .env
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - '3306:3306'
+    mailpit:
+        image: axllent/mailpit
+        container_name: 'library-mailpit'
+        restart: always
+        ports:
+            - '8025:8025' # Web UI
+            - '1025:1025' # SMTP Server
+        environment:
+            MP_UI_BIND_ADDR: 0.0.0.0:8025
+            MP_SMTP_BIND_ADDR: 0.0.0.0:1025
+    tailwind:
+        image: node:18
+        container_name: 'library-tailwind'
+        working_dir: /var/www/html
+        tty: true
+        stdin_open: true
+        volumes:
+            - '.:/var/www/html:z'
+        command: sh -c "npm install && npm run watch"
+
+volumes:
+    db_data:

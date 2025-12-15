@@ -43,13 +43,13 @@ Route::get('/knihovna', [BrowseController::class, 'browse']);
 Route::get('/kontakt', function () {
     // Passes opening hours from .ENV file
     return view('contact', [
-        'mon' => explode(',', $_ENV['LIBRARY_MON']),
-        'tue' => explode(',', $_ENV['LIBRARY_TUE']),
-        'wed' => explode(',', $_ENV['LIBRARY_WED']),
-        'thu' => explode(',', $_ENV['LIBRARY_THU']),
-        'fri' => explode(',', $_ENV['LIBRARY_FRI']),
-        'sat' => explode(',', $_ENV['LIBRARY_SAT']),
-        'sun' => explode(',', $_ENV['LIBRARY_SUN']),
+        'mon' => explode(',', env('LIBRARY_MON')),
+        'tue' => explode(',', env('LIBRARY_TUE')),
+        'wed' => explode(',', env('LIBRARY_WED')),
+        'thu' => explode(',', env('LIBRARY_THU')),
+        'fri' => explode(',', env('LIBRARY_FRI')),
+        'sat' => explode(',', env('LIBRARY_SAT')),
+        'sun' => explode(',', env('LIBRARY_SUN')),
     ]);
 });
 

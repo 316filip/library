@@ -27,13 +27,21 @@ class DatabaseSeeder extends Seeder
             'description' => ''
         ]);
 
-        // Uncomment these for testing purposes
-        // \App\Models\User::factory(10)->create();
-        // \App\Models\Author::factory(10)->create();
-        // \App\Models\Work::factory(10)->create();
-        // \App\Models\Book::factory(10)->create();
-        // \App\Models\Booking::factory(10)->create();
-        // \App\Models\Category::factory(10)->create();
-        // \App\Models\Assignment::factory(10)->create();
+        // Create example admin
+        \App\Models\User::factory(1)->create([
+            'first_name' => 'Ukázkový',
+            'last_name' => 'Účet',
+            'email' => 'library@example.com',
+            'librarian' => true,
+            'admin' => true,
+        ]);
+
+        \App\Models\User::factory(10)->create();
+        \App\Models\Author::factory(10)->create();
+        \App\Models\Work::factory(10)->create();
+        \App\Models\Book::factory(10)->create();
+        \App\Models\Booking::factory(10)->create();
+        \App\Models\Category::factory(10)->create();
+        \App\Models\Assignment::factory(10)->create();
     }
 }
